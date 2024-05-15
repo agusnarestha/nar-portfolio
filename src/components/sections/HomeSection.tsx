@@ -1,6 +1,7 @@
 "use client";
-
 import TypeIt from "typeit-react";
+import ScrollDown from "../ScrollDown";
+
 const HomeSection = () => {
   return (
     <div className="flex flex-col h-screen">
@@ -11,6 +12,7 @@ const HomeSection = () => {
           </TypeIt>
         </div>
       </section>
+      <ScrollDown />
     </div>
   );
 };
