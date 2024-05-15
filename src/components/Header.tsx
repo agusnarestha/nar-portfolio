@@ -7,7 +7,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="relative flex items-center justify-between pt-6 pb-6">
+    <nav className="fixed top-0 left-0 right-0 z-50 md flex items-center justify-between p-6">
       <div className="text-2xl">
         <span className="text-3xl font-bold">Nar.</span>
       </div>
