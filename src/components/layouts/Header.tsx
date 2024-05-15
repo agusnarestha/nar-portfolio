@@ -7,7 +7,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 md flex items-center justify-between p-6">
+    <nav className="fixed top-0 left-0 right-0 z-50 md flex items-center justify-between p-6 bg-white">
       <div className="text-2xl">
         <span className="text-3xl font-bold">Nar.</span>
       </div>
@@ -31,7 +31,7 @@ const Header = () => {
         <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
           <HeaderButton label="Home" color="#3cc4ce" />
           <HeaderButton label="About" color="#e6b448" />
-          <HeaderButton label="Portfolio" color="#df548e" />
+          <HeaderButton label="Project" color="#df548e" />
           <HeaderButton label="Contact" color="#2e8b57" />
         </ul>
       </div>
