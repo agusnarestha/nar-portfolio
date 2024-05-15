@@ -24,12 +24,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <footer className="mt-auto text-center py-3">
-        <p className="text-white">
-          Made with <span className="font-light text-gray-500">❤️</span> by Agus
-          Narestha
-        </p>
-      </footer>
     </div>
   );
 }
