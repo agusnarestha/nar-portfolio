@@ -17,6 +17,9 @@ const config: Config = {
         custom: "5px 7px 0px 1px rgb(20, 20, 20)",
         customhover: "2px 3px 0px 1px rgb(20, 20, 20)",
       },
+      fontFamily: {
+        SpaceGrotesk: ["Space Grotesk", "sans-serif"],
+      },
     },
   },
   plugins: [],
