@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-SpaceGrotesk container mx-auto lg:px-24 md:px-5 sm:px-5">
+      <body className="container mx-auto px-10">
         <Header />
         {children}
         <Footer />
