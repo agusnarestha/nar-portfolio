@@ -1,0 +1,30 @@
+[
+  {
+    "title": "BullDOC",
+    "description": "Health information system website",
+    "imageUrl": "project/bulldoc.png",
+    "linkProject": "#",
+    "categories": ["webapp", "hospital", "health"]
+  },
+  {
+    "title": "Dapur Yatim Indonesia",
+    "description": "Profile website for Panti Asuhan Dapur Yatim",
+    "imageUrl": "project/dapur.png",
+    "linkProject": "#",
+    "categories": ["webapp", "charity"]
+  },
+  {
+    "title": "iCovid",
+    "description": "COVID-19 information system website",
+    "imageUrl": "project/icovid.png",
+    "linkProject": "#",
+    "categories": ["webapp", "covid", "health"]
+  },
+  {
+    "title": "BeMO",
+    "description": "BeMO is an e-commerce platform for buying and selling with a variety of new and used cars",
+    "imageUrl": "project/bemo.png",
+    "linkProject": "#",
+    "categories": ["webapp", "car", "ecommerce"]
+  }
+]
