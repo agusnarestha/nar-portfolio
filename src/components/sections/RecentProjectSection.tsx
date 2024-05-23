@@ -1,6 +1,9 @@
 import ProjectCard from "../ProjectCard";
+import projectData from "@/data/projectData.json";
 
 const RecentProjectSection = () => {
+  const latestProjects = projectData.slice(-3);
+
   return (
     <div>
       <div className="flex text-center items-center justify-between max-[480px]:px-8">
@@ -38,9 +41,16 @@ const RecentProjectSection = () => {
         </a>
       </div>
       <div className="mt-9 gap-5 grid grid-cols-3 max-[768px]:mt-5 max-[480px]:px-8 max-[992px]:grid-cols-2 max-[768px]:grid-cols-2 max-[600px]:grid-cols-1">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {latestProjects.map((item, index) => (
+          <ProjectCard
+            key={index}
+            title={item.title}
+            description={item.description}
+            imageUrl={item.imageUrl}
+            linkProject={item.linkProject}
+            categories={item.categories}
+          />
+        ))}
       </div>
     </div>
   );
