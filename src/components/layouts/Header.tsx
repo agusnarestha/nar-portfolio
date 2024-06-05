@@ -29,9 +29,13 @@ const Header = () => {
         } absolute top-full left-0 w-full bg-white lg:relative lg:bg-transparent lg:w-auto lg:block`}
       >
         <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-          <HeaderButton label="Home" color="#3cc4ce" href="/" />
+          <HeaderButton label="Home" color="#3cc4ce" href="/nar-portfolio/" />
           <HeaderButton label="About" color="#e6b448" href="#" />
-          <HeaderButton label="Project" color="#df548e" href="/project" />
+          <HeaderButton
+            label="Project"
+            color="#df548e"
+            href="/nar-portfolio/project"
+          />
           <HeaderButton label="Contact" color="#2e8b57" href="#" />
         </ul>
       </div>
