@@ -39,6 +39,7 @@ const AllProjectSection = () => {
             imageUrl={item.imageUrl}
             linkProject={item.linkProject}
             categories={item.categories}
+            technologies={item.technologies}
           />
         ))}
       </div>

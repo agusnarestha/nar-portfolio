@@ -6,6 +6,7 @@ type ProjectCardProps = {
   imageUrl: string;
   linkProject: string;
   categories: string[];
+  technologies: string[];
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -14,6 +15,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageUrl,
   linkProject,
   categories = [],
+  technologies = [],
 }) => {
   return (
     <div className="relative h-[385px] border-[1px] group border-[#e5e5e5] rounded-xl overflow-hidden cursor-pointer transition-all duration-[.5s] hover:scale-[1.03] dark:border-[#404040]">
@@ -40,7 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             />
           </div>
         </div>
-        <div className="font-sora bg-[#fafafa] h-full w-full absolute z-[6] mt-44 px-4 pr-1">
+        <div className="bg-[#fafafa] h-full w-full absolute z-[6] mt-44 px-4 pr-1">
           <div className="flex gap-2 text-[11px] text-white pt-4">
             {categories.map((category, index) => (
               <h1
@@ -51,13 +53,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               </h1>
             ))}
           </div>
-          <div className="font-sora mt-2">
+          <div className="mt-2">
             <div className="text-[#121212] leading-10 text-lg font-medium transition-all duration-[.5s] group-hover:underline">
               <h1>{title}</h1>
             </div>
             <p className="text-sm text-[#404040] mt-1 dark:text-[#a3a3a3]">
               {description}
             </p>
+          </div>
+          <div className="relative">
+            <div className="flex flex-row">
+              {technologies.map((technology, index) => (
+                <Image
+                  className="mr-3 mt-5"
+                  key={index}
+                  alt=""
+                  height="24"
+                  width="24"
+                  src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/${technology}.svg`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </a>

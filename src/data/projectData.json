@@ -1,30 +1,50 @@
 [
   {
+    "title": "Kedai Kopi Selatpandjang",
+    "description": "Profile website company for Kedai Kopi Selatpandjang",
+    "imageUrl": "project/kedaikopi.png",
+    "linkProject": "#",
+    "categories": ["webapp", "company-profile"],
+    "technologies": ["mysql", "laravel"]
+  },
+  {
+    "title": "Covid Indo Tracker",
+    "description": "This website is created to monitor the real-time number of COVID-19 cases in Indonesia",
+    "imageUrl": "project/covidindotracker.png",
+    "linkProject": "#",
+    "categories": ["webapp", "covid", "public-api"],
+    "technologies": ["react"]
+  },
+  {
     "title": "BeMO",
     "description": "BeMO is an e-commerce platform for buying and selling with a variety of new and used cars",
     "imageUrl": "project/bemo.png",
     "linkProject": "#",
-    "categories": ["webapp", "car", "ecommerce"]
+    "categories": ["webapp", "car", "ecommerce"],
+    "technologies": ["mysql", "laravel"]
   },
   {
     "title": "Dapur Yatim Indonesia",
     "description": "Profile website for Panti Asuhan Dapur Yatim",
     "imageUrl": "project/dapur.png",
     "linkProject": "#",
-    "categories": ["webapp", "charity"]
+    "categories": ["webapp", "charity"],
+    "technologies": ["mysql", "php"]
   },
   {
     "title": "iCovid",
-    "description": "COVID-19 information system website",
+    "description": " COVID-19 information system website designed to up-to-date information about the pandemic",
     "imageUrl": "project/icovid.png",
     "linkProject": "#",
-    "categories": ["webapp", "covid", "health"]
+    "categories": ["webapp", "covid", "health"],
+    "technologies": ["mysql", "codeigniter"]
   },
   {
     "title": "BullDOC",
-    "description": "Health information system website",
+    "description": "Hospital management system website",
     "imageUrl": "project/bulldoc.png",
     "linkProject": "#",
-    "categories": ["webapp", "hospital", "health"]
+    "categories": ["webapp", "hospital", "health"],
+    "technologies": ["mysql", "php"]
   }
 ]
