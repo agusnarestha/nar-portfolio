@@ -5,7 +5,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Agus Narestha - Portfolio",
-  description: "Personal Portfolio Website of Agus Narestha",
+  description:
+    "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
 };
 
 export default function RootLayout({
