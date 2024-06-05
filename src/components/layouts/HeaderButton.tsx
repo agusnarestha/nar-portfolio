@@ -3,13 +3,14 @@ import React from "react";
 type HeaderButtonProps = {
   label: string;
   color: string;
+  href: string;
 };
 
-const HeaderButton: React.FC<HeaderButtonProps> = ({ label, color }) => {
+const HeaderButton: React.FC<HeaderButtonProps> = ({ label, color, href }) => {
   return (
     <li className="">
       <a
-        href="#"
+        href={href}
         style={{
           backgroundColor: color,
           marginBottom: "-3px",

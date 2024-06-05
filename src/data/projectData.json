@@ -1,10 +1,10 @@
 [
   {
-    "title": "BullDOC",
-    "description": "Health information system website",
-    "imageUrl": "project/bulldoc.png",
+    "title": "BeMO",
+    "description": "BeMO is an e-commerce platform for buying and selling with a variety of new and used cars",
+    "imageUrl": "project/bemo.png",
     "linkProject": "#",
-    "categories": ["webapp", "hospital", "health"]
+    "categories": ["webapp", "car", "ecommerce"]
   },
   {
     "title": "Dapur Yatim Indonesia",
@@ -21,10 +21,10 @@
     "categories": ["webapp", "covid", "health"]
   },
   {
-    "title": "BeMO",
-    "description": "BeMO is an e-commerce platform for buying and selling with a variety of new and used cars",
-    "imageUrl": "project/bemo.png",
+    "title": "BullDOC",
+    "description": "Health information system website",
+    "imageUrl": "project/bulldoc.png",
     "linkProject": "#",
-    "categories": ["webapp", "car", "ecommerce"]
+    "categories": ["webapp", "hospital", "health"]
   }
 ]

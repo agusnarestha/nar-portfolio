@@ -2,7 +2,7 @@ import ProjectCard from "../ProjectCard";
 import projectData from "@/data/projectData.json";
 
 const RecentProjectSection = () => {
-  const latestProjects = projectData.slice(-3);
+  const latestProjects = projectData.slice(0, 3);
 
   return (
     <div>
