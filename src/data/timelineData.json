@@ -3,12 +3,22 @@
     "job": "Junior Software Engineer",
     "company": "Bali Mandira Resort & Spa",
     "date": "September 2023 - Present",
-    "description": "Maecenas finibus nec sem ut imperdiet. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis ante."
+    "description": [
+      "Conducted daily checks on the websites and other deployed applications",
+      "Cleaned customer data using Python for sending newsletters",
+      "Created a website for selling tickets to the Foam Party New Year's Eve 2024 Bali Mandira x Azul Using Laravel",
+      "Developed a game based on website open for public to celebrate Bali Mandira 43rd Anniversary using Nuxtjs"
+    ]
   },
   {
     "job": "Web Developer Intern",
     "company": "Humic Research Center",
     "date": "July - August 2021",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    "description": [
+      "Planned and designed the functions and workflows for the system",
+      "Created the website interface using Figma",
+      "Implemented the design, functions, and workflows using Laravel, PostgreSQL, and Bootstrap",
+      "Conducted through manual testing of every script, form, and functionality to identify and fix typos or programming errors"
+    ]
   }
 ]
