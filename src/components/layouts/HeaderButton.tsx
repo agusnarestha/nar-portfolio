@@ -14,8 +14,10 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({ label, color, href }) => {
         style={{
           backgroundColor: color,
           marginBottom: "-3px",
+          display: "inline-block",
+          textAlign: "center",
         }}
-        className={`px-8 py-2 border-2 border-black rounded shadow-custom text-black hover:shadow-customhover`}
+        className={`px-8 py-2 border-2 border-black rounded shadow-custom text-black hover:shadow-customhover lg:w-auto w-[150px]`}
       >
         {label}
       </a>
