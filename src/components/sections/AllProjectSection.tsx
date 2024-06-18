@@ -5,7 +5,7 @@ const AllProjectSection = () => {
   return (
     <div>
       <div className="relative max-w-6xl mx-auto mt-8 max-[768px]:mt-28 dark:text-[#E4E6EB] dark:fill-[#E4E6EB] aos-init aos-animate">
-        <div className="relative">
+        <div className="relative max-[480px]:px-8">
           <div className="flex items-center">
             <svg
               className="w-11 text-[#121212] max-[375px]:w-9 max-[425px]:w-9 max-[600px]:w-10"
