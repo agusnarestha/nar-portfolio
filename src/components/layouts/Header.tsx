@@ -30,7 +30,11 @@ const Header = () => {
       >
         <ul className="flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 lg:space-x-4">
           <HeaderButton label="Home" color="#3cc4ce" href="/nar-portfolio/" />
-          <HeaderButton label="About" color="#e6b448" href="#" />
+          <HeaderButton
+            label="About"
+            color="#e6b448"
+            href="/nar-portfolio/about"
+          />
           <HeaderButton
             label="Project"
             color="#df548e"
