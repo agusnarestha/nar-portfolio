@@ -14,7 +14,7 @@ const Timeline: React.FC<TimelineProps> = ({
   description,
 }) => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full mb-5">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -27,7 +27,7 @@ const Timeline: React.FC<TimelineProps> = ({
         <h4 className="font-bold text-lg text-[#3cc4ce]">{job}.</h4>
         <h3 className="mt-1 block text-base font-semibold">{company}</h3>
         <span className="mt-1 block text-sm font-semibold">{date}</span>
-        <ul className="mt-2 max-w-screen-sm text-sm text-gray-500 list-disc pl-5 space-y-1">
+        <ul className="mt-2 text-sm text-gray-500 list-disc pl-5 space-y-1">
           {description.map((line, index) => (
             <li key={index}>{line}</li>
           ))}

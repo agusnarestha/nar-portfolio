@@ -11,7 +11,7 @@ const ExperienceSection = () => {
         Take a look at my Experience
       </p> */}
       <hr className="border-[#d1d5db]"></hr>
-      <div className="flex items-center justify-center bg-white mt-9 max-[768px]:mt-5">
+      <div className="flex bg-white mt-9 max-[768px]:mt-5">
         <div className="lg:space-y-6 border-l-2 border-dashed">
           {timelineData.map((item, index) => (
             <Timeline

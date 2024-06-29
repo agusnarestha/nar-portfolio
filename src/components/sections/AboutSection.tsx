@@ -15,7 +15,7 @@ const AboutSection = () => {
                 width={200}
                 height={300}
                 alt="Photo of Agus Narestha"
-                src="/me/me.jpg"
+                src={"/me/me.jpg"}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
@@ -29,8 +29,8 @@ const AboutSection = () => {
             </span>{" "}
             a passionate web developer. My journey in web development began at
             university, where I dedicated myself to mastering both backend and
-            frontend development. To level up my skills, I decided take
-            additional courses and watching some YouTube videos.
+            frontend development. To level up my skills, I decided take some
+            courses and watching some YouTube videos.
           </p>
           <p className="mt-3">
             I am motivated to continuously expand my knowledge in web
