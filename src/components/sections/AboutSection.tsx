@@ -15,7 +15,7 @@ const AboutSection = () => {
                 width={200}
                 height={300}
                 alt="Photo of Agus Narestha"
-                src={"/me/me.jpg"}
+                src={"me/me.jpg"}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
