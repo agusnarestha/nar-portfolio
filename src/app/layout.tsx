@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Head from "next/head";
+
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import "./globals.css";
@@ -16,6 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="3LKzU_9eGN8m0aZwlYu22VKTDhkYtmEbGIzCuDQzs2g"
+        />
+      </Head>
       <body className="font-SpaceGrotesk relative max-w-6xl mx-auto px-8 max-[768px]:mt-28 max-[480px]:px-0 ">
         <Header />
         {children}
