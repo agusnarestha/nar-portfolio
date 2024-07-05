@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
   other: {
-    "google-site-verification": "3LKzU_9eGN8m0aZwlYu22VKTDhkYtmEbGIzCuDQzs2g",
+    "google-site-verification": "Hqx3xeh09OgoTUxXBJvvPqYvcp46ccE63zLCqko-8so",
   },
 };
 
