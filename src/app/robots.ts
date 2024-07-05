@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://agusnarestha.github.io/nar-portfolio/sitemap.xml",
+    sitemap: "https://agusnarestha.dev/sitemap.xml",
   };
 }
