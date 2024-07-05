@@ -3,7 +3,7 @@ import AboutSection from "@/components/sections/AboutSection";
 
 export default function About() {
   return (
-    <div className="mb-10">
+    <div className="mb-10 my-32">
       <AboutSection />
       <ExperienceSection />
     </div>
