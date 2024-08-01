@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
@@ -33,6 +34,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-PHV2VZN6" />
+      <GoogleAnalytics gaId="G-B2ZN13JQ9F" />
       <body className="font-SpaceGrotesk relative max-w-6xl mx-auto px-8 max-[768px]:mt-28 max-[480px]:px-0 ">
         <Header />
         {children}
