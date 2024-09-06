@@ -1,7 +1,7 @@
 [
   {
     "title": "Kedai Kopi Selatpandjang",
-    "description": "Profile website company for Kedai Kopi Selatpandjang",
+    "description": "Point of Sale website based for Kedai Kopi Selatpandjang",
     "imageUrl": "project/kedaikopi.png",
     "linkProject": "#",
     "categories": ["webapp", "company-profile"],
@@ -11,7 +11,7 @@
     "title": "Covid Indo Tracker",
     "description": "This website is created to monitor the real-time number of COVID-19 cases in Indonesia",
     "imageUrl": "project/covidindotracker.png",
-    "linkProject": "#",
+    "linkProject": "https://covidindotracker.agusnarestha.dev/",
     "categories": ["webapp", "covid", "public-api"],
     "technologies": ["react"]
   },
