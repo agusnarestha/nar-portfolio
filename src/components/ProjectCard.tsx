@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   technologies = [],
 }) => {
   return (
-    <div className="relative h-[385px] border-[1px] group border-[#e5e5e5] rounded-xl overflow-hidden cursor-pointer transition-all duration-[.5s] hover:scale-[1.03] dark:border-[#404040]">
+    <div className="relative h-[385px] border-[1px] group border-[#e5e5e5] rounded-xl overflow-hidden cursor-pointer transition-all duration-[.5s] hover:scale-[1.03] dark:border-[#404040] flex-shrink-0 max-[600px]:w-[100%]">
       <a aria-label="linkproject" href={linkProject}>
         <div className="BackgroundHoverT absolute z-[4] h-full w-full bg-black bg-opacity-[0.7] opacity-0 transition-opacity duration-[.5s] group-hover:opacity-80" />
         <div className="flex flex-col items-center">

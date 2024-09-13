@@ -40,7 +40,7 @@ const RecentProjectSection = () => {
           </svg>
         </a>
       </div>
-      <div className="mt-9 gap-5 grid grid-cols-3 max-[768px]:mt-5 max-[480px]:px-8 max-[992px]:grid-cols-2 max-[768px]:grid-cols-2 max-[600px]:grid-cols-1">
+      <div className="my-9 gap-5 grid grid-cols-3 max-[992px]:grid-cols-2 max-[768px]:mt-5 max-[768px]:grid-cols-2 max-[600px]:grid-cols-1 max-[992px]:flex max-[992px]:flex-row max-[992px]:overflow-hidden max-[992px]:overflow-x-auto max-[992px]:scrollbar-hide max-[480px]:px-8">
         {latestProjects.map((item, index) => (
           <ProjectCard
             key={index}
