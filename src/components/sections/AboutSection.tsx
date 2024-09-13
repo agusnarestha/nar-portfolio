@@ -48,6 +48,35 @@ const AboutSection = () => {
             possibilities together!"
           </p>
         </article>
+        <div className="flex flex-row">
+          <a href="https://www.linkedin.com/in/agusnarestha/">
+            <Image
+              className="mr-4 mt-5"
+              alt=""
+              height="28"
+              width="28"
+              src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/linkedin.svg`}
+            />
+          </a>
+          <a href="https://github.com/agusnarestha">
+            <Image
+              className="mr-4 mt-5"
+              alt=""
+              height="28"
+              width="28"
+              src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/github.svg`}
+            />
+          </a>
+          <a href="mailto:agusnaresthaa@gmail.com">
+            <Image
+              className="mr-4 mt-5"
+              alt=""
+              height="28"
+              width="28"
+              src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/gmail.svg`}
+            />
+          </a>
+        </div>
       </div>
     </div>
   );
