@@ -25,7 +25,7 @@ const RecentProjectSection = () => {
           </h1>
         </div>
         <a
-          href="/nar-portfolio/project"
+          href="/project"
           className="flex text-center justify-center gap-1 transition-all duration-300 mt-1 max-[375px]:hover:gap-2 hover:gap-3 group"
         >
           <h1 className="font-medium text-base text-[#525252] max-[325px]:text-[11px] max-[380px]:text-[12px] max-[430px]:text-[13px] max-[540px]:text-[14px] dark:text-[#a3a3a3] group-hover:dark:text-[#d4d4d4]">
