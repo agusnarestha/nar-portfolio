@@ -4,10 +4,12 @@
     "company": "Bali Mandira Beach Resort & Spa",
     "date": "September 2023 - Present",
     "description": [
-      "Conducted daily checks on the websites and other deployed applications",
+      "Conducted daily checks on the websites and other deployed applications in Google Cloud Platform",
       "Cleaned customer data using Python for sending newsletters",
-      "Created a website for selling tickets to the Foam Party New Year's Eve 2024 Bali Mandira x Azul Using Laravel",
-      "Developed a game based on website open for public to celebrate Bali Mandira 43rd Anniversary using Nuxtjs"
+      "Developed a website for selling tickets to the Foam Party New Year's Eve 2024 at Bali Mandira x Azul using Laravel, integrated with a payment gateway",
+      "Created a web-based game open to the public to celebrate Bali Mandira's 43rd Anniversary using Nuxt.js",
+      "Developed a virtual business card using Laravel",
+      "Built a headless CMS using Strapi"
     ]
   },
   {
