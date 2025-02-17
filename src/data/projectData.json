@@ -1,5 +1,21 @@
 [
   {
+    "title": "Crypto Revolution",
+    "description": "Crypto Revolution is a website that provides information about cryptocurrency ",
+    "imageUrl": "project/cryptorevolution.png",
+    "linkProject": "https://crypto-revolution.vercel.app/",
+    "categories": ["webapp", "crypto", "public-api"],
+    "technologies": ["nextdotjs"]
+  },
+  {
+    "title": "Pilot Pro",
+    "description": "Pilot Pro is a website professional boosting games service",
+    "imageUrl": "project/pilotpro.png",
+    "linkProject": "https://pilot-pro.vercel.app/",
+    "categories": ["webapp", "games"],
+    "technologies": ["nextdotjs"]
+  },
+  {
     "title": "Covid Indo Tracker",
     "description": "This website is created to monitor the real-time number of COVID-19 cases in Indonesia",
     "imageUrl": "project/covidindotracker.png",
