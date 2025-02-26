@@ -13,7 +13,7 @@ const Footer = () => {
         <a className="btn-github mb-2" href="https://github.com/agusnarestha">
           <i className="fab fa-github"></i>
         </a>
-        <p className="mt-4">© 2024 Agus Narestha | Made With ❤️</p>
+        <p className="mt-4">© 2025 Agus Narestha | Made With ❤️</p>
       </div>
     </div>
   );
