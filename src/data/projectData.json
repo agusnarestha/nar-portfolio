@@ -1,5 +1,13 @@
 [
   {
+    "title": "QR Generator",
+    "description": "QR Generator is a website that can generate QR codes from text and URLs",
+    "imageUrl": "project/qrgenerator.png",
+    "linkProject": "https://qrgenerator.agusnarestha.dev/",
+    "categories": ["webapp", "qr-code", "utils"],
+    "technologies": ["nextdotjs"]
+  },
+  {
     "title": "Crypto Revolution",
     "description": "Crypto Revolution is a website that provides information about cryptocurrency ",
     "imageUrl": "project/cryptorevolution.png",

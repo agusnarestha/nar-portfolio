@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Agus Narestha Portfolio",
     description:
       "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
-    url: "https://agusnarestha.dev",
+    url: "https://www.agusnarestha.dev",
     siteName: "Agus Narestha Portfolio",
     type: "website",
     images: [
