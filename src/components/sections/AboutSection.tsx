@@ -14,8 +14,8 @@ const AboutSection = () => {
               <Image
                 width={200}
                 height={300}
-                alt="Photo of Agus Narestha"
-                src={"me/me.jpg"}
+                alt="Agus Narestha"
+                src={"me/me.webp"}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>

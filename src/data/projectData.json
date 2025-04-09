@@ -2,7 +2,7 @@
   {
     "title": "QR Generator",
     "description": "QR Generator is a website that can generate QR codes from text and URLs",
-    "imageUrl": "project/qrgenerator.png",
+    "imageUrl": "project/qrgenerator.webp",
     "linkProject": "https://qrgenerator.agusnarestha.dev/",
     "categories": ["webapp", "qr-code", "utils"],
     "technologies": ["nextdotjs"]
@@ -10,7 +10,7 @@
   {
     "title": "Crypto Revolution",
     "description": "Crypto Revolution is a website that provides information about cryptocurrency ",
-    "imageUrl": "project/cryptorevolution.png",
+    "imageUrl": "project/cryptorevolution.webp",
     "linkProject": "https://crypto-revolution.vercel.app/",
     "categories": ["webapp", "crypto", "public-api"],
     "technologies": ["nextdotjs"]
@@ -18,7 +18,7 @@
   {
     "title": "Pilot Pro",
     "description": "Pilot Pro is a website professional boosting games service",
-    "imageUrl": "project/pilotpro.png",
+    "imageUrl": "project/pilotpro.webp",
     "linkProject": "https://pilot-pro.vercel.app/",
     "categories": ["webapp", "games"],
     "technologies": ["nextdotjs"]
@@ -26,7 +26,7 @@
   {
     "title": "Covid Indo Tracker",
     "description": "This website is created to monitor the real-time number of COVID-19 cases in Indonesia",
-    "imageUrl": "project/covidindotracker.png",
+    "imageUrl": "project/covidindotracker.webp",
     "linkProject": "https://covidindotracker.agusnarestha.dev/",
     "categories": ["webapp", "covid", "public-api"],
     "technologies": ["react"]
@@ -34,7 +34,7 @@
   {
     "title": "BeMO",
     "description": "BeMO is an e-commerce platform for buying and selling with a variety of new and used cars",
-    "imageUrl": "project/bemo.png",
+    "imageUrl": "project/bemo.webp",
     "linkProject": "#",
     "categories": ["webapp", "car", "ecommerce"],
     "technologies": ["mysql", "laravel"]
@@ -42,7 +42,7 @@
   {
     "title": "Dapur Yatim Indonesia",
     "description": "Profile website for Panti Asuhan Dapur Yatim",
-    "imageUrl": "project/dapur.png",
+    "imageUrl": "project/dapur.webp",
     "linkProject": "#",
     "categories": ["webapp", "charity"],
     "technologies": ["mysql", "php"]
@@ -50,7 +50,7 @@
   {
     "title": "iCovid",
     "description": " COVID-19 information system website designed to up-to-date information about the pandemic",
-    "imageUrl": "project/icovid.png",
+    "imageUrl": "project/icovid.webp",
     "linkProject": "#",
     "categories": ["webapp", "covid", "health"],
     "technologies": ["mysql", "codeigniter"]
@@ -58,7 +58,7 @@
   {
     "title": "BullDOC",
     "description": "Hospital management system website",
-    "imageUrl": "project/bulldoc.png",
+    "imageUrl": "project/bulldoc.webp",
     "linkProject": "#",
     "categories": ["webapp", "hospital", "health"],
     "technologies": ["mysql", "php"]
