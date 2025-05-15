@@ -15,7 +15,7 @@ const AboutSection = () => {
                 width={200}
                 height={300}
                 alt="Agus Narestha"
-                src={"me/me.webp"}
+                src={"/me/me.webp"}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>

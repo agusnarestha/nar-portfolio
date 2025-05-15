@@ -17,7 +17,7 @@ const HomeSection = () => {
 
           <Image
             className="relative mx-auto mb-5"
-            src="emoji.webp"
+            src="/emoji.webp"
             alt="Agus Narestha Emoji"
             width={300}
             height={300}
