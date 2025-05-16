@@ -1,10 +1,10 @@
 import { getAllPosts, getAllTags } from "@/utils/blog";
 import BlogCard from "@/components/blog/BlogCard";
 import Link from "next/link";
+import { title } from "process";
 
 export const metadata = {
-  title: "Blog",
-  description: "Blog | Agus Narestha Portfolio",
+  title: "Blog | Agus Narestha Portfolio",
 };
 
 export default function BlogPage() {
