@@ -6,18 +6,17 @@ const RecentPostSection = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("https://blog.agusnarestha.dev/api/posts.json");
-      const projectData = await res.json();
-      const transformedData = projectData.map((post: any) => ({
-        title: post.data.title,
+      const res = await fetch("/api/posts");
+      const posts = await res.json();
+      const transformedData = posts.slice(0, 3).map((post: any) => ({
+        title: post.title,
         slug: post.slug,
-        description: post.data.description,
-        pubDate: post.data.pubDate,
-        tags: post.data.tags,
+        description: post.description,
+        pubDate: post.date,
+        tags: post.tags,
       }));
 
-      setLatestPosts(transformedData.slice(0, 3));
-      console.log(transformedData);
+      setLatestPosts(transformedData);
     };
 
     fetchData();
@@ -44,7 +43,7 @@ const RecentPostSection = () => {
           </h1>
         </div>
         <a
-          href="https://blog.agusnarestha.dev/"
+          href="/blog"
           className="flex text-center justify-center gap-1 transition-all duration-300 mt-1 max-[375px]:hover:gap-2 hover:gap-3 group"
         >
           <h1 className="font-medium text-base text-[#525252] max-[325px]:text-[11px] max-[380px]:text-[12px] max-[430px]:text-[13px] max-[540px]:text-[14px] dark:text-[#a3a3a3] group-hover:dark:text-[#d4d4d4]">

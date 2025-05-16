@@ -17,7 +17,7 @@ const PostCard: React.FC<PostCardProps> = ({
 }) => {
   return (
     <div className="relative h-[180px] border-[1px] group border-[#e5e5e5] rounded-xl overflow-hidden cursor-pointer transition-all duration-[.5s] hover:scale-[1.03] dark:border-[#404040] flex-shrink-0 max-[600px]:w-[100%]">
-      <a aria-label="slug" href={`https://blog.agusnarestha.dev/${slug}`}>
+      <a aria-label="slug" href={`/blog/${slug}`}>
         <div className="BackgroundHoverT absolute z-[4] h-full w-full bg-black bg-opacity-[0.7] opacity-0 transition-opacity duration-[.5s] group-hover:opacity-80" />
         <div className="bg-[#fafafa] h-full w-full absolute z-[6] px-4 pr-1">
           <div className="mt-2">

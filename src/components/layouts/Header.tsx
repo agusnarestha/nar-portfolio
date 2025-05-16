@@ -32,11 +32,7 @@ const Header = () => {
           <HeaderButton label="Home" color="#3cc4ce" href="/" />
           <HeaderButton label="About" color="#e6b448" href="/about" />
           <HeaderButton label="Project" color="#df548e" href="/project" />
-          <HeaderButton
-            label="Blog"
-            color="#2e8b57"
-            href="https://blog.agusnarestha.dev/"
-          />
+          <HeaderButton label="Blog" color="#2e8b57" href="/blog" />
         </ul>
       </div>
     </nav>

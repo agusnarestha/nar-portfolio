@@ -1,10 +1,19 @@
 import React from "react";
+import CodeBlock from "@/components/CodeBlock";
 
 const generateId = (text: string) => {
   return text.toLowerCase().replace(/[^\w]+/g, "-");
 };
 
 export const MDXComponents = {
+  pre: (props: React.HTMLAttributes<HTMLPreElement>) => {
+    const { children, ...rest } = props;
+    const child = React.Children.only(children) as React.ReactElement;
+    const { className, children: code } = child.props;
+    const language = className?.replace("language-", "") || "text";
+
+    return <CodeBlock language={language} value={code as string} {...rest} />;
+  },
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
     const id = generateId(props.children as string);
     return (
