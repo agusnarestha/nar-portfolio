@@ -1,0 +1,111 @@
+---
+title: "Install Ollama and DeepSeek Locally"
+description: "Step-by-step guide for running Ollama with DeepSeek on your local machine"
+date: "2024-05-14"
+tags: ["ollama", "deepseek", "local-llm", "ai"]
+---
+
+# Installing Ollama and Running DeepSeek Locally
+
+This guide will walk you through the process of installing [Ollama](https://ollama.com) and running the [DeepSeek](https://github.com/deepseek-ai/DeepSeek-V2) language model on your local machine.
+
+## Prerequisites
+
+- A system running **macOS**, **Windows**, or **Linux**
+- At least **8GB of RAM** (16GB+ recommended)
+- An internet connection (for downloading the model)
+- Optional: **GPU support** for better performance
+
+## What is Ollama?
+
+Ollama is a simple and efficient way to run large language models locally. It offers a command-line interface and takes care of model downloading, execution, and environment setup behind the scenes.
+
+## Steps to Install and Run DeepSeek Locally
+
+### 1. Install Ollama
+
+Visit [Ollama's official website](https://ollama.com/download) and download the installer for your OS:
+
+- **macOS**: Use the `.pkg` installer or install via Homebrew:
+
+  ```bash
+  brew install ollama
+  ```
+
+- **Windows**: Download and run the .exe installer.
+
+- **Linux**: Run the following script in your terminal:
+  ```
+  curl -fsSL https://ollama.com/install.sh | sh
+  ```
+
+> After installation, verify Ollama is working by running:
+
+```
+ollama --version
+```
+
+### 2. Run the DeepSeek Model
+
+Ollama uses a simple pull-and-run system. To download and run the DeepSeek model:
+
+```
+ollama run deepseek
+```
+
+This command will automatically:
+
+- Download the DeepSeek model if it’s not already cached
+- You can start chatting with the model immediately after it loads.
+
+> ⚠️ Depending on the size of the model and your internet speed, the initial pull may take a few minutes.
+
+### 3. List Available Models
+
+To explore other models Ollama supports:
+
+```
+ollama list
+```
+
+And to remove any model:
+
+```
+ollama remove <model-name>
+```
+
+### 4. Run DeepSeek in the Background (Optional)
+
+If you want to serve DeepSeek continuously in the background:
+
+```
+ollama serve &
+```
+
+You can now make requests via API to `http://localhost:11434` or use it in apps like LM Studio, Obsidian, or VSCode extensions that support custom LLM endpoints.
+
+### 5. Customize the DeepSeek Model (Optional)
+
+You can create a custom Modelfile to tweak how DeepSeek behaves. Example:
+
+```
+FROM deepseek
+PARAMETER temperature 0.7
+```
+
+Then run:
+
+```
+ollama create deepseek-custom -f Modelfile
+ollama run deepseek-custom
+```
+
+## Troubleshooting Tips
+
+- Model download fails: Make sure you're connected to the internet and not behind a restrictive firewall.
+- Not enough RAM: Try a smaller model, or run Ollama on a machine with more resources.
+- API not responding: Ensure the Ollama server is running. You can restart it with ollama serve.
+
+## Conclusion
+
+You're now set up to run DeepSeek locally using Ollama! This is a great way to experiment with open-source language models without relying on the cloud. For more details, check out the [Ollama documentation](https://github.com/ollama/ollama/tree/main/docs) or the [DeepSeek GitHub](https://github.com/deepseek-ai).

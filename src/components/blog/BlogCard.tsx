@@ -27,7 +27,11 @@ export default function BlogCard({ post }: BlogCardProps) {
             ))}
           </div>
           <time className="text-sm text-gray-500 dark:text-gray-400">
-            {new Date(post.date).toLocaleDateString()}
+            {new Date(post.date).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
           </time>
         </div>
       </Link>
