@@ -1,10 +1,25 @@
 import { getAllPosts, getAllTags } from "@/utils/blog";
 import BlogCard from "@/components/blog/BlogCard";
 import Link from "next/link";
-import { title } from "process";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog | Agus Narestha Portfolio",
+  description:
+    "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
+  openGraph: {
+    title: "Blog | Agus Narestha Portfolio",
+    description:
+      "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
+    url: "https://agusnarestha.dev/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Agus Narestha Portfolio",
+    description:
+      "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
+  },
 };
 
 export default function BlogPage() {

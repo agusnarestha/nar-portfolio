@@ -34,7 +34,7 @@
   {
     "title": "BeMO",
     "description": "BeMO is an e-commerce platform for buying and selling with a variety of new and used cars",
-    "imageUrl": "project/bemo.webp",
+    "imageUrl": "/project/bemo.webp",
     "linkProject": "#",
     "categories": ["webapp", "car", "ecommerce"],
     "technologies": ["mysql", "laravel"]

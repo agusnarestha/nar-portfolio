@@ -18,11 +18,47 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://agusnarestha.dev/emoji.png",
+        width: 1200,
+        height: 630,
+        alt: "Agus Narestha Portfolio Preview",
       },
     ],
+    locale: "en_US",
   },
   description:
     "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
+  keywords: [
+    "Agus Narestha",
+    "Web Developer",
+    "Portfolio",
+    "Software Engineer",
+    "Full Stack Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Web Development",
+    "Projects",
+    "Blog",
+  ],
+  authors: [{ name: "Agus Narestha" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Agus Narestha Portfolio",
+    description:
+      "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
+    images: ["https://agusnarestha.dev/emoji.png"],
+  },
   other: {
     "google-site-verification": "Hqx3xeh09OgoTUxXBJvvPqYvcp46ccE63zLCqko-8so",
   },
