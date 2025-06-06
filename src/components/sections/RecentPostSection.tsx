@@ -12,7 +12,7 @@ const RecentPostSection = () => {
         title: post.title,
         slug: post.slug,
         description: post.description,
-        pubDate: post.date,
+        date: post.date,
         tags: post.tags,
       }));
 
@@ -63,7 +63,11 @@ const RecentPostSection = () => {
           <PostCard
             key={index}
             slug={post.slug}
-            pubDate={post.pubDate}
+            pubDate={new Date(post.date).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
             tags={post.tags}
             title={post.title}
             description={post.description}

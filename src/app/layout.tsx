@@ -5,13 +5,20 @@ import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import "./globals.css";
 import Head from "next/head";
+import PortfolioJsonLd from "@/components/PortfolioJsonLd";
 
 export const metadata: Metadata = {
-  title: "Agus Narestha Portfolio",
+  metadataBase: new URL("https://agusnarestha.dev"),
+  title: {
+    default: "Agus Narestha - Web Developer & Data Enthusiast",
+    template: "%s | Agus Narestha Portfolio",
+  },
+  description:
+    "Agus Narestha is a passionate web developer and data enthusiast specializing in modern web technologies and data analysis. Explore my portfolio of projects, blog posts, and professional experience in web development and data science.",
   openGraph: {
-    title: "Agus Narestha Portfolio",
+    title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
-      "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
+      "Agus Narestha is a passionate web developer and data enthusiast specializing in modern web technologies and data analysis. Explore my portfolio of projects, blog posts, and professional experience in web development and data science.",
     url: "https://www.agusnarestha.dev",
     siteName: "Agus Narestha Portfolio",
     type: "website",
@@ -25,20 +32,28 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
   },
-  description:
-    "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
   keywords: [
     "Agus Narestha",
     "Web Developer",
+    "Data Enthusiast",
     "Portfolio",
     "Software Engineer",
     "Full Stack Developer",
     "React",
     "Next.js",
+    "Laravel",
     "TypeScript",
     "Web Development",
+    "Data Analysis",
+    "Data Visualization",
     "Projects",
     "Blog",
+    "Frontend Developer",
+    "Backend Developer",
+    "JavaScript",
+    "Node.js",
+    "Database Management",
+    "Data Processing",
   ],
   authors: [{ name: "Agus Narestha" }],
   robots: {
@@ -54,13 +69,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agus Narestha Portfolio",
+    title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
-      "Explore Agus Narestha's personal portfolio website showcasing a collection of innovative projects and achievements in web development and technology.",
+      "Agus Narestha is a passionate web developer and data enthusiast specializing in modern web technologies and data analysis. Explore my portfolio of projects, blog posts, and professional experience in web development and data science.",
     images: ["https://agusnarestha.dev/emoji.png"],
+    creator: "@agusnarestha",
   },
   other: {
     "google-site-verification": "Hqx3xeh09OgoTUxXBJvvPqYvcp46ccE63zLCqko-8so",
+  },
+  alternates: {
+    canonical: "https://agusnarestha.dev",
   },
 };
 
@@ -80,6 +99,7 @@ export default function RootLayout({
       </head>
       <GoogleTagManager gtmId="GTM-PHV2VZN6" />
       <GoogleAnalytics gaId="G-B2ZN13JQ9F" />
+      <PortfolioJsonLd />
       <body className="font-SpaceGrotesk relative max-w-6xl mx-auto px-8 max-[768px]:mt-28 max-[480px]:px-0 ">
         <Header />
         {children}
