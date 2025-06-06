@@ -2,11 +2,11 @@ import AllProjectSection from "@/components/sections/AllProjectSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects | Agus Narestha Portfolio",
+  title: "Projects ",
   description:
     "Explore Agus Narestha's portfolio of web development projects, including full-stack applications, websites, and innovative solutions.",
   openGraph: {
-    title: "Projects | Agus Narestha Portfolio",
+    title: "Projects ",
     description:
       "Explore Agus Narestha's portfolio of web development projects, including full-stack applications, websites, and innovative solutions.",
     url: "https://agusnarestha.dev/project",

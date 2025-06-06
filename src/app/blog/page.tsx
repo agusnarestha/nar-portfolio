@@ -4,11 +4,11 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Agus Narestha Portfolio",
+  title: "Blog ",
   description:
     "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
   openGraph: {
-    title: "Blog | Agus Narestha Portfolio",
+    title: "Blog ",
     description:
       "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
     url: "https://agusnarestha.dev/blog",

@@ -3,11 +3,11 @@ import AboutSection from "@/components/sections/AboutSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Agus Narestha Portfolio",
+  title: "About",
   description:
     "Learn more about Agus Narestha - a passionate web developer and software engineer with expertise in modern web technologies and full-stack development.",
   openGraph: {
-    title: "About | Agus Narestha Portfolio",
+    title: "About",
     description:
       "Learn more about Agus Narestha - a passionate web developer and software engineer with expertise in modern web technologies and full-stack development.",
     url: "https://agusnarestha.dev/about",
