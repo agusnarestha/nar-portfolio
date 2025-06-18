@@ -7,9 +7,6 @@ import MobileTableOfContents from "@/components/blog/MobileTableOfContents";
 import { MDXComponents } from "@/components/blog/MDXComponents";
 import { Metadata } from "next";
 import JsonLd from "@/components/blog/JsonLd";
-import { allPosts } from "contentlayer/generated";
-import { getMDXComponent } from "next-contentlayer/hooks";
-import { format } from "date-fns";
 import ShareButtons from "@/components/blog/ShareButtons";
 
 interface BlogPostPageProps {
