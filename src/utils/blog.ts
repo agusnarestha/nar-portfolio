@@ -5,6 +5,16 @@ import { BlogPost, BlogMetadata } from "@/types/blog";
 
 const postsDirectory = path.join(process.cwd(), "src/content/blog");
 
+// Average reading speed (words per minute)
+const WORDS_PER_MINUTE = 200;
+
+function calculateReadingTime(content: string): number {
+  // Remove markdown syntax and count words
+  const plainText = content.replace(/[#*`_~\[\]]/g, "");
+  const wordCount = plainText.trim().split(/\s+/).length;
+  return Math.ceil(wordCount / WORDS_PER_MINUTE);
+}
+
 export function getAllPosts(): BlogPost[] {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames.map((fileName) => {
@@ -16,6 +26,7 @@ export function getAllPosts(): BlogPost[] {
     return {
       slug,
       content,
+      readingTime: calculateReadingTime(content),
       ...(data as BlogMetadata),
     };
   });
@@ -48,6 +59,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     return {
       slug,
       content,
+      readingTime: calculateReadingTime(content),
       ...(data as BlogMetadata),
     };
   } catch (error) {

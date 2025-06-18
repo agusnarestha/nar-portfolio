@@ -26,14 +26,29 @@ const Header = () => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } absolute top-full left-0 w-full lg:h-full h-screen bg-white lg:relative lg:bg-transparent lg:w-auto lg:block`}
+        } fixed top-0 left-0 right-0 bottom-0 w-full h-screen bg-white lg:relative lg:bg-transparent lg:w-auto lg:h-auto lg:block`}
       >
-        <ul className="flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 lg:space-x-4">
-          <HeaderButton label="Home" color="#3cc4ce" href="/" />
-          <HeaderButton label="About" color="#e6b448" href="/about" />
-          <HeaderButton label="Project" color="#df548e" href="/project" />
-          <HeaderButton label="Blog" color="#2e8b57" href="/blog" />
-        </ul>
+        <div className="flex flex-col items-center justify-center h-full">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-6 right-6 lg:hidden"
+          >
+            <svg
+              className="h-6 w-6 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Close</title>
+              <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+            </svg>
+          </button>
+          <ul className="flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-4">
+            <HeaderButton label="Home" color="#3cc4ce" href="/" />
+            <HeaderButton label="About" color="#e6b448" href="/about" />
+            <HeaderButton label="Project" color="#df548e" href="/project" />
+            <HeaderButton label="Blog" color="#2e8b57" href="/blog" />
+          </ul>
+        </div>
       </div>
     </nav>
   );

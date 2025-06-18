@@ -25,7 +25,7 @@ export default function TagPage({ params }: TagPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto my-32">
       <h1 className="text-4xl font-bold text-gray-900  mb-8">
         Posts tagged with "{params.tag}"
       </h1>
@@ -37,7 +37,7 @@ export default function TagPage({ params }: TagPageProps) {
           <Link
             key="all"
             href="/blog"
-            className="px-4 py-2 bg-[#525252] text-white  rounded-full hover:bg-[#949494] transition-colors duration-200"
+            className="px-4 py-2 bg-[#525252] text-white rounded-full hover:bg-[#949494] transition-colors duration-200"
           >
             All
           </Link>

@@ -6,32 +6,24 @@ interface TableOfContentsProps {
   content: string;
 }
 
-interface TocItem {
-  id: string;
-  text: string;
-  level: number;
-}
-
 export default function TableOfContents({ content }: TableOfContentsProps) {
-  const [headings, setHeadings] = useState<TocItem[]>([]);
+  const [headings, setHeadings] = useState<
+    { id: string; text: string; level: number }[]
+  >([]);
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
-    // Parse headings from content
+    // Extract headings from content
     const headingRegex = /^(#{1,6})\s+(.+)$/gm;
     const matches = Array.from(content.matchAll(headingRegex));
+    const extractedHeadings = matches.map((match) => ({
+      level: match[1].length,
+      text: match[2],
+      id: match[2].toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    }));
+    setHeadings(extractedHeadings);
 
-    const tocItems = matches.map((match) => {
-      const level = match[1].length;
-      const text = match[2].trim();
-      const id = text.toLowerCase().replace(/[^\w]+/g, "-");
-
-      return { id, text, level };
-    });
-
-    setHeadings(tocItems);
-
-    // Set up intersection observer
+    // Set up intersection observer for active heading
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -40,42 +32,45 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           }
         });
       },
-      {
-        rootMargin: "-20% 0px -80% 0px",
-      }
+      { rootMargin: "-20% 0px -80% 0px" }
     );
 
     // Observe all headings
-    const headingElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-    headingElements.forEach((element) => observer.observe(element));
+    headings.forEach((heading) => {
+      const element = document.getElementById(heading.id);
+      if (element) observer.observe(element);
+    });
 
-    return () => {
-      headingElements.forEach((element) => observer.unobserve(element));
-    };
+    return () => observer.disconnect();
   }, [content]);
 
-  if (headings.length === 0) {
-    return null;
-  }
+  if (headings.length === 0) return null;
 
   return (
-    <nav className="sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto">
-      <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+    <nav className="toc">
+      <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
         Table of Contents
       </h2>
-      <ul className="space-y-2">
+      <ul className="space-y-2 text-sm sm:text-base">
         {headings.map((heading) => (
           <li
             key={heading.id}
             style={{ marginLeft: `${(heading.level - 1) * 1}rem` }}
+            className="transition-colors duration-200"
           >
             <a
               href={`#${heading.id}`}
-              className={`text-sm transition-colors duration-200 ${
+              className={`block py-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 ${
                 activeId === heading.id
-                  ? "text-blue-600 dark:text-blue-400 font-medium"
-                  : "text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  ? "text-blue-600 dark:text-blue-400 font-medium bg-gray-100 dark:bg-gray-700"
+                  : "text-gray-600 dark:text-gray-300"
               }`}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(heading.id)?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
             >
               {heading.text}
             </a>

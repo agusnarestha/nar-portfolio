@@ -5,6 +5,7 @@ export interface BlogPost {
   description: string;
   tags: string[];
   content: string;
+  readingTime: number;
 }
 
 export interface BlogMetadata {
