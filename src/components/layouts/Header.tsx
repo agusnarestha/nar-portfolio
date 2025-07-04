@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import HeaderButton from "./HeaderButton";
+import { useRouter, usePathname } from "next/navigation";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +45,19 @@ const Header = () => {
           </button>
           <ul className="flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-4">
             <HeaderButton label="Home" color="#3cc4ce" href="/" />
-            <HeaderButton label="About" color="#e6b448" href="/about" />
+            <HeaderButton
+              label="About"
+              color="#e6b448"
+              href="/?scroll=about"
+              onClick={(e) => {
+                const pathname = window.location.pathname;
+                if (pathname === "/") {
+                  e.preventDefault();
+                  const el = document.getElementById("about");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            />
             <HeaderButton label="Project" color="#df548e" href="/project" />
             <HeaderButton label="Blog" color="#2e8b57" href="/blog" />
           </ul>

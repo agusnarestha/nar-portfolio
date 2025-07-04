@@ -4,13 +4,20 @@ type HeaderButtonProps = {
   label: string;
   color: string;
   href: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 };
 
-const HeaderButton: React.FC<HeaderButtonProps> = ({ label, color, href }) => {
+const HeaderButton: React.FC<HeaderButtonProps> = ({
+  label,
+  color,
+  href,
+  onClick,
+}) => {
   return (
     <li className="">
       <a
         href={href}
+        onClick={onClick}
         style={{
           backgroundColor: color,
           marginBottom: "-3px",

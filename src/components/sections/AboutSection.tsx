@@ -27,26 +27,24 @@ const AboutSection = () => {
             <span className="font-bold bg-gradient-to-r from-blue-500 to-green-500 text-white w-max">
               Agus Narestha.
             </span>{" "}
-            a passionate web developer. My journey in web development began at
-            university, where I dedicated myself to mastering both backend and
-            frontend development. To level up my skills, I decided take some
-            courses and watching some YouTube videos.
+            a passionate web developer with a deep love for both web
+            technologies and data-driven solutions. My journey started at
+            university, where I focused on both backend and frontend
+            development. To level up, I’ve watched YouTube tutorials and read
+            documentation to stay on top of the latest trends and improve my
+            skills.
           </p>
           <p className="mt-3">
-            I am motivated to continuously expand my knowledge in web
-            development. I really enjoy learning new things and I'm open to
-            feedback to improve my skills and grow professionally.
+            I'm driven by a curiosity to explore new tech and how data can
+            improve web experiences. I’m always eager to learn and open to
+            feedback that helps me grow.
           </p>
           <p className="mt-3">
-            This website serves as a platform to showcase my completed projects
-            and engage in meaningful discussions. Whether you have questions,
-            ideas to share, or potential collaborations in mind, please feel
-            free to reach out.
+            This website showcases my projects and serves as a space to connect.
+            Feel free to reach out if you have questions, ideas, or want to
+            collaborate!
           </p>
-          <p className="mt-3">
-            I look forward to connecting with you and exploring the
-            possibilities together!"
-          </p>
+          <p className="mt-3">Let’s create something amazing together!</p>
         </article>
         <div className="flex flex-row">
           <a href="https://www.linkedin.com/in/agusnarestha/">
