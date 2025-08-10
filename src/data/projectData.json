@@ -1,5 +1,13 @@
 [
   {
+    "title": "Type Me",
+    "description": "A website that provides a personality test based on the 16 Personalities theory",
+    "imageUrl": "/project/typeme.webp",
+    "linkProject": "https://personality-mbti-quiz.vercel.app/",
+    "categories": ["webapp", "quiz"],
+    "technologies": ["nextdotjs"]
+  },
+  {
     "title": "QR Generator",
     "description": "QR Generator is a website that can generate QR codes from text and URLs",
     "imageUrl": "/project/qrgenerator.webp",

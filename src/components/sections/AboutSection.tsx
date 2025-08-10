@@ -27,17 +27,17 @@ const AboutSection = () => {
             <span className="font-bold bg-gradient-to-r from-blue-500 to-green-500 text-white w-max">
               Agus Narestha.
             </span>{" "}
-            a passionate web developer with a deep love for both web
-            technologies and data-driven solutions. My journey started at
-            university, where I focused on both backend and frontend
-            development. To level up, I’ve watched YouTube tutorials and read
-            documentation to stay on top of the latest trends and improve my
-            skills.
+            a software developer currently focused on web development and
+            data-driven solutions. My journey started at university, where I
+            focused on both backend and frontend development. To level up, I’ve
+            watched YouTube tutorials and read documentation to stay on top of
+            the latest trends and improve my skills.
           </p>
           <p className="mt-3">
-            I'm driven by a curiosity to explore new tech and how data can
-            improve web experiences. I’m always eager to learn and open to
-            feedback that helps me grow.
+            What excites me is exploring new technologies to help businesses
+            unlock their full potential and solve real-world problems. I’m
+            always curious to dive into new challenges and eager to keep
+            learning and improving.
           </p>
           <p className="mt-3">
             This website showcases my projects and serves as a space to connect.

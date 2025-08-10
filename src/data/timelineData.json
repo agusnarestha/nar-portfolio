@@ -5,11 +5,13 @@
     "date": "September 2023 - Present",
     "description": [
       "Conducted daily checks on the websites and other deployed applications in Google Cloud Platform",
-      "Cleaned customer data using Python for sending newsletters",
-      "Developed a website for selling tickets to the Foam Party New Year's Eve 2024 at Bali Mandira x Azul using Laravel, integrated with a payment gateway",
-      "Created a web-based game open to the public to celebrate Bali Mandira's 43rd Anniversary using Nuxt.js",
-      "Developed a virtual business card using Laravel",
-      "Built a headless CMS using Strapi"
+      "Segmented customer data using Google BigQuery for targeted marketing campaigns",
+      "Created a website for selling tickets to the Foam Party New Year's Eve 2024 at Bali Mandira x Azul using Laravel, integrated with a payment gateway",
+      "Created a website game open to the public to celebrate Bali Mandira's 43rd Anniversary using Nuxt.js",
+      "Created a website virtual business card using Laravel",
+      "Created a website headless CMS using Strapi",
+      "Created a website for selling Gift Cards, Frontend using Wordpress and backend using Express.js integrated with a payment gateway",
+      "Created automation with N8n workflows for various tasks such as alert notifications, data synchronization, and more"
     ]
   },
   {
