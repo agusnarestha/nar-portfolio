@@ -1,0 +1,357 @@
+---
+title: "Building a Spotify Now Playing Widget with Next.js"
+description: "Learn how to integrate Spotify's Web API to display your currently playing music in real-time on your Next.js portfolio"
+date: "2026-01-16"
+tags: ["nextjs", "spotify", "react", "typescript", "api"]
+---
+
+# Building a Spotify Now Playing Widget with Next.js
+
+Adding a "Now Playing" widget to your portfolio is a great way to showcase your personality and technical skills. In this guide, I'll show you how to integrate Spotify's Web API with Next.js to display your currently playing music in real-time.
+
+## What We'll Build
+
+A beautiful, animated widget that:
+
+- Displays your currently playing Spotify track
+- Shows album artwork, song title, and artist
+- Updates automatically every 30 seconds
+- Features smooth animations and dark mode support
+- Links directly to the song on Spotify
+
+## Prerequisites
+
+Before we start, you'll need:
+
+- A Next.js 14+ project with TypeScript
+- A Spotify account (Free or Premium)
+- Basic knowledge of React and API routes
+- Tailwind CSS and Framer Motion installed
+
+## Step 1: Set Up Spotify Developer Account
+
+First, we need to create a Spotify application to get API credentials:
+
+1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Click **"Create app"**
+3. Fill in the details:
+   - **App name**: Your Portfolio
+   - **Redirect URI**: `http://localhost:3000/callback`
+   - Check the **Web API** checkbox
+4. Save and note your **Client ID** and **Client Secret**
+
+## Step 2: Get Your Refresh Token
+
+To access your currently playing track, you need a refresh token with the right scope:
+
+1. Create an authorization URL (replace `YOUR_CLIENT_ID`):
+
+```
+https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://localhost:3000/callback&scope=user-read-currently-playing
+```
+
+2. Open this URL in your browser and authorize the app
+3. Copy the `code` parameter from the redirect URL
+4. Exchange it for a refresh token using curl:
+
+```bash
+curl -X POST https://accounts.spotify.com/api/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "code=YOUR_CODE" \
+  -d "redirect_uri=http://localhost:3000/callback" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET"
+```
+
+5. Save the `refresh_token` from the response
+
+## Step 3: Create TypeScript Types
+
+Create `src/types/spotify.ts` to define our data structures:
+
+```typescript
+export interface SpotifyNowPlayingData {
+  isPlaying: boolean;
+  title?: string;
+  artist?: string;
+  album?: string;
+  albumImageUrl?: string;
+  songUrl?: string;
+}
+
+export interface SpotifyTokenResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+}
+
+export interface SpotifyCurrentlyPlayingResponse {
+  is_playing: boolean;
+  item?: {
+    name: string;
+    artists: Array<{ name: string }>;
+    album: {
+      name: string;
+      images: Array<{ url: string; height: number; width: number }>;
+    };
+    external_urls: { spotify: string };
+  };
+}
+```
+
+## Step 4: Create Spotify Utility Functions
+
+Create `src/utils/spotify.ts` for API interactions:
+
+```typescript
+import { SpotifyTokenResponse } from "@/types/spotify";
+
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
+const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
+
+export const getAccessToken = async (): Promise<SpotifyTokenResponse> => {
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${basic}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token: refresh_token!,
+    }),
+  });
+
+  return response.json();
+};
+
+export const getNowPlaying = async (): Promise<Response> => {
+  const { access_token } = await getAccessToken();
+
+  return fetch(NOW_PLAYING_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+```
+
+## Step 5: Create the API Route
+
+Create `src/app/api/spotify/now-playing/route.ts`:
+
+```typescript
+import { NextResponse } from "next/server";
+import { getNowPlaying } from "@/utils/spotify";
+import { SpotifyNowPlayingData } from "@/types/spotify";
+
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  try {
+    const response = await getNowPlaying();
+
+    if (response.status === 204 || response.status > 400) {
+      return NextResponse.json<SpotifyNowPlayingData>({ isPlaying: false });
+    }
+
+    const song = await response.json();
+
+    if (!song.item) {
+      return NextResponse.json<SpotifyNowPlayingData>({ isPlaying: false });
+    }
+
+    return NextResponse.json<SpotifyNowPlayingData>({
+      isPlaying: song.is_playing,
+      title: song.item.name,
+      artist: song.item.artists.map((a) => a.name).join(", "),
+      album: song.item.album.name,
+      albumImageUrl: song.item.album.images[0]?.url,
+      songUrl: song.item.external_urls.spotify,
+    });
+  } catch (error) {
+    return NextResponse.json<SpotifyNowPlayingData>(
+      { isPlaying: false },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## Step 6: Build the React Component
+
+Create `src/components/SpotifyNowPlaying.tsx`:
+
+```typescript
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Music2 } from "lucide-react";
+import { SpotifyNowPlayingData } from "@/types/spotify";
+
+const SpotifyNowPlaying = () => {
+  const [data, setData] = useState<SpotifyNowPlayingData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNowPlaying = async () => {
+      try {
+        const response = await fetch("/api/spotify/now-playing");
+        const nowPlaying: SpotifyNowPlayingData = await response.json();
+        setData(nowPlaying);
+      } catch (error) {
+        console.error("Error fetching now playing:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNowPlaying();
+    const interval = setInterval(fetchNowPlaying, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="animate-pulse flex items-center gap-3">
+        <div className="w-12 h-12 bg-gray-300 dark:bg-gray-700 rounded" />
+        <div className="flex-1">
+          <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2" />
+          <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/2" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!data?.isPlaying) {
+    return (
+      <div className="flex items-center gap-3">
+        <Music2 className="w-5 h-5 text-gray-500" />
+        <span className="text-sm text-gray-600">Not playing anything</span>
+      </div>
+    );
+  }
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.a
+        href={data.songUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.02 }}
+        className="flex items-center gap-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800"
+      >
+        {data.albumImageUrl && (
+          <img
+            src={data.albumImageUrl}
+            alt={data.album}
+            className="w-12 h-12 rounded"
+          />
+        )}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
+            {data.title}
+          </p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+            {data.artist}
+          </p>
+        </div>
+      </motion.a>
+    </AnimatePresence>
+  );
+};
+
+export default SpotifyNowPlaying;
+```
+
+## Step 7: Add Environment Variables
+
+Create a `.env.local` file in your project root:
+
+```env
+SPOTIFY_CLIENT_ID=your_client_id_here
+SPOTIFY_CLIENT_SECRET=your_client_secret_here
+SPOTIFY_REFRESH_TOKEN=your_refresh_token_here
+```
+
+> ⚠️ **Important**: Never commit `.env.local` to version control!
+
+## Step 8: Use the Component
+
+Import and use the component anywhere in your app:
+
+```typescript
+import SpotifyNowPlaying from "@/components/SpotifyNowPlaying";
+
+export default function Home() {
+  return (
+    <div>
+      <h1>Welcome to my portfolio</h1>
+      <SpotifyNowPlaying />
+    </div>
+  );
+}
+```
+
+## Customization Ideas
+
+Here are some ways to enhance your widget:
+
+1. **Add an animated equalizer** when music is playing
+2. **Show listening history** using the recently played endpoint
+3. **Display top tracks** from your Spotify profile
+4. **Add playback controls** (requires additional scopes)
+5. **Create a full music dashboard** with stats and insights
+
+## Troubleshooting
+
+**Widget shows "Not playing anything":**
+
+- Verify your environment variables are correct
+- Make sure you're actively playing music on Spotify
+- Check that your refresh token has the `user-read-currently-playing` scope
+
+**API returns 401 Unauthorized:**
+
+- Your refresh token may have expired - regenerate it
+- Double-check your Client ID and Client Secret
+
+**Widget not updating:**
+
+- Check the browser console for errors
+- Verify the API route is accessible at `/api/spotify/now-playing`
+
+## Performance Considerations
+
+- The widget polls every 30 seconds - adjust based on your needs
+- Consider implementing SWR or React Query for better caching
+- Use Next.js Image component for optimized album art loading
+- Add error boundaries to prevent crashes
+
+## Conclusion
+
+You now have a fully functional Spotify "Now Playing" widget! This is a great addition to any portfolio, showing both your technical skills and personality.
+
+The same pattern can be applied to other APIs like:
+
+- **Last.fm** for music scrobbling
+- **GitHub** for recent activity
+- **Wakatime** for coding stats
+- **Strava** for fitness activities
+
+Happy coding, and enjoy sharing your music taste with the world! 🎵
+
+## Resources
+
+- [Spotify Web API Documentation](https://developer.spotify.com/documentation/web-api)
+- [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- [Framer Motion Documentation](https://www.framer.com/motion/)

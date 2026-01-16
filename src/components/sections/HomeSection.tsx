@@ -2,6 +2,7 @@
 import TypeIt from "typeit-react";
 import ScrollDown from "../ScrollDown";
 import Image from "next/image";
+import SpotifyNowPlaying from "../SpotifyNowPlaying";
 
 const HomeSection = () => {
   return (
@@ -25,6 +26,11 @@ const HomeSection = () => {
           <TypeIt className="text-gray-500 text-2xl xl:text-3xl dark:text-gray-400">
             Hello Everyone...👋
           </TypeIt>
+
+          {/* Spotify Now Playing */}
+          <div className="mt-6">
+            <SpotifyNowPlaying />
+          </div>
         </div>
       </section>
       <ScrollDown />
