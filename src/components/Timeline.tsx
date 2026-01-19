@@ -4,6 +4,7 @@ type TimelineProps = {
   company: string;
   job: string;
   date: string;
+  duration?: string;
   description: string[];
 };
 
@@ -11,6 +12,7 @@ const Timeline: React.FC<TimelineProps> = ({
   company,
   job,
   date,
+  duration,
   description,
 }) => {
   return (
@@ -26,7 +28,17 @@ const Timeline: React.FC<TimelineProps> = ({
       <div className="ml-6">
         <h4 className="font-bold text-lg text-[#3cc4ce]">{job}.</h4>
         <h3 className="mt-1 block text-base font-semibold">{company}</h3>
-        <span className="mt-1 block text-sm font-semibold">{date}</span>
+        <div className="mt-1 flex flex-wrap items-center gap-2">
+          <span className="text-sm font-semibold">{date}</span>
+          {duration && (
+            <>
+              <span className="text-gray-400">•</span>
+              <span className="text-sm text-gray-500 font-medium italic">
+                {duration}
+              </span>
+            </>
+          )}
+        </div>
         <ul className="mt-2 text-sm text-gray-500 list-disc pl-5 space-y-1">
           {description.map((line, index) => (
             <li key={index}>{line}</li>

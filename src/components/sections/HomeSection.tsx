@@ -3,11 +3,13 @@ import TypeIt from "typeit-react";
 import ScrollDown from "../ScrollDown";
 import Image from "next/image";
 import SpotifyNowPlaying from "../SpotifyNowPlaying";
+import BackgroundArt from "../BackgroundArt";
 
 const HomeSection = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <section className="flex-row items-center justify-center h-screen">
+    <div className="flex flex-col h-screen relative">
+      <BackgroundArt />
+      <section className="flex-row items-center justify-center h-screen relative z-10">
         <div className="relative py-8 px-4 mx-auto max-w-screen-md text-center lg:py-16 lg:px-12">
           <p
             className="absolute inset-x-0 top-[calc(50%+10px)] text-gray-500 xl:text-7xl text-5xl"

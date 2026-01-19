@@ -28,7 +28,7 @@ const PostCard: React.FC<PostCardProps> = ({
     setShowAllTags(!showAllTags);
   };
   return (
-    <div className="relative min-h-[220px] border-[1px] group border-[#e5e5e5] rounded-xl overflow-hidden cursor-pointer transition-all duration-[.5s] hover:scale-[1.03] dark:border-[#404040] flex flex-col">
+    <div className="relative h-[280px] border-[1px] group border-[#e5e5e5] rounded-xl overflow-hidden cursor-pointer transition-all duration-[.5s] hover:scale-[1.03] dark:border-[#404040] flex flex-col w-full">
       <a aria-label="slug" href={`/blog/${slug}`} className="h-full flex flex-col">
         <div className="BackgroundHoverT absolute z-[4] h-full w-full bg-black bg-opacity-[0.7] opacity-0 transition-opacity duration-[.5s] group-hover:opacity-80" />
         <div className="bg-[#fafafa] dark:bg-[#1a1a1a] h-full w-full relative z-[6] p-5 flex flex-col">
