@@ -7,8 +7,8 @@ interface OGImageLayoutProps {
 }
 
 /**
- * Reusable OG Image Layout Component
- * Generates a 1200x630 Open Graph image with consistent branding
+ * Neobrutalism OG Image Layout Component
+ * Features: thick borders, offset shadows, vibrant colors, bold typography
  */
 export function generateOGImage({
     title,
@@ -25,127 +25,200 @@ export function generateOGImage({
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+                    backgroundColor: "#FFE5E5",
                     fontFamily: "system-ui, sans-serif",
-                    padding: "60px",
+                    padding: "50px",
                 }}
             >
-                {/* Top accent bar */}
-                <div
-                    style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: "8px",
-                        background: "linear-gradient(90deg, #FF6B6B 0%, #FFE66D 50%, #4ECDC4 100%)",
-                    }}
-                />
-
-                {/* Type badge */}
-                {type === "blog" && (
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            marginBottom: "24px",
-                            padding: "8px 24px",
-                            background: "rgba(255, 107, 107, 0.2)",
-                            borderRadius: "999px",
-                            border: "2px solid #FF6B6B",
-                        }}
-                    >
-                        <span
-                            style={{
-                                color: "#FF6B6B",
-                                fontSize: "24px",
-                                fontWeight: 600,
-                                letterSpacing: "0.05em",
-                                textTransform: "uppercase",
-                            }}
-                        >
-                            Blog
-                        </span>
-                    </div>
-                )}
-
-                {/* Main title */}
+                {/* Main card with neobrutalist shadow */}
                 <div
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "center",
-                        textAlign: "center",
-                        maxWidth: "1000px",
+                        alignItems: "flex-start",
+                        justifyContent: "space-between",
+                        width: "1100px",
+                        height: "530px",
+                        backgroundColor: "#ffffff",
+                        border: "4px solid #000000",
+                        borderRadius: "12px",
+                        boxShadow: "8px 8px 0px 0px #000000",
+                        padding: "48px",
+                        position: "relative",
                     }}
                 >
-                    <h1
-                        style={{
-                            color: "#ffffff",
-                            fontSize: title.length > 50 ? "48px" : title.length > 30 ? "56px" : "72px",
-                            fontWeight: 800,
-                            lineHeight: 1.2,
-                            margin: 0,
-                            textShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
-                        }}
-                    >
-                        {title}
-                    </h1>
-
-                    {/* Subtitle / Author */}
+                    {/* Top section with badge */}
                     <div
                         style={{
                             display: "flex",
                             alignItems: "center",
-                            marginTop: "32px",
                             gap: "16px",
                         }}
                     >
+                        {/* Type badge */}
                         <div
                             style={{
-                                width: "60px",
-                                height: "2px",
-                                background: "linear-gradient(90deg, transparent, #4ECDC4)",
-                            }}
-                        />
-                        <span
-                            style={{
-                                color: "#94a3b8",
-                                fontSize: "28px",
-                                fontWeight: 500,
+                                display: "flex",
+                                alignItems: "center",
+                                padding: "10px 24px",
+                                backgroundColor: type === "blog" ? "#FF6B6B" : "#4ECDC4",
+                                border: "3px solid #000000",
+                                borderRadius: "8px",
+                                boxShadow: "4px 4px 0px 0px #000000",
                             }}
                         >
-                            {subtitle}
-                        </span>
+                            <span
+                                style={{
+                                    color: "#000000",
+                                    fontSize: "22px",
+                                    fontWeight: 800,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.05em",
+                                }}
+                            >
+                                {type === "blog" ? "📝 Blog" : "🚀 Portfolio"}
+                            </span>
+                        </div>
+
+                        {/* Site name */}
                         <div
                             style={{
-                                width: "60px",
-                                height: "2px",
-                                background: "linear-gradient(90deg, #4ECDC4, transparent)",
+                                display: "flex",
+                                alignItems: "center",
+                                padding: "10px 20px",
+                                backgroundColor: "#FFE66D",
+                                border: "3px solid #000000",
+                                borderRadius: "8px",
+                                boxShadow: "4px 4px 0px 0px #000000",
+                            }}
+                        >
+                            <span
+                                style={{
+                                    color: "#000000",
+                                    fontSize: "20px",
+                                    fontWeight: 700,
+                                }}
+                            >
+                                agusnarestha.dev
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Title section */}
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "20px",
+                            maxWidth: "950px",
+                        }}
+                    >
+                        <h1
+                            style={{
+                                color: "#000000",
+                                fontSize: title.length > 50 ? "48px" : title.length > 30 ? "60px" : "72px",
+                                fontWeight: 900,
+                                lineHeight: 1.1,
+                                margin: 0,
+                                letterSpacing: "-0.02em",
+                            }}
+                        >
+                            {title}
+                        </h1>
+                    </div>
+
+                    {/* Bottom section with author */}
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "16px",
+                        }}
+                    >
+                        {/* Author avatar placeholder */}
+                        <div
+                            style={{
+                                width: "56px",
+                                height: "56px",
+                                backgroundColor: "#FF6B6B",
+                                border: "3px solid #000000",
+                                borderRadius: "50%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                boxShadow: "3px 3px 0px 0px #000000",
+                            }}
+                        >
+                            <span style={{ fontSize: "28px" }}>👨‍💻</span>
+                        </div>
+
+                        {/* Author info */}
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "2px",
+                            }}
+                        >
+                            <span
+                                style={{
+                                    color: "#000000",
+                                    fontSize: "24px",
+                                    fontWeight: 800,
+                                }}
+                            >
+                                {subtitle}
+                            </span>
+                            <span
+                                style={{
+                                    color: "#525252",
+                                    fontSize: "18px",
+                                    fontWeight: 600,
+                                }}
+                            >
+                                Web Developer & Data Enthusiast
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Decorative corner element */}
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "20px",
+                            right: "20px",
+                            display: "flex",
+                            gap: "8px",
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: "16px",
+                                height: "16px",
+                                backgroundColor: "#FF6B6B",
+                                border: "2px solid #000000",
+                                borderRadius: "50%",
+                            }}
+                        />
+                        <div
+                            style={{
+                                width: "16px",
+                                height: "16px",
+                                backgroundColor: "#FFE66D",
+                                border: "2px solid #000000",
+                                borderRadius: "50%",
+                            }}
+                        />
+                        <div
+                            style={{
+                                width: "16px",
+                                height: "16px",
+                                backgroundColor: "#4ECDC4",
+                                border: "2px solid #000000",
+                                borderRadius: "50%",
                             }}
                         />
                     </div>
-                </div>
-
-                {/* Bottom branding */}
-                <div
-                    style={{
-                        position: "absolute",
-                        bottom: "40px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "12px",
-                    }}
-                >
-                    <span
-                        style={{
-                            color: "#64748b",
-                            fontSize: "20px",
-                            fontWeight: 500,
-                        }}
-                    >
-                        agusnarestha.dev
-                    </span>
                 </div>
             </div>
         ),
