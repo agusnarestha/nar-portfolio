@@ -80,6 +80,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://agusnarestha.dev",
+    types: {
+      "application/rss+xml": "https://agusnarestha.dev/feed.xml",
+    },
   },
 };
 

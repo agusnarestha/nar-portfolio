@@ -2,6 +2,7 @@ import { getPostsByTag, getAllTags } from "@/utils/blog";
 import BlogCard from "@/components/blog/BlogCard";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 interface TagPageProps {
   params: {
@@ -9,10 +10,32 @@ interface TagPageProps {
   };
 }
 
-export function generateMetadata({ params }: TagPageProps) {
+export function generateMetadata({ params }: TagPageProps): Metadata {
+  const tag = params.tag;
+  const baseUrl = "https://agusnarestha.dev";
+  const url = `${baseUrl}/blog/tag/${tag}`;
+
   return {
-    title: `Posts tagged with "${params.tag}"`,
-    description: `Browse all posts tagged with "${params.tag}"`,
+    title: `Posts tagged with "${tag}"`,
+    description: `Browse all articles tagged with "${tag}" on Agus Narestha's blog. Explore insights about ${tag} and related topics.`,
+    openGraph: {
+      title: `Posts tagged with "${tag}"`,
+      description: `Browse all articles tagged with "${tag}" on Agus Narestha's blog.`,
+      url,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Posts tagged with "${tag}" | Agus Narestha`,
+      description: `Browse all articles tagged with "${tag}" on Agus Narestha's blog.`,
+    },
+    alternates: {
+      canonical: url,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -45,11 +68,10 @@ export default function TagPage({ params }: TagPageProps) {
             <Link
               key={tag}
               href={`/blog/tag/${tag}`}
-              className={`px-4 py-2 rounded-full transition-colors duration-200 ${
-                tag === params.tag
+              className={`px-4 py-2 rounded-full transition-colors duration-200 ${tag === params.tag
                   ? "bg-[#1a1a1a] text-white"
                   : "bg-[#525252] text-white hover:bg-[#949494]"
-              }`}
+                }`}
             >
               {tag}
             </Link>

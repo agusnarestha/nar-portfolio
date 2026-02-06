@@ -1,9 +1,10 @@
 import Script from "next/script";
 
 export default function PortfolioJsonLd() {
-  const jsonLd = {
+  const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://agusnarestha.dev/#person",
     name: "Agus Narestha",
     url: "https://agusnarestha.dev",
     jobTitle: "Web Developer & Data Enthusiast",
@@ -30,11 +31,33 @@ export default function PortfolioJsonLd() {
       "Web developer and data enthusiast passionate about creating modern web applications and working with data to derive meaningful insights.",
   };
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://agusnarestha.dev/#website",
+    url: "https://agusnarestha.dev",
+    name: "Agus Narestha Portfolio",
+    description:
+      "Personal portfolio of Agus Narestha - Web Developer & Data Enthusiast",
+    publisher: {
+      "@id": "https://agusnarestha.dev/#person",
+    },
+    inLanguage: "en-US",
+  };
+
   return (
-    <Script
-      id="portfolio-jsonld"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <Script
+        id="person-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <Script
+        id="website-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+    </>
   );
 }
+

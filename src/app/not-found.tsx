@@ -1,4 +1,15 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "404 - Page Not Found",
+  description:
+    "The page you are looking for could not be found. Return to Agus Narestha's portfolio homepage.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function NotFound() {
   return (
@@ -13,7 +24,7 @@ export default function NotFound() {
         <p className="text-gray-500 mt-4 pb-4 border-b-2 text-center">
           Sorry, the page you are looking for could not be found.
         </p>
-        <a
+        <Link
           href="/"
           className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 mt-6 rounded transition duration-150"
           title="Return Home"
@@ -31,7 +42,7 @@ export default function NotFound() {
             ></path>
           </svg>
           <p>Return Home</p>
-        </a>
+        </Link>
       </div>
     </div>
   );

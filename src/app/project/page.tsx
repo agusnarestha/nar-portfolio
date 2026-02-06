@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     description:
       "Explore Agus Narestha's portfolio of web development projects, including full-stack applications, websites, and innovative solutions.",
   },
+  alternates: {
+    canonical: "https://agusnarestha.dev/project",
+  },
 };
 
 export default function Project() {

@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     description:
       "Learn more about Agus Narestha - a passionate web developer and software engineer with expertise in modern web technologies and full-stack development.",
   },
+  alternates: {
+    canonical: "https://agusnarestha.dev/about",
+  },
 };
 
 export default function About() {

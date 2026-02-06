@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     description:
       "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
   },
+  alternates: {
+    canonical: "https://agusnarestha.dev/blog",
+  },
 };
 
 export default function BlogPage() {
