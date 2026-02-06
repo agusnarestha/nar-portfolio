@@ -22,14 +22,6 @@ export const metadata: Metadata = {
     url: "https://www.agusnarestha.dev",
     siteName: "Agus Narestha Portfolio",
     type: "website",
-    images: [
-      {
-        url: "https://agusnarestha.dev/emoji.png",
-        width: 1200,
-        height: 630,
-        alt: "Agus Narestha Portfolio Preview",
-      },
-    ],
     locale: "en_US",
   },
   keywords: [
@@ -72,7 +64,6 @@ export const metadata: Metadata = {
     title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
       "Agus Narestha is a passionate web developer and data enthusiast specializing in modern web technologies and data analysis. Explore my portfolio of projects, blog posts, and professional experience in web development and data science.",
-    images: ["https://agusnarestha.dev/emoji.png"],
     creator: "@agusnarestha",
   },
   other: {
