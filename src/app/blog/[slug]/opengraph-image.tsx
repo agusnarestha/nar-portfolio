@@ -1,13 +1,21 @@
 import { generateOGImage, size, contentType } from "@/components/og/OGImageLayout";
-import { getPostBySlug } from "@/utils/blog";
+import { getPostBySlug, getAllPosts } from "@/utils/blog";
 
 export { size, contentType };
+
+// Generate OG images at build time to avoid fs issues on Vercel runtime
+export function generateStaticParams() {
+    const posts = getAllPosts();
+    return posts.map((post) => ({ slug: post.slug }));
+}
 
 interface Props {
     params: {
         slug: string;
     };
 }
+
+export const alt = "Blog post preview image";
 
 export default async function Image({ params }: Props) {
     const post = getPostBySlug(params.slug);
@@ -31,3 +39,4 @@ export default async function Image({ params }: Props) {
         type: "blog",
     });
 }
+
