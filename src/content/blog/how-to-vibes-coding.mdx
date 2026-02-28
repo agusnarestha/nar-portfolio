@@ -1,0 +1,84 @@
+---
+title: "How to Master Vibes Coding with AI Agents"
+date: "2026-02-28"
+description: "Discover the best practices for 'vibes coding'—leveraging AI to write code efficiently. Learn how to use PRDs and .agent files to guide your AI agent to success."
+tags: ["AI", "Vibes Coding", "Best Practices", "Productivity", "Agents"]
+---
+
+"Vibes coding" has quickly become the new paradigm in software development. Instead of writing every line of code manually, you describe what you want, provide the right "vibes" (context and direction), and let an AI agent do the heavy lifting.
+
+But if you've tried this, you know that AI can sometimes go off the rails. It might hallucinate features, use the wrong framework, or build UI that doesn't match your design system. 
+
+To truly master vibes coding, you need to set up rails for your AI. Here are the best practices to achieve perfect results every time.
+
+## 1. Start with a solid PRD 📄
+
+A Product Requirements Document (PRD) isn't just for enterprise teams anymore—it's the exact blueprint your AI needs.
+
+When vibes coding, never start by just saying "build a to-do app." Instead, write a simple but comprehensive PRD in markdown. Your PRD should include:
+- **Core Objective:** What is the app supposed to do?
+- **Features Breakdown:** List all features and user flows clearly.
+- **Rules & Constraints:** Specify what the AI *shouldn't* do.
+- **Database Schema & Tech Stack:** Explicitly state the models and the stack you are using.
+
+### Example PRD snippet:
+```markdown
+# To-Do App PRD
+**Goal:** A minimalist to-do app with drag-and-drop ordering.
+**Features:** 
+1. Auth (Email/Pass)
+2. Task CRUD
+3. Drag-and-drop reordering column
+**Constraints:** NO external state management libraries (use React Context).
+**Stack:** Next.js 14 App Router, Supabase, Tailwind CSS, dnd-kit.
+```
+
+By feeding a PRD to your AI agent before it starts coding, you give it absolute clarity on the end goal.
+
+## 2. Define the System with `.agent` Files ⚙️
+
+Context is everything. When an AI agent drops into your codebase, it needs to know your preferred conventions. This is where `.agent` files (or custom system prompts / project rules) shine.
+
+Create a `.agent` or `.cursorrules` file at the root of your project to define the architectural "vibes." You should specify:
+- **Tech Stack versions:** e.g., Next.js 14 App Router, React 18.
+- **Styling preferences:** e.g., "Always use Tailwind CSS and prioritize dark mode."
+- **Code patterns:** e.g., "Use functional components with explicit TypeScript interfaces."
+- **File structure:** Tell the agent where to put components, utilities, and assets.
+
+When the agent reads this file, every piece of code it generates will match your exact style.
+
+## 3. Leverage `.skills` for Actionable Workflows 🛠️
+
+Beyond passive rules, advanced vibes coding involves giving your agent active capabilities. This is often done via `.skills` files or directories (depending on your agent framework). 
+
+Skills are explicit instructions on *how* to perform specific, repetitive tasks. For example, if your app requires a specific command to format database migrations, you don't want to explain this to the AI every single time.
+
+Create a `database-migration.md` skill that defines:
+- The exact CLI command to generate a migration.
+- The folder where migrations should be saved.
+- Naming conventions for migration files.
+
+When the agent attempts a migration, it reads the skill and executes the workflow perfectly without hallucinating command flags.
+
+## 4. Keep Iterations Small 🔄
+
+A common mistake is asking the agent to build the entire app in one prompt. This almost always leads to a bloated context window and tangled code.
+
+Break your PRD into small, actionable chunks:
+1. **Phase 1:** Setup the project shell and database schemas.
+2. **Phase 2:** Build the basic UI layout and navigation.
+3. **Phase 3:** Integrate the backend APIs.
+
+Vibes coding requires you to act as the Engineering Manager. You review each PR, ensure it works, and then assign the next task.
+
+## 5. The "Vibe Check" (Reviewing & Refactoring) 🔍
+
+Always "vibe check" the code. Don't blindly accept what the agent produces. 
+If the UI doesn't look quite right or the logic seems clunky, tell the agent exactly what feels off. AI is fantastic at refactoring. You can say:
+> *"The authentication logic works, but it's too nested. Refactor it to use early returns, and make sure the error messages match our brand tone."*
+
+## Conclusion
+
+Vibes coding isn't about being lazy; it's about shifting your role from a syntax-typist to an architect and director. By providing a clear PRD, defining strict boundaries with `.agent` files, and managing the AI in small iterations, you'll be building software faster and better than ever before.
+
+Embrace the vibes, but define the rules!

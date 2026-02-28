@@ -1,8 +1,17 @@
 import React from "react";
 import CodeBlock from "@/components/CodeBlock";
 
-const generateId = (text: string) => {
-  return text.toLowerCase().replace(/[^\w]+/g, "-");
+const getTextFromChildren = (children: any): string => {
+  if (typeof children === "string") return children;
+  if (typeof children === "number") return children.toString();
+  if (Array.isArray(children)) return children.map(getTextFromChildren).join("");
+  if (React.isValidElement(children)) return getTextFromChildren((children as React.ReactElement).props.children);
+  return "";
+};
+
+const generateId = (children: React.ReactNode) => {
+  const text = getTextFromChildren(children);
+  return text.toLowerCase().replace(/[^\w]+/g, "-").replace(/^-+|-+$/g, "");
 };
 
 export const MDXComponents = {
@@ -15,7 +24,7 @@ export const MDXComponents = {
     return <CodeBlock language={language} value={code as string} {...rest} />;
   },
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
-    const id = generateId(props.children as string);
+    const id = generateId(props.children);
     return (
       <h1
         {...props}
@@ -27,7 +36,7 @@ export const MDXComponents = {
     );
   },
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
-    const id = generateId(props.children as string);
+    const id = generateId(props.children);
     return (
       <h2
         {...props}
@@ -39,7 +48,7 @@ export const MDXComponents = {
     );
   },
   h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
-    const id = generateId(props.children as string);
+    const id = generateId(props.children);
     return (
       <h3
         {...props}
@@ -51,7 +60,7 @@ export const MDXComponents = {
     );
   },
   h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
-    const id = generateId(props.children as string);
+    const id = generateId(props.children);
     return (
       <h4
         {...props}
@@ -63,7 +72,7 @@ export const MDXComponents = {
     );
   },
   h5: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
-    const id = generateId(props.children as string);
+    const id = generateId(props.children);
     return (
       <h5
         {...props}
@@ -75,7 +84,7 @@ export const MDXComponents = {
     );
   },
   h6: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
-    const id = generateId(props.children as string);
+    const id = generateId(props.children);
     return (
       <h6
         {...props}
