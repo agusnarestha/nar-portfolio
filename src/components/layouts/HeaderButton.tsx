@@ -14,17 +14,17 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
   onClick,
 }) => {
   return (
-    <li className="">
+    <li>
       <a
         href={href}
         onClick={onClick}
-        style={{
-          backgroundColor: color,
-          marginBottom: "-3px",
-          display: "inline-block",
-          textAlign: "center",
-        }}
-        className={`px-8 py-2 border-2 border-black rounded shadow-custom text-black hover:shadow-customhover lg:w-auto w-[150px]`}
+        style={{ backgroundColor: color }}
+        className="inline-block px-6 py-2 border-2 border-black font-bold text-black text-sm uppercase tracking-wide
+          shadow-[4px_4px_0px_0px_#000]
+          hover:shadow-[2px_2px_0px_0px_#000]
+          hover:translate-x-[2px] hover:translate-y-[2px]
+          transition-all duration-100
+          lg:w-auto w-[150px] text-center"
       >
         {label}
       </a>

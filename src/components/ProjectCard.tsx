@@ -18,66 +18,77 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   technologies = [],
 }) => {
   return (
-    <div className="relative h-[385px] border-[1px] group border-[#e5e5e5] rounded-xl overflow-hidden cursor-pointer transition-all duration-[.5s] hover:scale-[1.03] dark:border-[#404040] flex-shrink-0 max-[600px]:w-[100%]">
-      <a aria-label="linkproject" href={linkProject}>
-        <div className="BackgroundHoverT absolute z-[4] h-full w-full bg-black bg-opacity-[0.7] opacity-0 transition-opacity duration-[.5s] group-hover:opacity-80" />
-        <div className="flex flex-col items-center">
-          <div className="absolute z-0 h-full w-full" />
-          <Image
-            className="absolute z-[1] transition-all rounded-xl group-hover:blur-[5px] duration-700 ease-in-out scale-100 blur-0 grayscale-0"
-            src={imageUrl}
-            alt="imgproject"
-            width={385}
-            height={385}
-            loading="lazy"
-          />
-          <div className="font-poppins absolute gap-3 top-[20%] flex z-[4] opacity-0 transition-opacity duration-[.5s] group-hover:opacity-100">
-            <h1 className="text-white">View Project</h1>
+    <a
+      aria-label={title}
+      href={linkProject}
+      className="
+        relative h-[385px] flex flex-col
+        border-2 border-black
+        shadow-[5px_5px_0_#000]
+        hover:shadow-[2px_2px_0_#000]
+        hover:translate-x-[3px] hover:translate-y-[3px]
+        transition-all duration-100
+        cursor-pointer overflow-hidden
+        flex-shrink-0 max-[600px]:w-[100%]
+        group
+      "
+    >
+      {/* Image area */}
+      <div className="relative h-44 w-full overflow-hidden border-b-2 border-black flex-shrink-0">
+        <Image
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          src={imageUrl}
+          alt={title}
+          width={385}
+          height={176}
+          loading="lazy"
+        />
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300 flex items-center justify-center">
+          <span className="text-white font-black uppercase text-sm tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 border-2 border-white px-3 py-1">
+            View Project →
+          </span>
+        </div>
+      </div>
+
+      {/* Content area */}
+      <div className="bg-white flex-1 p-4 flex flex-col">
+        {/* Categories */}
+        <div className="flex gap-1.5 flex-wrap mb-2">
+          {categories.map((category, index) => (
+            <span
+              key={index}
+              className="bg-[#df548e] border border-black text-white font-bold text-[10px] uppercase px-2 py-0.5 whitespace-nowrap"
+            >
+              #{category}
+            </span>
+          ))}
+        </div>
+
+        {/* Title */}
+        <h2 className="text-[#121212] text-base font-black uppercase tracking-tight leading-tight mb-1 group-hover:underline">
+          {title}
+        </h2>
+
+        {/* Description */}
+        <p className="text-sm text-[#404040] line-clamp-2 flex-grow">
+          {description}
+        </p>
+
+        {/* Tech icons */}
+        <div className="flex flex-row gap-2 mt-3 pt-3 border-t border-black/20">
+          {technologies.map((technology, index) => (
             <Image
-              className=""
-              src="icon/arrow-right-light.svg"
-              alt=""
-              width={15}
-              height={15}
+              key={index}
+              alt={technology}
+              height="20"
+              width="20"
+              src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/${technology}.svg`}
             />
-          </div>
+          ))}
         </div>
-        <div className="bg-[#fafafa] h-full w-full absolute z-[6] mt-44 px-4 pr-1">
-          <div className="flex gap-2 text-[11px] text-white pt-4">
-            {categories.map((category, index) => (
-              <h1
-                key={index}
-                className="flex justify-center bg-[#525252] py-[2px] px-[10px] rounded-xl  border "
-              >
-                #{category}
-              </h1>
-            ))}
-          </div>
-          <div className="mt-2">
-            <div className="text-[#121212] leading-10 text-lg font-medium transition-all duration-[.5s] group-hover:underline">
-              <h1>{title}</h1>
-            </div>
-            <p className="text-sm text-[#404040] mt-1 dark:text-[#a3a3a3]">
-              {description}
-            </p>
-          </div>
-          <div className="relative">
-            <div className="flex flex-row">
-              {technologies.map((technology, index) => (
-                <Image
-                  className="mr-3 mt-5"
-                  key={index}
-                  alt=""
-                  height="24"
-                  width="24"
-                  src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/${technology}.svg`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
+      </div>
+    </a>
   );
 };
 

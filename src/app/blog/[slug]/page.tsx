@@ -26,9 +26,7 @@ export async function generateMetadata({
   const post = getPostBySlug(params.slug);
 
   if (!post) {
-    return {
-      title: "Post Not Found",
-    };
+    return { title: "Post Not Found" };
   }
 
   const url = `https://agusnarestha.dev/blog/${params.slug}`;
@@ -54,9 +52,7 @@ export async function generateMetadata({
       title: `${post.title} | by Agus Narestha | ${formattedDate}`,
       description: post.description,
     },
-    alternates: {
-      canonical: url,
-    },
+    alternates: { canonical: url },
   };
 }
 
@@ -70,20 +66,29 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div className="container mx-auto my-32">
       <JsonLd post={post} />
-      <div className="relative max-w-6xl mx-auto mt-24 max-[768px]:mt-28 dark:text-[#E4E6EB] dark:fill-[#E4E6EB]">
+      <div className="relative max-w-6xl mx-auto mt-24 max-[768px]:mt-28">
         <div className="relative max-[480px]:px-8">
+
+          {/* Back button */}
           <Link
             href="/blog"
-            className="inline-block mb-8 text-gray-900 dark:text-white font-medium hover:-translate-x-1 transition-transform duration-200 max-[375px]:text-sm max-[425px]:text-base"
+            className="inline-flex items-center gap-2 mb-8 font-black text-xs uppercase tracking-widest
+              border-2 border-black bg-white px-3 py-2
+              shadow-[3px_3px_0_#000] hover:shadow-[1px_1px_0_#000]
+              hover:translate-x-[2px] hover:translate-y-[2px]
+              transition-all duration-100"
           >
             ← Back to Blog
           </Link>
 
-          <header className="mb-12 p-4 sm:p-6 md:p-8 bg-[#FFE5E5] dark:bg-[#FF6B6B] rounded-lg border-2 border-black dark:border-white">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 max-[375px]:text-2xl max-[425px]:text-[22px] max-[600px]:text-[26px]">
+          {/* Post header */}
+          <header className="mb-10 p-6 bg-[#fffbe6] border-2 border-black shadow-[6px_6px_0_#000]">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#121212] uppercase tracking-tight mb-5 max-[375px]:text-xl">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-900 dark:text-white font-medium mb-4 sm:mb-6 max-[375px]:text-xs max-[425px]:text-sm">
+
+            {/* Meta */}
+            <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-[#525252] uppercase tracking-wide mb-5">
               <time>
                 {new Date(post.date).toLocaleDateString("en-US", {
                   month: "long",
@@ -91,17 +96,22 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                   year: "numeric",
                 })}
               </time>
-              <span className="w-1 h-1 bg-gray-900 dark:bg-white rounded-full"></span>
+              <span className="text-gray-300">|</span>
               <span>{post.readingTime} min read</span>
             </div>
-            <div className="flex flex-wrap items-center gap-2 max-[375px]:gap-1.5">
+
+            {/* Tags + Share */}
+            <div className="flex flex-wrap items-center gap-2">
               {post.tags.map((tag) => (
                 <Link
                   key={tag}
                   href={`/blog/tag/${tag}`}
-                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#525252] text-white rounded-lg border-2 border-black dark:border-white font-medium hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-200 text-sm sm:text-base max-[375px]:text-xs max-[375px]:px-2 max-[375px]:py-1"
+                  className="inline-block bg-[#e6b448] border-2 border-black text-black font-bold text-xs uppercase px-3 py-1
+                    shadow-[2px_2px_0_#000]
+                    hover:shadow-[1px_1px_0_#000] hover:translate-x-[1px] hover:translate-y-[1px]
+                    transition-all duration-100"
                 >
-                  {tag}
+                  #{tag}
                 </Link>
               ))}
               <ShareButtons title={post.title} slug={post.slug} />
@@ -111,17 +121,27 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           <MobileTableOfContents content={post.content} />
 
           <div className="flex flex-col lg:flex-row gap-8">
-            <article className="w-full lg:flex-1 prose prose-sm sm:prose-base md:prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-pre:bg-gray-100 prose-pre:text-gray-800 dark:prose-pre:text-gray-200 prose-code:text-blue-600 prose-strong:text-gray-900 bg-white dark:bg-gray-800 p-4 sm:p-6 md:p-8 rounded-lg border-2 border-black dark:border-white">
+            {/* Article body */}
+            <article className="w-full lg:flex-1 prose prose-sm sm:prose-base md:prose-lg max-w-none
+              prose-headings:font-black prose-headings:uppercase
+              prose-a:text-[#3cc4ce]
+              prose-strong:text-gray-900
+              prose-pre:bg-gray-50 prose-pre:border-2 prose-pre:border-black prose-pre:rounded-none
+              prose-code:text-[#df548e]
+              bg-white border-2 border-black
+              shadow-[4px_4px_0_#000]
+              p-5 sm:p-7 md:p-9">
               <MDXRemote source={post.content} components={MDXComponents} />
             </article>
 
             {/* Desktop Table of Contents */}
             <aside className="hidden lg:block w-64 sticky top-8 self-start">
-              <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg border-2 border-black dark:border-white">
+              <div className="bg-white border-2 border-black shadow-[4px_4px_0_#000] p-5">
                 <TableOfContents content={post.content} />
               </div>
             </aside>
           </div>
+
         </div>
       </div>
     </div>

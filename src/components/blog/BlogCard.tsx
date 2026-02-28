@@ -7,36 +7,53 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   return (
-    <article className="group relative bg-white dark:bg-gray-800 border-2 border-black dark:border-white rounded-lg overflow-hidden transition-all duration-300 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
-      <Link href={`/blog/${post.slug}`} className="block h-full">
-        <div className="p-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 line-clamp-2">
-            {post.title}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 text-sm">
-            {post.description}
-          </p>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 bg-[#525252] text-white text-xs font-medium rounded-full border border-current"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-            <time className="font-medium">
-              {new Date(post.date).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </time>
-            <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
-            <span className="font-medium">{post.readingTime} min read</span>
-          </div>
+    <article
+      className="
+        group relative bg-white border-2 border-black
+        shadow-[5px_5px_0_#000]
+        hover:shadow-[2px_2px_0_#000]
+        hover:translate-x-[3px] hover:translate-y-[3px]
+        transition-all duration-100
+        overflow-hidden flex flex-col
+      "
+    >
+      {/* Top accent bar */}
+      <div className="h-1.5 w-full bg-[#3cc4ce] flex-shrink-0" />
+
+      <Link href={`/blog/${post.slug}`} className="block h-full p-5 flex flex-col flex-1">
+        {/* Title */}
+        <h2 className="text-base font-black text-[#121212] mb-2 line-clamp-2 uppercase tracking-tight group-hover:underline">
+          {post.title}
+        </h2>
+
+        {/* Description */}
+        <p className="text-sm text-[#525252] mb-4 line-clamp-2 flex-grow">
+          {post.description}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {post.tags.map((tag) => (
+            <span
+              key={tag}
+              className="bg-[#e6b448] border border-black text-black font-bold text-[10px] uppercase px-2 py-0.5 whitespace-nowrap"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Date + read time */}
+        <div className="flex items-center gap-2 text-xs font-bold text-[#737373] uppercase tracking-wide mt-auto border-t border-black/10 pt-3">
+          <time>
+            {new Date(post.date).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </time>
+          <span className="text-gray-300">|</span>
+          <span>{post.readingTime} min read</span>
         </div>
       </Link>
     </article>

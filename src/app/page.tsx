@@ -8,6 +8,17 @@ import RecentPostSection from "@/components/sections/RecentPostSection";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
+const SectionDivider = ({ color = "#3cc4ce" }: { color?: string }) => (
+  <div className="relative flex items-center my-16 max-[480px]:px-8">
+    <div className="flex-1 border-t-2 border-black" />
+    <div
+      className="mx-3 w-4 h-4 border-2 border-black rotate-45 flex-shrink-0"
+      style={{ backgroundColor: color }}
+    />
+    <div className="flex-1 border-t-2 border-black" />
+  </div>
+);
+
 export default function Home() {
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -29,6 +40,7 @@ export default function Home() {
       >
         <HomeSection />
       </motion.div>
+
       <div id="about" className="mb-10 my-32">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -38,6 +50,9 @@ export default function Home() {
         >
           <AboutSection />
         </motion.div>
+
+        <SectionDivider color="#e6b448" />
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,6 +62,9 @@ export default function Home() {
           <ExperienceSection />
         </motion.div>
       </div>
+
+      <SectionDivider color="#df548e" />
+
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -55,6 +73,9 @@ export default function Home() {
       >
         <RecentProjectSection />
       </motion.div>
+
+      <SectionDivider color="#3cc4ce" />
+
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
