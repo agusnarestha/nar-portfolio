@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import TableOfContents from "./TableOfContents";
 
 interface MobileTableOfContentsProps {
@@ -9,19 +9,51 @@ interface MobileTableOfContentsProps {
 
 const MobileTableOfContents = ({ content }: MobileTableOfContentsProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setContentHeight(contentRef.current.scrollHeight);
+    }
+  }, [isOpen]);
 
   return (
     <div className="lg:hidden mb-8">
+      {/* Toggle button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg border-2 border-black dark:border-white font-medium"
+        className={`w-full flex items-center justify-between px-4 py-3
+          bg-white border-2 border-black font-black text-xs uppercase tracking-widest
+          shadow-[4px_4px_0_#000]
+          hover:shadow-[2px_2px_0_#000] hover:translate-x-[2px] hover:translate-y-[2px]
+          active:shadow-none active:translate-x-[4px] active:translate-y-[4px]
+          transition-all duration-100
+          `}
       >
-        <span className="text-gray-900 dark:text-white">Table of Contents</span>
+        <span className="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Table of Contents
+        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className={`h-5 w-5 text-gray-900 dark:text-white transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+            }`}
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -32,13 +64,25 @@ const MobileTableOfContents = ({ content }: MobileTableOfContentsProps) => {
           />
         </svg>
       </button>
+
+      {/* Expandable content */}
       <div
-        className={`mt-2 transition-all duration-200 ${
-          isOpen ? "block" : "hidden"
-        }`}
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{
+          maxHeight: isOpen ? `${contentHeight}px` : "0px",
+          opacity: isOpen ? 1 : 0,
+        }}
       >
-        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border-2 border-black dark:border-white">
-          <TableOfContents content={content} />
+        <div
+          ref={contentRef}
+          className="bg-white border-2 border-black p-4 mt-[-4px]
+            shadow-[4px_4px_0_#000]"
+        >
+          <TableOfContents
+            content={content}
+            onHeadingClick={handleClose}
+            showTitle={false}
+          />
         </div>
       </div>
     </div>

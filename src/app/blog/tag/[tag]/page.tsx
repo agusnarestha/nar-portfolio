@@ -35,12 +35,17 @@ export function generateMetadata({ params }: TagPageProps): Metadata {
 }
 
 export default function TagPage({ params }: TagPageProps) {
-  const posts = getPostsByTag(params.tag);
+  const decodedTag = decodeURIComponent(params.tag);
   const tags = getAllTags();
+  const canonicalTag = tags.find(
+    (t) => t.toLowerCase() === decodedTag.toLowerCase()
+  );
 
-  if (!tags.includes(params.tag)) {
+  if (!canonicalTag) {
     notFound();
   }
+
+  const posts = getPostsByTag(canonicalTag);
 
   return (
     <div className="container mx-auto my-32 px-4 max-[480px]:px-8">
@@ -65,7 +70,7 @@ export default function TagPage({ params }: TagPageProps) {
               bg-[#e6b448] border-2 border-black px-4 py-1
               shadow-[5px_5px_0_#000]"
           >
-            #{params.tag}
+            #{canonicalTag}
           </h1>
         </div>
 
@@ -90,7 +95,7 @@ export default function TagPage({ params }: TagPageProps) {
                   shadow-[3px_3px_0_#000]
                   hover:shadow-[1px_1px_0_#000] hover:translate-x-[2px] hover:translate-y-[2px]
                   transition-all duration-100
-                  ${tag === params.tag
+                  ${tag.toLowerCase() === canonicalTag.toLowerCase()
                     ? "bg-[#e6b448] text-black"
                     : "bg-white text-black hover:bg-[#e6b448]"
                   }`}

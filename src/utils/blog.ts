@@ -36,18 +36,28 @@ export function getAllPosts(): BlogPost[] {
 
 export function getPostsByTag(tag: string): BlogPost[] {
   const allPosts = getAllPosts();
-  return allPosts.filter((post) => post.tags.includes(tag));
+  const normalizedTag = tag.toLowerCase();
+  return allPosts.filter((post) =>
+    post.tags.some((t) => t.toLowerCase() === normalizedTag)
+  );
 }
 
 export function getAllTags(): string[] {
   const posts = getAllPosts();
-  const tags = new Set<string>();
+  const tagsMap = new Map<string, string>();
 
   posts.forEach((post) => {
-    post.tags.forEach((tag) => tags.add(tag));
+    post.tags.forEach((tag) => {
+      const key = tag.toLowerCase();
+      if (!tagsMap.has(key)) {
+        tagsMap.set(key, tag);
+      }
+    });
   });
 
-  return Array.from(tags).sort();
+  return Array.from(tagsMap.values()).sort((a, b) =>
+    a.toLowerCase().localeCompare(b.toLowerCase())
+  );
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {

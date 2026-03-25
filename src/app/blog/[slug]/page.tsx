@@ -135,7 +135,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             </article>
 
             {/* Desktop Table of Contents */}
-            <aside className="hidden lg:block w-64 sticky top-8 self-start">
+            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto">
               <div className="bg-white border-2 border-black shadow-[4px_4px_0_#000] p-5">
                 <TableOfContents content={post.content} />
               </div>
