@@ -3,8 +3,13 @@
     "company": "Bali Mandira Beach Resort & Spa",
     "positions": [
       {
+        "job": "Software Engineer",
+        "date": "January 2026 - Present",
+        "description": []
+      },
+      {
         "job": "Junior Software Engineer",
-        "date": "September 2023 - Present",
+        "date": "September 2023 - December 2025",
         "description": [
           "Conducted daily checks on the websites and other deployed applications in Google Cloud Platform",
           "Segmented customer data using Google BigQuery for targeted marketing campaigns",
