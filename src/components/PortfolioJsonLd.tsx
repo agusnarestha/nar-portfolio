@@ -1,12 +1,14 @@
 import Script from "next/script";
 
 export default function PortfolioJsonLd() {
+  const baseUrl = "https://agusnarestha.dev";
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://agusnarestha.dev/#person",
+    "@id": `${baseUrl}/#person`,
     name: "Agus Narestha",
-    url: "https://agusnarestha.dev",
+    url: baseUrl,
     jobTitle: "Web Developer & Data Enthusiast",
     worksFor: {
       "@type": "Organization",
@@ -34,15 +36,93 @@ export default function PortfolioJsonLd() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://agusnarestha.dev/#website",
-    url: "https://agusnarestha.dev",
+    "@id": `${baseUrl}/#website`,
+    url: baseUrl,
     name: "Agus Narestha Portfolio",
     description:
       "Personal portfolio of Agus Narestha - Web Developer & Data Enthusiast",
     publisher: {
-      "@id": "https://agusnarestha.dev/#person",
+      "@id": `${baseUrl}/#person`,
     },
     inLanguage: "en-US",
+    // SearchAction enables the Google Sitelinks Search Box
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${baseUrl}/blog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  // SiteNavigationElement tells Google which pages are your main nav links
+  // These become the sitelink candidates shown under the main search result
+  const navigationSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SiteNavigationElement",
+        "@id": `${baseUrl}/#nav-home`,
+        name: "Home",
+        description: "Agus Narestha - Web Developer & Data Enthusiast portfolio homepage",
+        url: baseUrl,
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": `${baseUrl}/#nav-about`,
+        name: "About",
+        description: "Learn more about Agus Narestha - web developer and software engineer",
+        url: `${baseUrl}/about`,
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": `${baseUrl}/#nav-projects`,
+        name: "Projects",
+        description: "Explore Agus Narestha's portfolio of web development projects",
+        url: `${baseUrl}/project`,
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": `${baseUrl}/#nav-blog`,
+        name: "Blog",
+        description: "Articles about web development, programming, and technology insights",
+        url: `${baseUrl}/blog`,
+      },
+    ],
+  };
+
+  // BreadcrumbList helps Google understand the site hierarchy
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${baseUrl}/#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "About",
+        item: `${baseUrl}/about`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Projects",
+        item: `${baseUrl}/project`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Blog",
+        item: `${baseUrl}/blog`,
+      },
+    ],
   };
 
   return (
@@ -56,6 +136,16 @@ export default function PortfolioJsonLd() {
         id="website-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <Script
+        id="navigation-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(navigationSchema) }}
+      />
+      <Script
+        id="breadcrumb-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
     </>
   );
