@@ -9,6 +9,7 @@ import PortfolioJsonLd from "@/components/PortfolioJsonLd";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://agusnarestha.dev"),
+  applicationName: "Agus Narestha Portfolio",
   title: {
     default: "Agus Narestha - Web Developer & Data Enthusiast",
     template: "%s | Agus Narestha Portfolio",
