@@ -4,7 +4,6 @@ import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import "./globals.css";
-import Head from "next/head";
 import PortfolioJsonLd from "@/components/PortfolioJsonLd";
 
 export const metadata: Metadata = {

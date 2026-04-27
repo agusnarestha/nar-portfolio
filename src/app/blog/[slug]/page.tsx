@@ -10,9 +10,9 @@ import JsonLd from "@/components/blog/JsonLd";
 import ShareButtons from "@/components/blog/ShareButtons";
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export function generateStaticParams() {
@@ -23,13 +23,14 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return { title: "Post Not Found" };
   }
 
-  const url = `https://agusnarestha.dev/blog/${params.slug}`;
+  const url = `https://agusnarestha.dev/blog/${slug}`;
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     month: "long",
     year: "numeric",
@@ -56,8 +57,9 @@ export async function generateMetadata({
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();

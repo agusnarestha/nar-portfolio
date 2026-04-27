@@ -5,13 +5,13 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 interface TagPageProps {
-  params: {
+  params: Promise<{
     tag: string;
-  };
+  }>;
 }
 
-export function generateMetadata({ params }: TagPageProps): Metadata {
-  const tag = params.tag;
+export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+  const { tag } = await params;
   const baseUrl = "https://agusnarestha.dev";
   const url = `${baseUrl}/blog/tag/${tag}`;
 
@@ -34,8 +34,9 @@ export function generateMetadata({ params }: TagPageProps): Metadata {
   };
 }
 
-export default function TagPage({ params }: TagPageProps) {
-  const decodedTag = decodeURIComponent(params.tag);
+export default async function TagPage({ params }: TagPageProps) {
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
   const tags = getAllTags();
   const canonicalTag = tags.find(
     (t) => t.toLowerCase() === decodedTag.toLowerCase()

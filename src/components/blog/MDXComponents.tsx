@@ -5,7 +5,7 @@ const getTextFromChildren = (children: any): string => {
   if (typeof children === "string") return children;
   if (typeof children === "number") return children.toString();
   if (Array.isArray(children)) return children.map(getTextFromChildren).join("");
-  if (React.isValidElement(children)) return getTextFromChildren((children as React.ReactElement).props.children);
+  if (React.isValidElement(children)) return getTextFromChildren((children as React.ReactElement<{ children?: React.ReactNode }>).props.children);
   return "";
 };
 
@@ -17,7 +17,7 @@ const generateId = (children: React.ReactNode) => {
 export const MDXComponents = {
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => {
     const { children, ...rest } = props;
-    const child = React.Children.only(children) as React.ReactElement;
+    const child = React.Children.only(children) as React.ReactElement<{ className?: string; children?: React.ReactNode }>;
     const { className, children: code } = child.props;
     const language = className?.replace("language-", "") || "text";
 

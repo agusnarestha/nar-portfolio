@@ -10,15 +10,16 @@ export function generateStaticParams() {
 }
 
 interface Props {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 export const alt = "Blog post preview image";
 
 export default async function Image({ params }: Props) {
-    const post = getPostBySlug(params.slug);
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
 
     if (!post) {
         // Fallback OG image for invalid slugs
