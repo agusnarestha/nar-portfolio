@@ -1,0 +1,16 @@
+{
+  "name": "Agus Narestha Portfolio",
+  "short_name": "Agus Narestha",
+  "description": "Personal portfolio of Agus Narestha - Web Developer & Data Enthusiast",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3cc4ce",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

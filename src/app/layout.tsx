@@ -85,6 +85,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="manifest" href="/site.webmanifest" />
         <script
           defer
           src="https://cloud.umami.is/script.js"
