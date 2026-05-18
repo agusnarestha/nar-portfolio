@@ -32,14 +32,12 @@ export default function BlogPage() {
   return (
     <div className="container mx-auto my-32">
       <div className="relative max-w-6xl mx-auto mt-24 max-[768px]:mt-28">
-        <div className="relative max-[480px]:px-8">
+        <div className="relative">
 
           {/* Page heading */}
           <div className="mb-6">
             <h1
-              className="inline-block font-black text-3xl uppercase tracking-tight
-                bg-[#3cc4ce] border-2 border-black px-4 py-1
-                shadow-[5px_5px_0_#000]
+              className="neo-badge text-3xl bg-[#3cc4ce]
                 max-[375px]:text-xl max-[425px]:text-2xl"
             >
               Blog
@@ -51,9 +49,9 @@ export default function BlogPage() {
 
           {/* Filter by Tags panel */}
           <div
-            className="mb-12 p-5 bg-[#fffbe6] border-2 border-black shadow-[5px_5px_0_#000]"
+            className="mb-12 p-5 bg-[#fffbe6] border-2 border-black shadow-[5px_5px_0_#1a1a1a]"
           >
-            <h2 className="font-black text-sm uppercase tracking-widest mb-4">
+            <h2 className="font-display font-black text-sm uppercase tracking-widest mb-4">
               Filter by Tags
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -61,7 +59,7 @@ export default function BlogPage() {
               <Link
                 key="all"
                 href="/blog"
-                className="inline-block bg-black text-white font-bold text-xs uppercase px-3 py-1.5 border border-black
+                className="inline-block bg-black text-white font-mono font-bold text-xs uppercase px-3 py-1.5 border border-black
                   shadow-[3px_3px_0_#888]
                   hover:shadow-[1px_1px_0_#888] hover:translate-x-[2px] hover:translate-y-[2px]
                   transition-all duration-100"
@@ -72,9 +70,9 @@ export default function BlogPage() {
                 <Link
                   key={tag}
                   href={`/blog/tag/${tag}`}
-                  className="inline-block bg-white text-black font-bold text-xs uppercase px-3 py-1.5 border-2 border-black
-                    shadow-[3px_3px_0_#000]
-                    hover:shadow-[1px_1px_0_#000] hover:translate-x-[2px] hover:translate-y-[2px]
+                  className="inline-block bg-white text-black font-mono font-bold text-xs uppercase px-3 py-1.5 border-2 border-black
+                    shadow-[3px_3px_0_#1a1a1a]
+                    hover:shadow-[1px_1px_0_#1a1a1a] hover:translate-x-[2px] hover:translate-y-[2px]
                     hover:bg-[#e6b448]
                     transition-all duration-100"
                 >

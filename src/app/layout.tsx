@@ -95,7 +95,7 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-PHV2VZN6" />
       <GoogleAnalytics gaId="G-B2ZN13JQ9F" />
       <PortfolioJsonLd />
-      <body className="font-SpaceGrotesk relative max-w-6xl mx-auto px-8 max-[768px]:mt-28 max-[480px]:px-0 ">
+      <body className="font-body relative max-w-6xl mx-auto px-4 sm:px-8 max-[768px]:mt-28 bg-surface">
         <Header />
         {children}
         <Footer />

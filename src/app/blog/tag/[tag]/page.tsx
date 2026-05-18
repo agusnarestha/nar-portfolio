@@ -49,7 +49,7 @@ export default async function TagPage({ params }: TagPageProps) {
   const posts = getPostsByTag(canonicalTag);
 
   return (
-    <div className="container mx-auto my-32 px-4 max-[480px]:px-8">
+    <div className="container mx-auto my-32">
       <div className="relative max-w-6xl mx-auto mt-24 max-[768px]:mt-28">
 
         {/* Back link */}

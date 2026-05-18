@@ -13,25 +13,45 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className=" w-full px-16 md:px-0 h-[100vh] flex items-center justify-center">
-      <div className="bg-white border border-gray-200 flex flex-col items-center justify-center px-4 md:px-8 lg:px-24 py-8 rounded-lg shadow-2xl">
-        <p className="text-6xl md:text-7xl lg:text-9xl font-bold tracking-wider text-gray-300">
-          404
-        </p>
-        <p className="text-2xl md:text-3xl lg:text-5xl font-bold tracking-wider text-gray-500 mt-4">
-          Page Not Found
-        </p>
-        <p className="text-gray-500 mt-4 pb-4 border-b-2 text-center">
-          Sorry, the page you are looking for could not be found.
-        </p>
+    <div className="w-full h-[100vh] flex items-center justify-center px-8">
+      <div className="text-center">
+        {/* Big 404 with neobrutalist style */}
+        <div className="relative inline-block mb-6">
+          <span
+            className="font-display font-black text-[120px] md:text-[180px] lg:text-[220px] leading-none tracking-tighter text-[#faf9f6]"
+            style={{
+              WebkitTextStroke: "3px #1a1a1a",
+            }}
+          >
+            404
+          </span>
+          {/* Decorative accent shapes */}
+          <div className="absolute top-4 -left-4 w-6 h-6 bg-[#3cc4ce] border-2 border-black rotate-45 animate-float" />
+          <div className="absolute bottom-8 -right-4 w-5 h-5 bg-[#df548e] border-2 border-black rounded-full animate-float-slow" />
+          <div className="absolute top-1/2 -right-8 w-4 h-4 bg-[#e6b448] border-2 border-black animate-drift" />
+        </div>
+
+        {/* Message */}
+        <div className="mb-8">
+          <h1
+            className="neo-badge text-2xl md:text-3xl bg-[#df548e] text-white mb-4"
+          >
+            Page Not Found
+          </h1>
+          <p className="text-[#525252] mt-4 max-w-md mx-auto">
+            Oops! The page you&apos;re looking for seems to have wandered off.
+            Let&apos;s get you back on track.
+          </p>
+        </div>
+
+        {/* Return home button */}
         <Link
           href="/"
-          className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 mt-6 rounded transition duration-150"
-          title="Return Home"
+          className="neo-btn bg-[#3cc4ce] text-black text-sm px-6 py-3 inline-flex items-center gap-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
+            className="h-4 w-4"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -39,9 +59,9 @@ export default function NotFound() {
               fillRule="evenodd"
               d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z"
               clipRule="evenodd"
-            ></path>
+            />
           </svg>
-          <p>Return Home</p>
+          Return Home
         </Link>
       </div>
     </div>

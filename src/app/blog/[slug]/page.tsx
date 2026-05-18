@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <div className="container mx-auto my-32">
       <JsonLd post={post} />
       <div className="relative max-w-6xl mx-auto mt-24 max-[768px]:mt-28">
-        <div className="relative max-[480px]:px-8">
+        <div className="relative">
 
           {/* Back button */}
           <Link

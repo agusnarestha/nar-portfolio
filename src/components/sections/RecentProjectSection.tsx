@@ -7,22 +7,16 @@ const RecentProjectSection = () => {
   return (
     <div>
       {/* Heading row */}
-      <div className="flex items-center justify-between max-[480px]:px-8 mb-2">
+      <div className="flex items-center justify-between mb-2">
         <h1
-          className="inline-block font-black text-3xl uppercase tracking-tight
-            bg-[#df548e] border-2 border-black px-4 py-1
-            shadow-[5px_5px_0_#000] text-white
+          className="neo-badge text-3xl bg-[#df548e] text-white
             max-[325px]:text-base max-[365px]:text-[19px] max-[395px]:text-xl max-[430px]:text-2xl max-[540px]:text-[25px]"
         >
           Recent Project
         </h1>
         <a
           href="/project"
-          className="inline-flex items-center gap-1.5 font-black text-xs uppercase tracking-widest
-            border-2 border-black bg-white px-3 py-2
-            shadow-[3px_3px_0_#000] hover:shadow-[1px_1px_0_#000]
-            hover:translate-x-[2px] hover:translate-y-[2px]
-            transition-all duration-100"
+          className="neo-btn"
         >
           View All
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 fill-current" viewBox="0 0 24 24">
@@ -31,18 +25,21 @@ const RecentProjectSection = () => {
         </a>
       </div>
 
-      <div className="my-9 gap-5 grid grid-cols-3 max-[992px]:grid-cols-2 max-[768px]:mt-5 max-[768px]:grid-cols-2 max-[600px]:grid-cols-1 max-[992px]:flex max-[992px]:flex-row max-[992px]:overflow-hidden max-[992px]:overflow-x-auto max-[992px]:scrollbar-hide max-[480px]:px-8">
-        {latestProjects.map((item, index) => (
-          <ProjectCard
-            key={index}
-            title={item.title}
-            description={item.description}
-            imageUrl={item.imageUrl}
-            linkProject={item.linkProject}
-            categories={item.categories}
-            technologies={item.technologies}
-          />
-        ))}
+      <div className="my-9 -mx-4 sm:-mx-8 px-4 sm:px-8 lg:mx-0 lg:px-0 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
+        <div className="flex lg:grid lg:grid-cols-3 gap-5 w-max lg:w-auto">
+          {latestProjects.map((item, index) => (
+            <div key={index} className="w-[280px] sm:w-[320px] lg:w-auto flex-shrink-0">
+              <ProjectCard
+                title={item.title}
+                description={item.description}
+                imageUrl={item.imageUrl}
+                linkProject={item.linkProject}
+                categories={item.categories}
+                technologies={item.technologies}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

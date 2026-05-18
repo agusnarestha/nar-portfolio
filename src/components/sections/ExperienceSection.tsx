@@ -48,20 +48,18 @@ const ExperienceSection = () => {
   };
 
   return (
-    <div className="max-[480px]:px-8 mt-24 max-[768px]:mt-28">
+    <div className="mt-24 max-[768px]:mt-28">
       {/* Neobrutalism section heading */}
       <div className="mb-6">
         <h1
-          className="inline-block font-black text-3xl uppercase tracking-tight
-            bg-[#a8e6a3] border-2 border-black px-4 py-1
-            shadow-[5px_5px_0_#000]
+          className="neo-badge text-3xl bg-[#a8e6a3]
             max-[325px]:text-base max-[365px]:text-[19px] max-[395px]:text-xl max-[430px]:text-2xl max-[540px]:text-[25px]"
         >
           Experience
         </h1>
       </div>
 
-      <div className="flex bg-white w-full">
+      <div className="flex backdrop-blur-sm w-full p-4 rounded-sm">
         <div className="w-full space-y-2">
           {timelineData.map((item, index) => (
             <Timeline

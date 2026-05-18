@@ -1,51 +1,144 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 const BackgroundArt = () => {
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            <svg
-                className="absolute top-0 left-0 w-full h-full opacity-100 dark:opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <defs>
-                    <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ff9ebb" stopOpacity="0.9" />
-                        <stop offset="100%" stopColor="#90cbf9" stopOpacity="0.9" />
-                    </linearGradient>
-                </defs>
+  const shapes = [
+    // Floating crosses
+    { type: "cross", x: "8%", y: "15%", size: 20, color: "#df548e", delay: 0, duration: 8 },
+    { type: "cross", x: "85%", y: "12%", size: 16, color: "#3cc4ce", delay: 2, duration: 10 },
+    { type: "cross", x: "15%", y: "75%", size: 14, color: "#e6b448", delay: 4, duration: 9 },
+    { type: "cross", x: "90%", y: "60%", size: 18, color: "#a8e6a3", delay: 1, duration: 11 },
 
-                {/* Large 4-point star top-left */}
-                <path
-                    d="M100,50 L110,90 L150,100 L110,110 L100,150 L90,110 L50,100 L90,90 Z"
-                    fill="url(#star-gradient)"
-                    className="animate-pulse"
-                    style={{ animationDuration: '4s' }}
-                />
+    // Dots
+    { type: "dot", x: "20%", y: "25%", size: 6, color: "#6c9bef", delay: 0.5, duration: 7 },
+    { type: "dot", x: "75%", y: "20%", size: 8, color: "#df548e", delay: 1.5, duration: 9 },
+    { type: "dot", x: "50%", y: "85%", size: 5, color: "#3cc4ce", delay: 3, duration: 8 },
+    { type: "dot", x: "10%", y: "55%", size: 7, color: "#e6b448", delay: 2.5, duration: 10 },
+    { type: "dot", x: "92%", y: "40%", size: 4, color: "#a8e6a3", delay: 0, duration: 6 },
 
-                {/* Medium 4-point star bottom-right */}
-                <path
-                    d="M800,600 L808,630 L838,638 L808,646 L800,676 L792,646 L762,638 L792,630 Z"
-                    fill="url(#star-gradient)"
-                    className="animate-pulse"
-                    style={{ animationDuration: '5s' }}
-                />
+    // Diamonds
+    { type: "diamond", x: "30%", y: "10%", size: 12, color: "#e6b448", delay: 1, duration: 12 },
+    { type: "diamond", x: "70%", y: "70%", size: 10, color: "#3cc4ce", delay: 3, duration: 10 },
+    { type: "diamond", x: "55%", y: "30%", size: 8, color: "#df548e", delay: 2, duration: 14 },
 
-                {/* Small sparkles scattered */}
-                <circle cx="20%" cy="20%" r="2" fill="#64b5f6" opacity="0.9" />
-                <circle cx="85%" cy="15%" r="3" fill="#ff80ab" opacity="0.8" />
-                <circle cx="50%" cy="80%" r="2" fill="#90caf9" opacity="0.9" />
-                <circle cx="10%" cy="80%" r="3" fill="#ce93d8" opacity="0.8" />
-                <circle cx="90%" cy="50%" r="2" fill="#64b5f6" opacity="0.9" />
+    // Triangles
+    { type: "triangle", x: "40%", y: "8%", size: 14, color: "#a8e6a3", delay: 0.5, duration: 11 },
+    { type: "triangle", x: "65%", y: "80%", size: 12, color: "#6c9bef", delay: 2, duration: 9 },
+  ];
 
-                {/* Cross shapes (+ signs) */}
-                <g stroke="#ff9ebb" strokeWidth="2" opacity="0.8">
-                    <path d="M200 200 L220 200 M210 190 L210 210" />
-                    <path d="M850 150 L870 150 M860 140 L860 160" />
-                    <path d="M150 700 L170 700 M160 690 L160 710" />
-                </g>
+  const renderShape = (shape: typeof shapes[0], index: number) => {
+    const baseStyle = {
+      position: "absolute" as const,
+      left: shape.x,
+      top: shape.y,
+    };
+
+    const animationProps = {
+      animate: {
+        y: [0, -15, 5, -10, 0],
+        x: [0, 8, -5, 10, 0],
+        rotate: [0, 5, -3, 8, 0],
+      },
+      transition: {
+        duration: shape.duration,
+        repeat: Infinity,
+        delay: shape.delay,
+        ease: "easeInOut" as const,
+      },
+    };
+
+    switch (shape.type) {
+      case "cross":
+        return (
+          <motion.div key={index} style={baseStyle} {...animationProps}>
+            <svg width={shape.size} height={shape.size} viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="2" x2="10" y2="18" stroke={shape.color} strokeWidth="3" strokeLinecap="round" />
+              <line x1="2" y1="10" x2="18" y2="10" stroke={shape.color} strokeWidth="3" strokeLinecap="round" />
             </svg>
-        </div>
-    );
+          </motion.div>
+        );
+      case "dot":
+        return (
+          <motion.div
+            key={index}
+            style={baseStyle}
+            {...animationProps}
+          >
+            <div
+              style={{
+                width: shape.size,
+                height: shape.size,
+                borderRadius: "50%",
+                backgroundColor: shape.color,
+                opacity: 0.7,
+              }}
+            />
+          </motion.div>
+        );
+      case "diamond":
+        return (
+          <motion.div key={index} style={baseStyle} {...animationProps}>
+            <div
+              style={{
+                width: shape.size,
+                height: shape.size,
+                backgroundColor: shape.color,
+                transform: "rotate(45deg)",
+                border: "2px solid #1a1a1a",
+                opacity: 0.6,
+              }}
+            />
+          </motion.div>
+        );
+      case "triangle":
+        return (
+          <motion.div key={index} style={baseStyle} {...animationProps}>
+            <svg width={shape.size} height={shape.size} viewBox="0 0 20 20" fill="none">
+              <polygon
+                points="10,2 18,18 2,18"
+                fill={shape.color}
+                stroke="#1a1a1a"
+                strokeWidth="1.5"
+                opacity="0.5"
+              />
+            </svg>
+          </motion.div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Dot grid pattern */}
+      <div className="absolute inset-0 dot-grid" />
+
+      {/* Gradient mesh blobs */}
+      <motion.div
+        className="mesh-blob mesh-blob-cyan"
+        style={{ width: 300, height: 300, left: "10%", top: "20%" }}
+        animate={{ x: [0, 30, -20, 0], y: [0, -20, 15, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="mesh-blob mesh-blob-pink"
+        style={{ width: 250, height: 250, right: "15%", top: "40%" }}
+        animate={{ x: [0, -25, 15, 0], y: [0, 25, -10, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="mesh-blob mesh-blob-yellow"
+        style={{ width: 200, height: 200, left: "50%", bottom: "10%" }}
+        animate={{ x: [0, 20, -15, 0], y: [0, -15, 20, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Floating geometric shapes */}
+      {shapes.map((shape, index) => renderShape(shape, index))}
+    </div>
+  );
 };
 
 export default BackgroundArt;

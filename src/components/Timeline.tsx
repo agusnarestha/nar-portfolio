@@ -30,11 +30,11 @@ const PositionEntry: React.FC<Position & { isLast: boolean }> = ({
       <span className="absolute left-0 top-1 w-5 h-5 rounded-full bg-[#3cc4ce] border-2 border-black flex-shrink-0 block" />
 
       <div>
-        <h4 className="font-extrabold text-base leading-snug">{job}</h4>
+        <h4 className="font-display font-extrabold text-base leading-snug">{job}</h4>
         <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-          <span className="text-xs font-bold text-gray-600">{date}</span>
+          <span className="text-xs font-mono font-bold text-gray-600">{date}</span>
           {duration && (
-            <span className="text-xs font-bold text-gray-400">· {duration}</span>
+            <span className="text-xs font-mono font-bold text-gray-400">· {duration}</span>
           )}
         </div>
         <ul className="mt-2 text-sm text-gray-500 list-disc pl-4 space-y-0.5">
@@ -57,8 +57,8 @@ const Timeline: React.FC<TimelineCompanyProps> = ({ company, positions }) => {
           bg-[#3cc4ce] text-black
           border-2 border-black
           px-4 py-2 mb-5
-          shadow-[4px_4px_0px_0px_#000]
-          font-extrabold text-sm tracking-tight
+          shadow-[4px_4px_0px_0px_#1a1a1a]
+          font-display font-extrabold text-sm tracking-tight
           uppercase
         "
       >
@@ -78,7 +78,7 @@ const Timeline: React.FC<TimelineCompanyProps> = ({ company, positions }) => {
         </svg>
         {company}
         {positions.length > 1 && (
-          <span className="ml-1 bg-black text-white text-[10px] font-black px-1.5 py-0.5 leading-none">
+          <span className="ml-1 bg-black text-white text-[10px] font-mono font-black px-1.5 py-0.5 leading-none">
             ×{positions.length}
           </span>
         )}

@@ -32,26 +32,24 @@ const PostCard: React.FC<PostCardProps> = ({
       href={`/blog/${slug}`}
       aria-label={title}
       className="
-        relative h-[280px] flex flex-col w-full
+        neo-card relative h-[280px] flex flex-col w-full
         bg-white border-2 border-black
-        shadow-[5px_5px_0_#000]
-        hover:shadow-[2px_2px_0_#000]
-        hover:translate-x-[3px] hover:translate-y-[3px]
-        transition-all duration-100
+        shadow-[5px_5px_0_#1a1a1a]
         cursor-pointer overflow-hidden
+        group
       "
     >
-      {/* Color accent top bar */}
-      <div className="h-1.5 w-full bg-[#3cc4ce]" />
+      {/* Color accent top bar — grows on hover */}
+      <div className="h-1.5 w-full bg-[#3cc4ce] accent-bar" />
 
       <div className="p-5 flex flex-col h-full">
         {/* Title */}
-        <h1 className="text-[#121212] text-lg font-black leading-6 mb-2 line-clamp-2 min-h-[3rem] uppercase tracking-tight">
+        <h1 className="text-[#121212] text-lg font-display font-black leading-6 mb-2 line-clamp-2 min-h-[3rem] uppercase tracking-tight group-hover:underline decoration-[#3cc4ce] decoration-2 underline-offset-2">
           {title}
         </h1>
 
         {/* Description */}
-        <p className="text-sm text-[#404040] mb-3 line-clamp-2 flex-grow">
+        <p className="text-sm text-[#525252] mb-3 line-clamp-2 flex-grow">
           {description}
         </p>
 
@@ -61,7 +59,7 @@ const PostCard: React.FC<PostCardProps> = ({
             {displayedTags.map((tag, index) => (
               <span
                 key={index}
-                className="flex-shrink-0 bg-[#e6b448] border border-black text-black font-bold text-[10px] uppercase px-2 py-0.5 whitespace-nowrap"
+                className="flex-shrink-0 bg-[#e6b448] border border-black text-black font-mono font-bold text-[10px] uppercase px-2 py-0.5 whitespace-nowrap"
               >
                 #{tag}
               </span>
@@ -69,7 +67,7 @@ const PostCard: React.FC<PostCardProps> = ({
             {hasMoreTags && (
               <button
                 onClick={handleTagClick}
-                className="flex-shrink-0 bg-black text-white font-bold text-[10px] uppercase px-2 py-0.5 border border-black whitespace-nowrap hover:bg-[#333] transition-colors"
+                className="flex-shrink-0 bg-black text-white font-mono font-bold text-[10px] uppercase px-2 py-0.5 border border-black whitespace-nowrap hover:bg-[#333] transition-colors"
               >
                 {showAllTags ? "Less" : `+${tags.length - 3}`}
               </button>
@@ -78,7 +76,7 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
 
         {/* Date */}
-        <p className="text-xs font-bold text-[#737373] uppercase tracking-wide mt-auto">
+        <p className="text-xs font-mono font-bold text-[#737373] uppercase tracking-wide mt-auto">
           {pubDate}
         </p>
       </div>
