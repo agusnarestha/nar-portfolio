@@ -4,21 +4,21 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog ",
+  title: "Blog",
   description:
-    "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
+    "Read articles about web development, programming, and technology insights from Agus Narestha.",
   openGraph: {
-    title: "Blog ",
+    title: "Blog",
     description:
-      "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
+      "Read articles about web development, programming, and technology insights from Agus Narestha.",
     url: "https://agusnarestha.dev/blog",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog | Agus Narestha Portfolio",
+    title: "Blog | Agus Narestha",
     description:
-      "Explore articles about web development, programming, and technology insights from Agus Narestha's blog.",
+      "Read articles about web development, programming, and technology insights from Agus Narestha.",
   },
   alternates: {
     canonical: "https://agusnarestha.dev/blog",

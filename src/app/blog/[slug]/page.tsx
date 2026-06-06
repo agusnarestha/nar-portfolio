@@ -37,20 +37,21 @@ export async function generateMetadata({
   });
 
   return {
-    title: `${post.title} | by Agus Narestha | ${formattedDate}`,
+    title: `${post.title} | Agus Narestha`,
     description: post.description,
     openGraph: {
-      title: `${post.title} | by Agus Narestha | ${formattedDate}`,
+      title: `${post.title} | Agus Narestha`,
       description: post.description,
       url,
       type: "article",
       publishedTime: post.date,
+      modifiedTime: post.date,
       authors: ["Agus Narestha"],
       tags: post.tags,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} | by Agus Narestha | ${formattedDate}`,
+      title: `${post.title} | Agus Narestha`,
       description: post.description,
     },
     alternates: { canonical: url },

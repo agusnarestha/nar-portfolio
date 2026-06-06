@@ -8,18 +8,20 @@ import PortfolioJsonLd from "@/components/PortfolioJsonLd";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://agusnarestha.dev"),
-  applicationName: "Agus Narestha Portfolio",
   title: {
     default: "Agus Narestha - Web Developer & Data Enthusiast",
-    template: "%s | Agus Narestha Portfolio",
+    template: "%s | Agus Narestha",
   },
   description:
-    "Agus Narestha is a passionate web developer and data enthusiast specializing in modern web technologies and data analysis. Explore my portfolio of projects, blog posts, and professional experience in web development and data science.",
+    "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
+  category: "technology",
+  applicationName: "Agus Narestha Portfolio",
+  generator: "Next.js",
   openGraph: {
     title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
-      "Agus Narestha is a passionate web developer and data enthusiast specializing in modern web technologies and data analysis. Explore my portfolio of projects, blog posts, and professional experience in web development and data science.",
-    url: "https://www.agusnarestha.dev",
+      "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
+    url: "https://agusnarestha.dev",
     siteName: "Agus Narestha Portfolio",
     type: "website",
     locale: "en_US",
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     "Database Management",
     "Data Processing",
   ],
-  authors: [{ name: "Agus Narestha" }],
+  authors: [{ name: "Agus Narestha", url: "https://agusnarestha.dev" }],
   robots: {
     index: true,
     follow: true,
@@ -63,8 +65,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
-      "Agus Narestha is a passionate web developer and data enthusiast specializing in modern web technologies and data analysis. Explore my portfolio of projects, blog posts, and professional experience in web development and data science.",
+      "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
     creator: "@agusnarestha",
+    site: "@agusnarestha",
   },
   other: {
     "google-site-verification": "Hqx3xeh09OgoTUxXBJvvPqYvcp46ccE63zLCqko-8so",
@@ -86,6 +89,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="manifest" href="/site.webmanifest" />
+        <meta name="referrer" content="origin-when-cross-origin" />
         <script
           defer
           src="https://cloud.umami.is/script.js"

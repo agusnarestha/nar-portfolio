@@ -5,19 +5,19 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn more about Agus Narestha - a passionate web developer and software engineer with expertise in modern web technologies and full-stack development.",
+    "Learn more about Agus Narestha — web developer and software engineer with expertise in modern web technologies and full-stack development.",
   openGraph: {
     title: "About",
     description:
-      "Learn more about Agus Narestha - a passionate web developer and software engineer with expertise in modern web technologies and full-stack development.",
+      "Learn more about Agus Narestha — web developer and software engineer with expertise in modern web technologies and full-stack development.",
     url: "https://agusnarestha.dev/about",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About | Agus Narestha Portfolio",
+    title: "About | Agus Narestha",
     description:
-      "Learn more about Agus Narestha - a passionate web developer and software engineer with expertise in modern web technologies and full-stack development.",
+      "Learn more about Agus Narestha — web developer and software engineer with expertise in modern web technologies and full-stack development.",
   },
   alternates: {
     canonical: "https://agusnarestha.dev/about",

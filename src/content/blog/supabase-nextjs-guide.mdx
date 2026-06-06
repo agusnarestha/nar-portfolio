@@ -1,0 +1,256 @@
+---
+title: "Supabase & Next.js: The Open-Source Backend Stack You Need in 2026"
+date: "2026-06-07"
+description: "A practical guide to integrating Supabase with Next.js — covering setup, authentication, real-time databases, and building a full-stack app without a dedicated backend."
+tags: ["Technology", "Next.js", "Supabase", "Database", "Full Stack"]
+---
+
+## Introduction
+
+Building a full-stack application used to mean writing backend APIs, managing databases, handling authentication, and configuring file storage — all separate pieces that needed to be glued together. **Supabase** changes that equation entirely.
+
+Often called the *open-source alternative to Firebase*, Supabase gives you a complete backend out of the box: a **PostgreSQL database**, **authentication**, **real-time subscriptions**, **file storage**, and **Edge Functions** — all accessible through a clean REST and TypeScript SDK.
+
+Paired with **Next.js**, you get one of the most productive full-stack stacks available today. In this guide, I'll walk you through everything you need to know to get started.
+
+## What is Supabase?
+
+[Supabase](https://supabase.com) is an open-source platform that wraps PostgreSQL and a suite of backend tools into a developer-friendly experience. Unlike Firebase, which uses a NoSQL (document) database, Supabase is built on **PostgreSQL** — a battle-tested relational database with powerful features like joins, foreign keys, and full-text search.
+
+### Key Features
+
+- **Database** — Full PostgreSQL with a table editor, SQL editor, and auto-generated REST/GraphQL APIs
+- **Authentication** — Email/password, OAuth (Google, GitHub, Twitter, and more), magic links, and phone auth out of the box
+- **Real-time** — Subscribe to database changes via WebSockets. No polling needed
+- **Storage** — S3-compatible file storage with fine-grained access control via Row Level Security (RLS)
+- **Edge Functions** — Deploy TypeScript/Deno serverless functions at the edge
+- **Row Level Security (RLS)** — PostgreSQL-native access control that locks down your data at the database level
+
+## Setting Up Supabase
+
+### Step 1: Create a Supabase Project
+
+Head to [supabase.com](https://supabase.com), create an account, and click **New Project**. You can self-host Supabase via Docker, but the managed cloud version gives you a working backend in under 60 seconds — and the free tier is generous enough for most personal projects.
+
+### Step 2: Install the Client SDK
+
+In your Next.js project, install the Supabase JavaScript client:
+
+```bash
+npm install @supabase/supabase-js
+```
+
+### Step 3: Configure Environment Variables
+
+Create or update your `.env.local` file:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+You'll find these values in your Supabase dashboard under **Settings → API**. The `SUPABASE_SERVICE_ROLE_KEY` must *only* be used in server-side code — never expose it to the client.
+
+## Connecting Supabase to Next.js
+
+The cleanest approach is to create a single Supabase client module that you import wherever you need it:
+
+```typescript
+// lib/supabase/client.ts
+import { createClient } from "@supabase/supabase-js"
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+```
+
+For **Next.js App Router server-side operations** (Server Components, Route Handlers, middleware), you should use the [Supabase SSR package](https://supabase.com/docs/guides/auth/server-side/nextjs) which handles cookie-based auth properly:
+
+```bash
+npm install @supabase/ssr @supabase/supabase-js
+```
+
+```typescript
+// lib/supabase/server.ts
+import { createServerClient } from "@supabase/ssr"
+import { cookies } from "next/headers"
+
+export async function createClient() {
+  const cookieStore = await cookies()
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll()
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            )
+          } catch {
+            // In Server Components, cookies are read-only
+          }
+        },
+      },
+    }
+  )
+}
+```
+
+## Building Your First Query
+
+Once connected, querying your database is straightforward. Here's a simple example that fetches posts from a `posts` table:
+
+```typescript
+import { supabase } from "@/lib/supabase/client"
+
+async function getPosts() {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .order("created_at", { ascending: false })
+
+  if (error) {
+    console.error("Error fetching posts:", error.message)
+    return []
+  }
+
+  return data
+}
+```
+
+### Using Row Level Security (RLS)
+
+Supabase's **Row Level Security** policies are what make it production-ready. Without RLS, anyone with your anon key can read or write all your data. Here's an example policy that only allows authenticated users to read posts:
+
+```sql
+-- Enable RLS on the posts table
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+
+-- Policy: Anyone can read public posts
+CREATE POLICY "Public posts are viewable by everyone"
+  ON posts FOR SELECT
+  USING (published = true);
+
+-- Policy: Only authors can update their own posts
+CREATE POLICY "Authors can update their own posts"
+  ON posts FOR UPDATE
+  USING (auth.uid() = author_id);
+```
+
+## Authentication in Next.js
+
+Supabase Auth handles the entire authentication flow. Here's a minimal email/password sign-in component:
+
+```typescript
+"use client"
+
+import { useState } from "react"
+import { supabase } from "@/lib/supabase/client"
+
+export default function SignIn() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  async function handleSignIn(e: React.FormEvent) {
+    e.preventDefault()
+    setLoading(true)
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      console.error("Sign in error:", error.message)
+    }
+
+    setLoading(false)
+  }
+
+  return (
+    <form onSubmit={handleSignIn}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        required
+      />
+      <button type="submit" disabled={loading}>
+        {loading ? "Signing in..." : "Sign In"}
+      </button>
+    </form>
+  )
+}
+```
+
+For **OAuth providers** like GitHub or Google, the flow is even simpler:
+
+```typescript
+const { data, error } = await supabase.auth.signInWithOAuth({
+  provider: "github",
+  options: {
+    redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
+  },
+})
+```
+
+## Real-Time Subscriptions
+
+This is where Supabase really shines. Instead of polling an API, you can subscribe to database changes in real time:
+
+```typescript
+useEffect(() => {
+  const channel = supabase
+    .channel("posts-changes")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "posts" },
+      (payload) => {
+        console.log("Change received:", payload)
+        // Update your local state here
+      }
+    )
+    .subscribe()
+
+  return () => {
+    supabase.removeChannel(channel)
+  }
+}, [])
+```
+
+This listens for **INSERT**, **UPDATE**, and **DELETE** events on the `posts` table in real time. Perfect for live dashboards, chat apps, or collaborative tools.
+
+## Why It Matters
+
+Supabase combined with Next.js gives you a **complete full-stack toolkit**:
+
+- **Next.js** handles SSR, SSG, routing, and the frontend layer
+- **Supabase** provides the database, auth, storage, and real-time layer
+- Both are **open source** and can be self-hosted if you need to
+- The **free tier** is generous enough for side projects and portfolios
+- **TypeScript support** is excellent — schemas can be auto-generated with `supabase gen types`
+
+Whether you're building a personal blog with authenticated comments, a SaaS dashboard, or a real-time collaboration tool, this stack lets you ship fast without sacrificing flexibility.
+
+### Useful Resources
+
+- [Supabase Documentation](https://supabase.com/docs)
+- [Supabase GitHub](https://github.com/supabase/supabase)
+- [Next.js + Supabase Quickstart](https://supabase.com/docs/guides/getting-started/quickstarts/nextjs)
+- [Supabase RLS Guide](https://supabase.com/docs/guides/database/postgres/row-level-security)
