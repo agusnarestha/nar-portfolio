@@ -2,6 +2,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  modifiedDate?: string;
   description: string;
   tags: string[];
   content: string;
@@ -11,6 +12,7 @@ export interface BlogPost {
 export interface BlogMetadata {
   title: string;
   date: string;
+  modifiedDate?: string;
   description: string;
   tags: string[];
 }

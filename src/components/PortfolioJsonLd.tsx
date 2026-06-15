@@ -7,14 +7,30 @@ export default function PortfolioJsonLd() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "@id": `${baseUrl}/#organization`,
+        name: "Agus Narestha",
+        url: baseUrl,
+        logo: {
+          "@type": "ImageObject",
+          url: `${baseUrl}/emoji.webp`,
+        },
+        sameAs: [
+          "https://github.com/agusnarestha",
+          "https://linkedin.com/in/agusnarestha",
+        ],
+        founder: {
+          "@id": `${baseUrl}/#person`,
+        },
+      },
+      {
         "@type": "Person",
         "@id": `${baseUrl}/#person`,
         name: "Agus Narestha",
         url: baseUrl,
         jobTitle: "Web Developer & Data Enthusiast",
         worksFor: {
-          "@type": "Organization",
-          name: "Self-employed",
+          "@id": `${baseUrl}/#organization`,
         },
         sameAs: [
           "https://github.com/agusnarestha",
@@ -43,15 +59,12 @@ export default function PortfolioJsonLd() {
         description:
           "Personal portfolio of Agus Narestha — Web Developer & Data Enthusiast",
         publisher: {
-          "@id": `${baseUrl}/#person`,
+          "@id": `${baseUrl}/#organization`,
         },
         inLanguage: "en-US",
         potentialAction: {
           "@type": "SearchAction",
-          target: {
-            "@type": "EntryPoint",
-            urlTemplate: `${baseUrl}/blog?q={search_term_string}`,
-          },
+          target: `${baseUrl}/blog?q={search_term_string}`,
           "query-input": "required name=search_term_string",
         },
       },
@@ -84,34 +97,13 @@ export default function PortfolioJsonLd() {
         url: `${baseUrl}/blog`,
       },
       {
-        "@type": "BreadcrumbList",
-        "@id": `${baseUrl}/#breadcrumb`,
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: baseUrl,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "About",
-            item: `${baseUrl}/about`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Projects",
-            item: `${baseUrl}/project`,
-          },
-          {
-            "@type": "ListItem",
-            position: 4,
-            name: "Blog",
-            item: `${baseUrl}/blog`,
-          },
-        ],
+        "@type": "Blog",
+        "@id": `${baseUrl}/blog`,
+        name: "Agus Narestha Blog",
+        url: `${baseUrl}/blog`,
+        publisher: {
+          "@id": `${baseUrl}/#organization`,
+        },
       },
     ],
   };

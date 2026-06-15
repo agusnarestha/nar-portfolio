@@ -15,7 +15,7 @@ const HomeSection = () => {
           {/* Asymmetric hero layout */}
           <div className="relative flex flex-col items-center">
             {/* Name text — sits behind the emoji with overlap */}
-            <motion.p
+            <motion.h1
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -23,7 +23,7 @@ const HomeSection = () => {
               style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.15)" }}
             >
               Agus Narestha
-            </motion.p>
+            </motion.h1>
 
             {/* Emoji avatar with bounce-in */}
             <motion.div

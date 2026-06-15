@@ -71,6 +71,7 @@ export const metadata: Metadata = {
   },
   other: {
     "google-site-verification": "Hqx3xeh09OgoTUxXBJvvPqYvcp46ccE63zLCqko-8so",
+    // "msvalidate.01": "YOUR_BING_VERIFICATION_ID", // Get from https://www.bing.com/webmasters
   },
   alternates: {
     canonical: "https://agusnarestha.dev",

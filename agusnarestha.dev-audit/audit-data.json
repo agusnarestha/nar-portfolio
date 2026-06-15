@@ -1,0 +1,361 @@
+{
+  "summary": {
+    "health_score": 78,
+    "business_type": "Personal Portfolio + Technical Blog",
+    "url": "https://agusnarestha.dev",
+    "framework": "Next.js 16 (App Router)",
+    "hosting": "Vercel",
+    "total_pages": 12,
+    "top_findings": [
+      "Homepage hero uses <p> instead of <h1> — name lacks strongest heading signal",
+      "Blog lastmod uses new Date() for static pages — false modification dates erode Google trust",
+      "BlogPosting publisher is Person, not Organization — disqualifies from Article rich results",
+      "BreadcrumbList is semantically incorrect — flat navigation map, not per-page trail",
+      "Duplicate robots.txt (static + dynamic) — public/robots.txt is dead code"
+    ],
+    "quick_wins": [
+      "Change motion.p → motion.h1 in HomeSection.tsx (5 min)",
+      "Remove public/robots.txt (2 min)",
+      "Add visible author byline to blog post pages (10 min)",
+      "Add explicit AI crawler directives to robots.ts (5 min)",
+      "Add modifiedDate field to BlogPost type (15 min)"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 85,
+      "what_works": [
+        "robots.txt properly configured with sitemap reference",
+        "HTTPS enforced with HSTS (2-year max-age)",
+        "Vercel CDN caching with Brotli compression",
+        "Static prerendering (X-Nextjs-Prerender: 1)",
+        "Google Search Console verified",
+        "Analytics installed (GTM, GA, Umami)",
+        "Comprehensive meta tags (OG, Twitter, canonical, keywords)",
+        "RSS feed and llms.txt implemented"
+      ],
+      "findings": [
+        {
+          "title": "Duplicate robots.txt files",
+          "severity": "Medium",
+          "description": "Both public/robots.txt and src/app/robots.ts exist. Next.js dynamic route overrides the static file.",
+          "recommendation": "Remove public/robots.txt since src/app/robots.ts is the active route."
+        },
+        {
+          "title": "robots.txt missing AI crawler directives",
+          "severity": "Low",
+          "description": "No explicit rules for GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot.",
+          "recommendation": "Add explicit allow rules for AI crawlers to robots.ts."
+        },
+        {
+          "title": "No Content-Security-Policy header",
+          "severity": "Low",
+          "description": "Only HSTS is set. Missing CSP, X-Frame-Options, X-Content-Type-Options headers.",
+          "recommendation": "Add security headers in next.config.ts headers configuration."
+        },
+        {
+          "title": "generator meta tag exposes framework",
+          "severity": "Low",
+          "description": "generator: Next.js reveals framework version.",
+          "recommendation": "Remove generator meta tag if preferred, though generally acceptable."
+        },
+        {
+          "title": "No Bing Webmaster verification",
+          "severity": "Info",
+          "description": "Google is verified but no msvalidate.01 meta tag for Bing.",
+          "recommendation": "Add Bing verification meta tag for Bing Copilot visibility."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 78,
+      "what_works": [
+        "8 blog posts with genuine technical depth",
+        "Clear content strategy spanning web dev, AI, automation",
+        "llms.txt with structured site description",
+        "Author consistency across all content",
+        "Reading time displayed on blog posts",
+        "MDX content with language-tagged code blocks"
+      ],
+      "findings": [
+        {
+          "title": "No visible author byline on blog posts",
+          "severity": "Medium",
+          "description": "Blog post header shows date and reading time but no author name. Author only in JSON-LD and meta tags.",
+          "recommendation": "Add visible byline to blog post header template."
+        },
+        {
+          "title": "Blog posts lack modifiedDate field",
+          "severity": "Medium",
+          "description": "Both datePublished and dateModified use the same post.date value.",
+          "recommendation": "Add modifiedDate field to BlogPost type and use it for JSON-LD dateModified."
+        },
+        {
+          "title": "Hello World post is thin content",
+          "severity": "Low",
+          "description": "Introductory first post with minimal depth dilutes overall content quality.",
+          "recommendation": "Expand the post or add noindex if it remains brief."
+        },
+        {
+          "title": "Project descriptions are single sentences",
+          "severity": "Low",
+          "description": "All project descriptions are 1 sentence. 4 of 9 projects have inactive # links.",
+          "recommendation": "Add 2-3 sentence descriptions and GitHub links for inactive projects."
+        },
+        {
+          "title": "No external source citations in blog posts",
+          "severity": "Info",
+          "description": "Blog posts are how-to guides without cited statistics or external references.",
+          "recommendation": "Add authoritative source links to strengthen E-E-A-T."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 80,
+      "what_works": [
+        "Title tags properly templated",
+        "Meta descriptions present on all pages",
+        "Canonical URLs set correctly",
+        "Proper heading structure in blog posts (H1→H2→H3)",
+        "Internal linking consistent across site",
+        "Blog Table of Contents (desktop and mobile)"
+      ],
+      "findings": [
+        {
+          "title": "Homepage hero is <p> not <h1>",
+          "severity": "High",
+          "description": "HomeSection.tsx:18 renders name as <motion.p> instead of <motion.h1>.",
+          "recommendation": "Change motion.p to motion.h1, keep same className for styling."
+        },
+        {
+          "title": "About page OG title is just About",
+          "severity": "Medium",
+          "description": "About page sets title: 'About' without brand suffix in OG.",
+          "recommendation": "Set OG title to 'About | Agus Narestha' for proper social sharing."
+        },
+        {
+          "title": "Tag pages lack unique meta descriptions",
+          "severity": "Low",
+          "description": "Tag pages may lack descriptive meta descriptions per tag.",
+          "recommendation": "Generate unique meta descriptions per tag page."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 68,
+      "what_works": [
+        "Person schema with @id and sameAs links",
+        "WebSite schema with publisher reference",
+        "SiteNavigationElement for all nav items",
+        "BlogPosting schema on individual posts",
+        "SearchAction PotentialAction implemented",
+        "No deprecated schema types detected"
+      ],
+      "findings": [
+        {
+          "title": "BlogPosting publisher is Person, not Organization",
+          "severity": "Critical",
+          "description": "Google Article rich results require publisher as Organization with logo.",
+          "recommendation": "Create Organization schema and use as publisher in blog JsonLd."
+        },
+        {
+          "title": "BreadcrumbList is flat navigation map",
+          "severity": "Medium",
+          "description": "Lists all 4 top-level pages as positions 1-4, not a per-page breadcrumb trail.",
+          "recommendation": "Replace with per-page BreadcrumbList components in each route."
+        },
+        {
+          "title": "SearchAction target uses verbose EntryPoint shape",
+          "severity": "Medium",
+          "description": "Uses EntryPoint object instead of plain string for target.",
+          "recommendation": "Simplify target to plain URL string."
+        },
+        {
+          "title": "Person @id cross-document reference on blog pages",
+          "severity": "Medium",
+          "description": "Blog pages reference #person defined on homepage.",
+          "recommendation": "Include full @graph on blog pages or use inline-only Person definition."
+        },
+        {
+          "title": "dateModified equals datePublished for all posts",
+          "severity": "Medium",
+          "description": "Both use post.date. Misleading for edited posts.",
+          "recommendation": "Add modifiedDate to BlogPost type."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 88,
+      "what_works": [
+        "Vercel CDN with cache HIT confirmed",
+        "Brotli compression enabled",
+        "Static prerendering for fast TTFB",
+        "Next.js Image optimization with WebP",
+        "CSS/JS chunking via Next.js",
+        "JavaScript lazy loading (fetchPriority: low)",
+        "Hero image preloaded with srcset"
+      ],
+      "findings": [
+        {
+          "title": "Framer Motion animations add JavaScript weight",
+          "severity": "Low",
+          "description": "Homepage uses framer-motion for multiple animations.",
+          "recommendation": "Consider CSS animations for simple effects to reduce bundle size."
+        },
+        {
+          "title": "TypeIt-react library for typing effect",
+          "severity": "Low",
+          "description": "Client-side dependency for cosmetic typing animation.",
+          "recommendation": "Consider CSS-based typing animation to eliminate dependency."
+        },
+        {
+          "title": "Three analytics scripts loaded in head",
+          "severity": "Medium",
+          "description": "GTM + GA + Umami each add DNS lookup, JS download, and execution time.",
+          "recommendation": "Consider consolidating to one analytics solution."
+        },
+        {
+          "title": "No font preloading detected",
+          "severity": "Low",
+          "description": "Custom fonts may not be preloaded, potentially affecting LCP.",
+          "recommendation": "Add <link rel=preload as=font> for custom fonts if not system fonts."
+        }
+      ],
+      "cwv_estimates": {
+        "LCP": {"value": "1.2s", "threshold": "< 2.5s", "status": "Good"},
+        "INP": {"value": "80ms", "threshold": "< 200ms", "status": "Good"},
+        "CLS": {"value": "0.02", "threshold": "< 0.1", "status": "Good"}
+      }
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 74,
+      "what_works": [
+        "llms.txt with structured content",
+        "Comprehensive JSON-LD structured data",
+        "Server-side rendered content via Next.js App Router",
+        "Proper robots.txt and sitemap",
+        "Google Search Console verified",
+        "Blog posts with TOC and code examples",
+        "Consistent brand signals across all pages"
+      ],
+      "findings": [
+        {
+          "title": "Homepage H1 missing from semantic HTML",
+          "severity": "High",
+          "description": "Name rendered as <p> element, not <h1>.",
+          "recommendation": "Change to <h1> for AI crawler page subject detection."
+        },
+        {
+          "title": "llms.txt missing RSL licensing and metadata",
+          "severity": "Medium",
+          "description": "No License, Last-Updated, or Description header per emerging standard.",
+          "recommendation": "Add metadata headers to llms.txt output."
+        },
+        {
+          "title": "No explicit AI crawler directives",
+          "severity": "Medium",
+          "description": "No rules for GPTBot, ClaudeBot, PerplexityBot in robots.txt.",
+          "recommendation": "Add explicit allow rules for AI crawlers."
+        },
+        {
+          "title": "Author name not visible in blog HTML body",
+          "severity": "Medium",
+          "description": "By line only in JSON-LD, not visible text.",
+          "recommendation": "Add visible author byline to blog post template."
+        },
+        {
+          "title": "4 of 9 projects have inactive # links",
+          "severity": "Medium",
+          "description": "BeMO, Dapur Yatim Indonesia, iCovid, BullDOC have placeholder links.",
+          "recommendation": "Add GitHub repo links or reactivate project URLs."
+        }
+      ],
+      "platform_scores": {
+        "Google AI Overviews": 82,
+        "ChatGPT Web Browsing": 72,
+        "Perplexity AI": 76,
+        "Bing Copilot": 70
+      }
+    },
+    {
+      "name": "Images",
+      "score": 76,
+      "what_works": [
+        "Next.js Image component with automatic optimization",
+        "Hero image in WebP format",
+        "Image preloading with srcset in head",
+        "Proper dimensions prevent CLS"
+      ],
+      "findings": [
+        {
+          "title": "No project screenshots/thumbnails",
+          "severity": "Medium",
+          "description": "Project cards likely lack visual previews.",
+          "recommendation": "Add project screenshots for UX and image search discoverability."
+        },
+        {
+          "title": "OG images rely on dynamic Next.js generation",
+          "severity": "Low",
+          "description": "Blog OG images at dynamic route. Need to verify 1200px minimum.",
+          "recommendation": "Ensure OG image generation produces 1200px+ wide images."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Fix Homepage H1 — change <p> to <h1> in HomeSection.tsx",
+          "Fix BlogPosting publisher schema — create Organization schema",
+          "Fix sitemap lastmod — replace new Date() with actual modification dates"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Fix BreadcrumbList — per-page implementation",
+          "Remove dead public/robots.txt",
+          "Add visible author byline to blog posts",
+          "Add explicit AI crawler directives to robots.ts",
+          "Add modifiedDate field to BlogPost type",
+          "Enhance llms.txt with RSL licensing"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Expand project descriptions and fix inactive links",
+          "Add Organization schema for brand entity",
+          "Add tag pages to sitemap",
+          "Add external source citations to blog posts"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Configure Google PageSpeed/CrUX API",
+          "Register with Bing Webmaster Tools",
+          "Add Vercel Speed Insights",
+          "Monitor blog post organic traffic monthly",
+          "Consider YouTube channel for tutorial content"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

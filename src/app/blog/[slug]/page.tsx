@@ -45,7 +45,7 @@ export async function generateMetadata({
       url,
       type: "article",
       publishedTime: post.date,
-      modifiedTime: post.date,
+      modifiedTime: post.modifiedDate ?? post.date,
       authors: ["Agus Narestha"],
       tags: post.tags,
     },
@@ -92,6 +92,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-[#525252] uppercase tracking-wide mb-5">
+              <span>By Agus Narestha</span>
+              <span className="text-gray-300">|</span>
               <time>
                 {new Date(post.date).toLocaleDateString("en-US", {
                   month: "long",

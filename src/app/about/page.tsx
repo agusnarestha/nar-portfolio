@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Learn more about Agus Narestha — web developer and software engineer with expertise in modern web technologies and full-stack development.",
   openGraph: {
-    title: "About",
+    title: "About | Agus Narestha",
     description:
       "Learn more about Agus Narestha — web developer and software engineer with expertise in modern web technologies and full-stack development.",
     url: "https://agusnarestha.dev/about",

@@ -35,7 +35,9 @@ export async function GET() {
 
   const llmsTxt = `# Agus Narestha Portfolio
 
-> Personal portfolio website of Agus Narestha — a web developer and data enthusiast specializing in modern web technologies, full-stack development, and data analysis. Built with Next.js and deployed at agusnarestha.dev.
+Description: Personal portfolio and technical blog of Agus Narestha
+Last-Updated: ${new Date().toISOString().split("T")[0]}
+License: CC BY 4.0
 
 Agus Narestha is a Software Engineer currently working at Bali Mandira Beach Resort & Spa. He has experience in full-stack web development using technologies like Next.js, React, Laravel, TypeScript, and Node.js, as well as data analysis and visualization using tools like Google BigQuery.
 
