@@ -47,19 +47,17 @@ const AboutSection = () => {
             <span
               className="font-display font-black bg-[#3cc4ce] border border-black px-1.5 py-0.5"
             >
-              Agus Narestha.
+              Agus Narestha,
             </span>{" "}
-            a software developer currently focused on web development and
-            data-driven solutions. My journey started at university, where I
-            focused on both backend and frontend development. To level up, I&apos;ve
-            watched YouTube tutorials and read documentation to stay on top of
-            the latest trends and improve my skills.
+            a software developer passionate about web and data development, with a
+            strong interest in learning and growing within the field.
           </p>
           <p className="mt-3">
-            What excites me is exploring new technologies to help businesses
-            unlock their full potential and solve real-world problems. I&apos;m
-            always curious to dive into new challenges and eager to keep
-            learning and improving.
+            I enjoy working on software development and deployment projects,
+            collaborating with teams, and applying my skills to solve real-world
+            problems. I also regularly use AI tools to support and enhance my
+            workflow — whether for development, data analysis, problem-solving, or
+            improving productivity and learning efficiency.
           </p>
           <p className="mt-3">
             This website showcases my projects and serves as a space to connect.
