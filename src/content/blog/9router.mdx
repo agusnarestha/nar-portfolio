@@ -1,0 +1,149 @@
+---
+title: "9Router: The Smart AI API Router That Saves You Money"
+date: "2026-06-30"
+description: "Discover 9Router, the open-source smart proxy that routes your AI coding tool requests to free and cheap LLM providers with automatic fallback and token compression."
+tags: ["AI", "Open Source", "Tools", "Developer Tools", "Productivity"]
+---
+
+AI coding tools have become an essential part of every developer's workflow. But there's a growing problem: **the cost adds up fast**. Between subscriptions for Claude Code, Codex, Cursor, and other AI assistants, you can easily spend hundreds of dollars a month—and that's before hitting usage limits that leave you staring at a "quota exceeded" screen mid-flow.
+
+Enter **9Router**, an open-source smart proxy that intelligently routes your AI coding requests across 40+ backend providers, ensuring you *never stop coding* while keeping costs to a minimum.
+
+## What is 9Router?
+
+[9Router](https://github.com/decolua/9router) is a smart API router and reverse proxy created by [decolua](https://github.com/decolua). It sits between your AI coding tools—**Claude Code**, **Codex**, **Cursor**, **Cline**, **Copilot**—and the LLM providers that power them.
+
+Instead of being locked into a single expensive subscription, 9Router acts as a traffic controller for your AI requests. It compresses tokens, translates between different API formats (OpenAI ↔ Claude ↔ Gemini), and automatically falls back to alternative providers when your primary one hits its limit.
+
+Think of it as a **load balancer for your AI coding workflow**—one that's smart enough to always find the cheapest, fastest path for your requests.
+
+## Key Features
+
+### RTK Token Saver 💰
+
+9Router includes built-in **lossless compression** for common tool outputs like `git diff`, `grep`, `ls`, and `tree`. This alone saves **20–40% on token usage** per request without losing any meaningful information. Less tokens = less cost = more coding.
+
+### Smart 3-Tier Fallback 🔄
+
+This is where 9Router truly shines. When your primary provider runs out of quota, 9Router automatically routes requests to the next available tier—**zero downtime, zero manual switching**:
+
+1. **Tier 1 — Subscription:** Your existing Claude Code, Codex, or Copilot subscriptions.
+2. **Tier 2 — Cheap:** Budget-friendly API providers like GLM-5.1 ($0.6/1M tokens) or MiniMax M2.7 ($0.2/1M tokens).
+3. **Tier 3 — Free:** Free-tier providers like Kiro AI, OpenCode Free, or Vertex AI ($300 GCP credits).
+
+### Format Translation 🌐
+
+Different AI tools speak different API languages. 9Router translates between formats seamlessly:
+
+- OpenAI ↔ Claude ↔ Gemini ↔ Cursor ↔ Kiro ↔ Vertex
+
+You point your tool at 9Router, and it handles the rest.
+
+### Real-Time Quota Tracking 📊
+
+9Router provides **live token counting** with reset countdowns, so you always know exactly how much quota you have left across all your providers. No more surprise "limit reached" errors.
+
+### Caveman & Ponytail Modes 🦴
+
+Two optional prompt injection modes that further reduce output tokens:
+- **Caveman Mode:** Injects a terse prompt style that cuts output tokens by up to **65%**.
+- **Ponytail Mode:** Injects a "lazy senior dev" prompt for minimal, YAGNI-first code generation.
+
+### Multi-Account & Cloud Sync ☁️
+
+Set up **round-robin load balancing** across multiple accounts per provider, and sync your configuration across devices with built-in cloud sync.
+
+## How It Works
+
+The architecture is straightforward but powerful:
+
+```
+┌──────────────────────────────────────────┐
+│          Your AI Coding Tools            │
+│   Claude Code · Codex · Cursor · Cline   │
+└────────────────┬─────────────────────────┘
+                 │ http://localhost:20128/v1
+                 ▼
+┌──────────────────────────────────────────┐
+│           9Router (Smart Router)         │
+│  • RTK Token Saver (compress outputs)    │
+│  • Format Translation (OpenAI ↔ Claude)  │
+│  • Quota Tracking & Auto Token Refresh   │
+└────────┬────────────┬───────────┬────────┘
+         │            │           │
+    ┌────▼────┐  ┌────▼────┐  ┌──▼─────┐
+    │  Tier 1 │  │  Tier 2 │  │ Tier 3 │
+    │  Sub    │  │  Cheap  │  │  Free  │
+    │ Claude  │  │  GLM    │  │  Kiro  │
+    │ Codex   │  │ MiniMax │  │Vertex  │
+    │ Copilot │  │  Kimi   │  │OpenCode│
+    └─────────┘  └─────────┘  └────────┘
+```
+
+When Tier 1 quota is exhausted, 9Router automatically cascades to Tier 2, then Tier 3—keeping your coding session alive without any interruption.
+
+## Getting Started
+
+Setting up 9Router takes just a few minutes. Choose the method that works best for you:
+
+### Method 1: npm (Recommended)
+
+```bash
+npm install -g 9router
+9router
+```
+
+The dashboard opens at **http://localhost:20128**.
+
+### Method 2: Docker
+
+```bash
+docker run -d \
+  --name 9router \
+  -p 20128:20128 \
+  -v "$HOME/.9router:/app/data" \
+  -e DATA_DIR=/app/data \
+  decolua/9router:latest
+```
+
+### Method 3: From Source
+
+```bash
+git clone https://github.com/decolua/9router.git
+cd 9router
+cp .env.example .env
+npm install
+PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
+```
+
+### Post-Installation
+
+1. Open the dashboard at `http://localhost:20128`.
+2. Connect a provider (Kiro AI is recommended to start—it's free and requires no signup).
+3. Configure your CLI tool's API endpoint to `http://localhost:20128/v1`.
+4. Set the API key from the dashboard.
+5. Select a model (e.g., `kr/claude-sonnet-4.5`).
+
+That's it—your AI coding tools are now routing through 9Router.
+
+## Supported Providers
+
+9Router supports **40+ backend providers** across multiple categories:
+
+- **OAuth/Subscription:** Claude Code (Pro/Max), Codex (Plus/Pro), GitHub Copilot, Cursor, Antigravity
+- **Free Tier:** Kiro AI (Claude 4.5, GLM-5, MiniMax — unlimited), OpenCode Free (no auth required), Vertex AI ($300 GCP credits)
+- **Cheap API:** GLM-5.1 ($0.6/1M tokens), MiniMax M2.7 ($0.2/1M tokens), Kimi K2.5 ($9/month flat)
+- **API Key Providers:** OpenAI, Anthropic, Gemini, DeepSeek, Groq, xAI, Mistral, Perplexity, Together AI, Fireworks, Cerebras, Cohere, NVIDIA, SiliconFlow, Nebius, Hyperbolic, and custom OpenAI/Anthropic-compatible endpoints
+
+## Why It Matters
+
+The AI coding tool landscape is fragmented and expensive. Developers often juggle multiple subscriptions, hit arbitrary usage limits, and get locked into specific vendors. 9Router addresses all of these pain points:
+
+- **Cost Reduction:** By compressing tokens and routing to free/cheap providers, 9Router can dramatically cut your AI coding expenses.
+- **Vendor Flexibility:** No more being locked into a single provider. Switch, mix, and match providers freely.
+- **Zero Downtime:** The automatic fallback system means your coding flow is never interrupted by quota limits.
+- **Open Source:** MIT licensed, community-driven, and fully auditable. You own your routing layer.
+
+With **18.8k stars on GitHub** and active development, 9Router has quickly become one of the most popular tools in the AI-assisted development ecosystem. It's the missing infrastructure layer that makes AI coding tools *sustainable* for individual developers and teams alike.
+
+If you're spending too much on AI coding tools or constantly hitting usage limits, check out the [9Router GitHub repository](https://github.com/decolua/9router) and start routing smarter today.
