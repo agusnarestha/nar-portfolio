@@ -1,0 +1,250 @@
+---
+title: "9Router Setup Guide: Cut AI Coding Costs with Smart LLM Routing"
+date: "2026-07-21"
+description: "Learn how to set up 9Router to route Claude Code, Cursor, and Codex to free and cheap LLM providers with auto fallback and token compression."
+tags:
+  ["AI", "Developer Tools", "Open Source", "Tools", "Productivity", "Tutorial"]
+---
+
+AI coding assistants like Claude Code, Cursor, and GitHub Copilot can feel indispensable—until the monthly bill arrives or a quota wall stops you mid-flow. A single developer can easily spend $100–$300 per month across subscriptions, and most tools lock you into one provider.
+
+**9Router** fixes that. It is an open-source AI API router that sits between your coding tools and dozens of LLM backends, automatically routing each request to the cheapest or free provider available. This 9Router setup guide shows you how to install it, connect your first provider, and wire it into Claude Code, Cursor, Cline, and [OpenClaw](/blog/openclaw) in under ten minutes.
+
+By the end of this tutorial you will have a local proxy running at `http://localhost:20128/v1` that compresses tokens, translates API formats, and falls back across three provider tiers so your coding session never dies because of a 429 error.
+
+## What Is 9Router and Why Use It?
+
+[9Router](https://github.com/decolua/9router) is an open-source smart proxy created by [decolua](https://github.com/decolua). It exposes a single OpenAI-compatible endpoint that your AI coding tools already know how to talk to, then routes each request to one of 40+ backend providers based on price, quota, and availability.
+
+The core idea is simple: instead of configuring each tool with a single API key, you point every tool at 9Router. 9Router decides whether to send the request to your Claude Code subscription, a cheap GLM API, or a free Kiro AI tier.
+
+Key benefits:
+
+- **Cost reduction.** RTK token saver and optional prompt modes can cut token spend by 20–65%.
+- **Provider freedom.** Mix Claude, OpenAI, Gemini, DeepSeek, Groq, GLM, MiniMax, and many others without rewriting configs.
+- **Zero downtime.** When Tier 1 hits a quota, 9Router automatically falls back to Tier 2, then Tier 3.
+- **Self-hosted and auditable.** MIT licensed, runs locally or in Docker.
+
+If you are tired of juggling multiple AI subscriptions, this 9Router tutorial is the fastest way to unify them.
+
+## How 9Router Saves Money on AI Coding Tools
+
+Most of the cost of AI coding comes from tokens. 9Router attacks that cost from several angles.
+
+### RTK Token Saver
+
+Common CLI outputs like `git diff`, `ls`, `grep`, and `tree` are verbose. 9Router applies lossless compression to these outputs before they are sent to the model. The result is a **20–40% reduction in input tokens** with no loss of meaning.
+
+### Caveman and Ponytail Modes
+
+Two optional prompt-injection styles further reduce output tokens:
+
+- **Caveman Mode** forces terse, noun-verb answers. It can cut output tokens by up to **65%**.
+- **Ponytail Mode** injects a "lazy senior developer" persona that favors stdlib, native features, and YAGNI-first answers.
+
+### 3-Tier Fallback
+
+Instead of paying premium prices for every request, 9Router cascades across tiers:
+
+1. **Tier 1 — Subscriptions:** Claude Code Pro/Max, Codex Plus/Pro, GitHub Copilot, Cursor.
+2. **Tier 2 — Cheap APIs:** GLM-5.1 ($0.6/1M tokens), MiniMax M2.7 ($0.2/1M tokens), Kimi K2.5 ($9/month flat).
+3. **Tier 3 — Free:** Kiro AI, OpenCode Free, Vertex AI ($300 GCP credits).
+
+When Tier 1 is exhausted, traffic moves to Tier 2, then Tier 3. You keep coding while spending less.
+
+| Cost factor     | Without 9Router        | With 9Router                      |
+| --------------- | ---------------------- | --------------------------------- |
+| Input tokens    | Full `git diff` text   | 20–40% smaller after RTK          |
+| Output tokens   | Verbose answers        | Up to 65% shorter in Caveman Mode |
+| Provider choice | Locked to one vendor   | Always cheapest available         |
+| Quota failures  | Manual switch required | Automatic fallback                |
+
+## 9Router Installation (3 Ways)
+
+You can run 9Router with npm, Docker, or from source. All three methods expose the same dashboard and API endpoint.
+
+### Install via npm (Recommended)
+
+The fastest path for most developers:
+
+```bash
+npm install -g 9router
+9router
+```
+
+After a few seconds the dashboard opens at **http://localhost:20128**.
+
+### Run with Docker
+
+Best if you want a clean, isolated environment:
+
+```bash
+docker run -d \
+  --name 9router \
+  -p 20128:20128 \
+  -v "$HOME/.9router:/app/data" \
+  -e DATA_DIR=/app/data \
+  decolua/9router:latest
+```
+
+The volume mount preserves your provider config across container restarts.
+
+### Build from Source
+
+Use this if you want to customize the router or contribute:
+
+```bash
+git clone https://github.com/decolua/9router.git
+cd 9router
+cp .env.example .env
+npm install
+PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
+```
+
+Once the server is running, move on to the dashboard configuration.
+
+## 9Router Dashboard Walkthrough
+
+Open `http://localhost:20128` in your browser. The dashboard is where you connect providers, copy your local API key, and choose models.
+
+1. **Connect a provider.** Start with **Kiro AI** if you want a free tier with no signup. It supports Claude 4.5, GLM-5, and MiniMax models.
+2. **Copy the API key.** The dashboard shows a local API key. Your coding tools will send this key to `http://localhost:20128/v1`.
+3. **Pick a model prefix.** 9Router uses prefixes to route requests. Examples:
+   - `kr/claude-sonnet-4.5` routes through Kiro AI.
+   - `cc/claude-sonnet-4` routes through Claude Code.
+   - `oc/gpt-4o` routes through OpenCode Free.
+
+With one provider connected, you can now point your coding tools at 9Router.
+
+## Configure AI Coding Tools to Use 9Router
+
+Every supported tool needs two values:
+
+- **Base URL:** `http://localhost:20128/v1`
+- **API key:** the key shown in the 9Router dashboard
+- **Model:** a 9Router model prefix such as `kr/claude-sonnet-4.5`
+
+### Claude Code Configuration
+
+Claude Code reads its config from `~/.claude/config.json`. Update it to point at 9Router:
+
+```json
+{
+  "primary": {
+    "provider": "openai",
+    "baseURL": "http://localhost:20128/v1",
+    "apiKey": "YOUR_9ROUTER_API_KEY",
+    "model": "kr/claude-sonnet-4.5"
+  }
+}
+```
+
+Replace `YOUR_9ROUTER_API_KEY` with the key from the dashboard and restart Claude Code.
+
+### Cursor, Cline, and Continue Configuration
+
+Cursor, Cline, and Continue all support custom OpenAI-compatible providers. Use these settings:
+
+| Field    | Value                                 |
+| -------- | ------------------------------------- |
+| Provider | OpenAI-compatible                     |
+| Base URL | `http://localhost:20128/v1`           |
+| API Key  | `YOUR_9ROUTER_API_KEY`                |
+| Model    | `kr/claude-sonnet-4.5` or `oc/gpt-4o` |
+
+In Cursor, go to **Settings > Models > OpenAI API** and paste the base URL and key. In Cline, use the API configuration panel and select "OpenAI Compatible."
+
+### OpenClaw Configuration
+
+If you use [OpenClaw](/blog/openclaw), edit `~/.openclaw/openclaw.json`:
+
+```json
+{
+  "provider": "openai",
+  "baseURL": "http://localhost:20128/v1",
+  "apiKey": "YOUR_9ROUTER_API_KEY",
+  "model": "kr/claude-sonnet-4.5"
+}
+```
+
+Restart OpenClaw and it will route every request through 9Router.
+
+### Codex, Copilot, Roo, and Kilo Code Notes
+
+- **Codex / Copilot:** These tools are harder to redirect because they use their own OAuth flows. 9Router works best when the tool lets you override the base URL and model.
+- **Roo Code / Kilo Code:** Both support custom OpenAI-compatible endpoints. Use the same base URL, API key, and model prefix pattern shown above.
+
+### Troubleshooting Provider Errors
+
+If you see `429` or `quota exceeded` even after setup:
+
+- Confirm the model prefix matches a connected provider in the dashboard.
+- Check that fallback tiers are enabled in 9Router settings.
+- Verify the provider still has quota by looking at the live quota countdown.
+- Restart the tool so it picks up the new base URL.
+
+## 9Router Provider Tiers Explained
+
+9Router groups providers into three tiers so fallback logic is predictable. Here is the current landscape:
+
+| Tier   | Type          | Examples                                                     | Best for                                      |
+| ------ | ------------- | ------------------------------------------------------------ | --------------------------------------------- |
+| Tier 1 | Subscriptions | Claude Code Pro/Max, Codex Plus/Pro, GitHub Copilot, Cursor  | High-quality answers when quota is available  |
+| Tier 2 | Cheap APIs    | GLM-5.1 ($0.6/1M), MiniMax M2.7 ($0.2/1M), Kimi K2.5 ($9/mo) | Daily driver once subscription quotas run out |
+| Tier 3 | Free tiers    | Kiro AI, OpenCode Free, Vertex AI ($300 GCP credits)         | Backup or low-volume usage                    |
+
+You can configure how aggressively 9Router moves between tiers. For example, keep Tier 1 as the default, but jump to Tier 2 immediately after the first 429 response.
+
+## Pro Tips to Get the Most from 9Router
+
+A few habits will maximize your savings:
+
+- **Enable RTK + Caveman Mode together.** The combination shrinks both input and output tokens.
+- **Use multi-account round-robin.** Add multiple accounts for the same provider and 9Router will rotate requests, extending your effective quota.
+- **Monitor the quota countdown.** Time heavy refactoring sessions right after free-tier resets.
+- **Start with Kiro AI.** It is free, requires no signup, and lets you validate the whole flow before adding paid providers.
+- **Keep configs in version control.** Store tool JSON configs in a dotfiles repo so setup is repeatable across machines.
+
+If you are exploring local alternatives, our guide on [running Ollama and DeepSeek locally](/blog/install-ollama-and-deepseek-locally) pairs well with a self-hosted workflow.
+
+## Common 9Router Issues and Fixes
+
+| Symptom                 | Cause                                         | Fix                                             |
+| ----------------------- | --------------------------------------------- | ----------------------------------------------- |
+| Dashboard does not load | Docker port not mapped or process not running | Check `docker ps` or run `9router` again        |
+| `model not found`       | Prefix does not match a connected provider    | Verify prefix in dashboard, e.g. `kr/` for Kiro |
+| Tool ignores 9Router    | Base URL cached in tool config                | Fully quit and restart the tool                 |
+| Fallback never triggers | Only one tier configured                      | Add at least one Tier 2 or Tier 3 provider      |
+| High latency            | Free tier overloaded                          | Switch default model to a Tier 2 provider       |
+
+## FAQ
+
+### Is 9Router free?
+
+Yes. 9Router itself is MIT licensed and free to use. You still pay any third-party providers you connect, but you choose which ones and can stay entirely on free tiers if you prefer.
+
+### Does 9Router work with Cursor?
+
+Yes. Cursor supports custom OpenAI-compatible endpoints. Set the base URL to `http://localhost:20128/v1`, paste your 9Router API key, and pick a model with the right prefix.
+
+### Can I self-host 9Router?
+
+Yes. Use Docker or run it from source. Your config and provider keys stay on your machine unless you enable cloud sync.
+
+### Is my data safe?
+
+When self-hosted, requests leave your machine only to the providers you select. 9Router does not route traffic through a central service unless you explicitly configure cloud sync.
+
+### What is the difference between 9Router and a cloud API aggregator?
+
+Cloud aggregators usually charge a markup and still lock you into their gateway. 9Router is local, open source, and lets you bring your own provider accounts.
+
+## Conclusion
+
+A complete 9Router setup comes down to three steps: install the router, connect a provider, and point your AI coding tools at `http://localhost:20128/v1`. From there, RTK token compression, Caveman/Ponytail modes, and 3-tier fallback do the rest.
+
+For developers spending too much on AI subscriptions or hitting quota walls at the worst moments, 9Router is the missing infrastructure layer. Start with the free Kiro AI tier, wire in Claude Code or Cursor using the configs above, and iterate as your needs grow.
+
+If you want a quick feature overview first, read the original [9Router introduction](/blog/9router). For more AI tool tips, see our posts on [vibes coding](/blog/how-to-vibes-coding) and [n8n automation](/blog/n8n-automation-guide).
+
+Star the [9Router GitHub repository](https://github.com/decolua/9router) to follow updates, and happy routing.
