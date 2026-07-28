@@ -1,5 +1,6 @@
 export interface SpotifyNowPlayingData {
     isPlaying: boolean;
+    isRecentlyPlayed?: boolean;
     title?: string;
     artist?: string;
     album?: string;
@@ -12,6 +13,8 @@ export interface SpotifyTokenResponse {
     token_type: string;
     expires_in: number;
     scope: string;
+    error?: string;
+    error_description?: string;
 }
 
 export interface SpotifyCurrentlyPlayingResponse {
@@ -33,4 +36,26 @@ export interface SpotifyCurrentlyPlayingResponse {
             spotify: string;
         };
     };
+}
+
+export interface SpotifyRecentlyPlayedResponse {
+    items: Array<{
+        track: {
+            name: string;
+            artists: Array<{
+                name: string;
+            }>;
+            album: {
+                name: string;
+                images: Array<{
+                    url: string;
+                    height: number;
+                    width: number;
+                }>;
+            };
+            external_urls: {
+                spotify: string;
+            };
+        };
+    }>;
 }
