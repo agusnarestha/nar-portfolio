@@ -3,6 +3,7 @@ import { getNowPlaying, getRecentlyPlayed } from "@/utils/spotify";
 import { SpotifyCurrentlyPlayingResponse, SpotifyRecentlyPlayedResponse, SpotifyNowPlayingData } from "@/types/spotify";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET() {
     try {
@@ -14,13 +15,14 @@ export async function GET() {
         if (response.status === 204 || response.status > 400) {
             // Not currently playing, fetch recently played
             const recentResponse = await getRecentlyPlayed();
+            console.log("Recently played response status:", recentResponse.status);
 
             if (recentResponse.ok) {
                 const recentData: SpotifyRecentlyPlayedResponse = await recentResponse.json();
 
                 if (recentData.items && recentData.items.length > 0) {
                     const lastTrack = recentData.items[0].track;
-                    console.log("Returning recently played track");
+                    console.log("Returning recently played track:", lastTrack.name);
 
                     return NextResponse.json<SpotifyNowPlayingData>({
                         isPlaying: false,
@@ -32,6 +34,10 @@ export async function GET() {
                         songUrl: lastTrack.external_urls.spotify,
                     });
                 }
+            } else {
+                // Log the error from recently played
+                const errorData = await recentResponse.json().catch(() => null);
+                console.error("Recently played failed:", recentResponse.status, errorData);
             }
 
             console.log("Spotify API returned error or no content:", response.status);
@@ -43,13 +49,14 @@ export async function GET() {
         // If not actively playing or no track, fetch recently played
         if (!song.item || !song.is_playing) {
             const recentResponse = await getRecentlyPlayed();
+            console.log("Recently played response status (paused):", recentResponse.status);
 
             if (recentResponse.ok) {
                 const recentData: SpotifyRecentlyPlayedResponse = await recentResponse.json();
 
                 if (recentData.items && recentData.items.length > 0) {
                     const lastTrack = recentData.items[0].track;
-                    console.log("Returning recently played track");
+                    console.log("Returning recently played track (paused):", lastTrack.name);
 
                     return NextResponse.json<SpotifyNowPlayingData>({
                         isPlaying: false,
@@ -61,6 +68,10 @@ export async function GET() {
                         songUrl: lastTrack.external_urls.spotify,
                     });
                 }
+            } else {
+                // Log the error from recently played
+                const errorData = await recentResponse.json().catch(() => null);
+                console.error("Recently played failed (paused):", recentResponse.status, errorData);
             }
 
             console.log("Spotify API returned no active playback or recent tracks");

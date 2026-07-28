@@ -12,7 +12,9 @@ const SpotifyNowPlaying = () => {
     useEffect(() => {
         const fetchNowPlaying = async () => {
             try {
-                const response = await fetch("/api/spotify/now-playing");
+                const response = await fetch("/api/spotify/now-playing", {
+                    cache: "no-store",
+                });
                 const nowPlaying: SpotifyNowPlayingData = await response.json();
                 setData(nowPlaying);
             } catch (error) {
