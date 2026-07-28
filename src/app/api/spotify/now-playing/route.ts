@@ -32,6 +32,7 @@ export async function GET() {
                         album: lastTrack.album.name,
                         albumImageUrl: lastTrack.album.images[0]?.url,
                         songUrl: lastTrack.external_urls.spotify,
+                        playedAt: recentData.items[0].played_at,
                     });
                 }
             } else {
@@ -66,6 +67,7 @@ export async function GET() {
                         album: lastTrack.album.name,
                         albumImageUrl: lastTrack.album.images[0]?.url,
                         songUrl: lastTrack.external_urls.spotify,
+                        playedAt: recentData.items[0].played_at,
                     });
                 }
             } else {

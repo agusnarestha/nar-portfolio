@@ -5,6 +5,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Clock, Music2 } from "lucide-react";
 import { SpotifyNowPlayingData } from "@/types/spotify";
 
+const formatTimeAgo = (timestamp: string): string => {
+    const now = Date.now();
+    const playedAt = new Date(timestamp).getTime();
+    const diffMs = now - playedAt;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffMins < 1) return "just now";
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return `${diffDays}d ago`;
+};
+
 const SpotifyNowPlaying = () => {
     const [data, setData] = useState<SpotifyNowPlayingData | null>(null);
     const [loading, setLoading] = useState(true);
@@ -66,7 +80,11 @@ const SpotifyNowPlaying = () => {
 
     // Determine display state
     const isPlaying = data.isPlaying;
-    const label = isPlaying ? "Now Playing" : "Last Played";
+    const label = isPlaying
+        ? "Now Playing"
+        : data.playedAt
+            ? `Last Played ${formatTimeAgo(data.playedAt)}`
+            : "Last Played";
     const labelColor = isPlaying
         ? "text-green-700 dark:text-green-400"
         : "text-gray-600 dark:text-gray-400";

@@ -6,6 +6,7 @@ export interface SpotifyNowPlayingData {
     album?: string;
     albumImageUrl?: string;
     songUrl?: string;
+    playedAt?: string;
 }
 
 export interface SpotifyTokenResponse {
@@ -57,5 +58,6 @@ export interface SpotifyRecentlyPlayedResponse {
                 spotify: string;
             };
         };
+        played_at: string;
     }>;
 }
