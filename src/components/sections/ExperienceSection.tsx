@@ -1,3 +1,5 @@
+"use client";
+
 import Timeline from "../Timeline";
 import timelineData from "@/data/timelineData.json";
 import { motion } from "framer-motion";
