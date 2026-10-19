@@ -9,22 +9,25 @@ export default function BlogCard({ post }: BlogCardProps) {
   return (
     <article
       className="
-        neo-card group relative bg-white border-2 border-black
-        shadow-[5px_5px_0_#1a1a1a]
+        neo-card group relative bg-white border-[3px] border-black
+        shadow-[8px_8px_0_#000000]
         overflow-hidden flex flex-col
       "
     >
+      {/* Corner bracket */}
+      <div className="absolute top-2 left-2 w-4 h-4 border-t-[3px] border-l-[3px] border-black pointer-events-none z-10" />
+
       {/* Top accent bar — grows on hover */}
-      <div className="h-1.5 w-full bg-[#3cc4ce] flex-shrink-0 accent-bar" />
+      <div className="h-2 w-full bg-[#06b6d4] flex-shrink-0 accent-bar" />
 
       <Link href={`/blog/${post.slug}`} className="block h-full p-5 flex flex-col flex-1">
         {/* Title */}
-        <h2 className="text-base font-display font-black text-[#121212] mb-2 line-clamp-2 uppercase tracking-tight group-hover:underline decoration-[#3cc4ce] decoration-2 underline-offset-2">
+        <h2 className="text-base font-display font-bold text-black mb-2 line-clamp-2 uppercase tracking-tight group-hover:underline decoration-[#06b6d4] decoration-[3px] underline-offset-2">
           {post.title}
         </h2>
 
         {/* Description */}
-        <p className="text-sm text-[#525252] mb-4 line-clamp-2 flex-grow">
+        <p className="text-sm text-gray-600 mb-4 line-clamp-2 flex-grow">
           {post.description}
         </p>
 
@@ -33,7 +36,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="bg-[#e6b448] border border-black text-black font-mono font-bold text-[10px] uppercase px-2 py-0.5 whitespace-nowrap"
+              className="bg-[#fbbf24] border-[2px] border-black text-black font-mono font-bold text-[10px] uppercase px-2 py-0.5 whitespace-nowrap"
             >
               #{tag}
             </span>
@@ -41,7 +44,7 @@ export default function BlogCard({ post }: BlogCardProps) {
         </div>
 
         {/* Date + read time */}
-        <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#737373] uppercase tracking-wide mt-auto border-t border-black/10 pt-3">
+        <div className="flex items-center gap-2 text-xs font-mono font-bold text-gray-600 uppercase tracking-wide mt-auto border-t-[3px] border-black pt-3">
           <time>
             {new Date(post.date).toLocaleDateString("en-US", {
               month: "short",
@@ -49,7 +52,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               year: "numeric",
             })}
           </time>
-          <span className="text-gray-300">|</span>
+          <span className="text-black">|</span>
           <span>{post.readingTime} min read</span>
         </div>
       </Link>

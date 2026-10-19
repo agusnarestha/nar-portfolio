@@ -23,16 +23,16 @@ const RecentPostSection = () => {
   return (
     <div>
       {/* Heading row */}
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <h1
-          className="neo-badge text-3xl bg-[#3cc4ce]
+          className="neo-badge text-3xl bg-[#06b6d4]
             max-[325px]:text-base max-[365px]:text-[19px] max-[395px]:text-xl max-[430px]:text-2xl max-[540px]:text-[25px]"
         >
           Recent Post
         </h1>
         <a
           href="/blog"
-          className="neo-btn"
+          className="neo-btn bg-[#fbbf24] self-start"
         >
           View All
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 fill-current" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@ const RecentPostSection = () => {
       </div>
 
       <div className="my-9 -mx-4 sm:-mx-8 px-4 sm:px-8 lg:mx-0 lg:px-0 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
-        <div className="flex lg:grid lg:grid-cols-3 gap-5 w-max lg:w-auto">
+        <div className="flex lg:grid lg:grid-cols-3 gap-6 w-max lg:w-auto">
           {latestPosts.map((post, index) => (
             <div key={index} className="w-[280px] sm:w-[320px] lg:w-auto flex-shrink-0">
               <PostCard

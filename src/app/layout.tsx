@@ -100,9 +100,11 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-PHV2VZN6" />
       <GoogleAnalytics gaId="G-B2ZN13JQ9F" />
       <PortfolioJsonLd />
-      <body className="font-body relative max-w-6xl mx-auto px-4 sm:px-8 max-[768px]:mt-28 bg-surface">
-        <Header />
-        {children}
+      <body className="font-body relative min-h-screen max-[768px]:mt-28 bg-surface">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+          <Header />
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

@@ -5,26 +5,26 @@ import { motion } from "framer-motion";
 const BackgroundArt = () => {
   const shapes = [
     // Floating crosses
-    { type: "cross", x: "8%", y: "15%", size: 20, color: "#df548e", delay: 0, duration: 8 },
-    { type: "cross", x: "85%", y: "12%", size: 16, color: "#3cc4ce", delay: 2, duration: 10 },
-    { type: "cross", x: "15%", y: "75%", size: 14, color: "#e6b448", delay: 4, duration: 9 },
-    { type: "cross", x: "90%", y: "60%", size: 18, color: "#a8e6a3", delay: 1, duration: 11 },
+    { type: "cross", x: "8%", y: "15%", size: 22, color: "#ec4899", delay: 0, duration: 8 },
+    { type: "cross", x: "85%", y: "12%", size: 18, color: "#06b6d4", delay: 2, duration: 10 },
+    { type: "cross", x: "15%", y: "75%", size: 16, color: "#f97316", delay: 4, duration: 9 },
+    { type: "cross", x: "90%", y: "60%", size: 20, color: "#22c55e", delay: 1, duration: 11 },
 
     // Dots
-    { type: "dot", x: "20%", y: "25%", size: 6, color: "#6c9bef", delay: 0.5, duration: 7 },
-    { type: "dot", x: "75%", y: "20%", size: 8, color: "#df548e", delay: 1.5, duration: 9 },
-    { type: "dot", x: "50%", y: "85%", size: 5, color: "#3cc4ce", delay: 3, duration: 8 },
-    { type: "dot", x: "10%", y: "55%", size: 7, color: "#e6b448", delay: 2.5, duration: 10 },
-    { type: "dot", x: "92%", y: "40%", size: 4, color: "#a8e6a3", delay: 0, duration: 6 },
+    { type: "dot", x: "20%", y: "25%", size: 8, color: "#3b82f6", delay: 0.5, duration: 7 },
+    { type: "dot", x: "75%", y: "20%", size: 10, color: "#ec4899", delay: 1.5, duration: 9 },
+    { type: "dot", x: "50%", y: "85%", size: 7, color: "#06b6d4", delay: 3, duration: 8 },
+    { type: "dot", x: "10%", y: "55%", size: 9, color: "#f97316", delay: 2.5, duration: 10 },
+    { type: "dot", x: "92%", y: "40%", size: 6, color: "#22c55e", delay: 0, duration: 6 },
 
     // Diamonds
-    { type: "diamond", x: "30%", y: "10%", size: 12, color: "#e6b448", delay: 1, duration: 12 },
-    { type: "diamond", x: "70%", y: "70%", size: 10, color: "#3cc4ce", delay: 3, duration: 10 },
-    { type: "diamond", x: "55%", y: "30%", size: 8, color: "#df548e", delay: 2, duration: 14 },
+    { type: "diamond", x: "30%", y: "10%", size: 14, color: "#fbbf24", delay: 1, duration: 12 },
+    { type: "diamond", x: "70%", y: "70%", size: 12, color: "#06b6d4", delay: 3, duration: 10 },
+    { type: "diamond", x: "55%", y: "30%", size: 10, color: "#ec4899", delay: 2, duration: 14 },
 
     // Triangles
-    { type: "triangle", x: "40%", y: "8%", size: 14, color: "#a8e6a3", delay: 0.5, duration: 11 },
-    { type: "triangle", x: "65%", y: "80%", size: 12, color: "#6c9bef", delay: 2, duration: 9 },
+    { type: "triangle", x: "40%", y: "8%", size: 16, color: "#22c55e", delay: 0.5, duration: 11 },
+    { type: "triangle", x: "65%", y: "80%", size: 14, color: "#3b82f6", delay: 2, duration: 9 },
   ];
 
   const renderShape = (shape: typeof shapes[0], index: number) => {
@@ -71,6 +71,7 @@ const BackgroundArt = () => {
                 height: shape.size,
                 borderRadius: "50%",
                 backgroundColor: shape.color,
+                border: "2px solid #000",
                 opacity: 0.7,
               }}
             />
@@ -85,7 +86,7 @@ const BackgroundArt = () => {
                 height: shape.size,
                 backgroundColor: shape.color,
                 transform: "rotate(45deg)",
-                border: "2px solid #1a1a1a",
+                border: "3px solid #000",
                 opacity: 0.6,
               }}
             />
@@ -98,8 +99,8 @@ const BackgroundArt = () => {
               <polygon
                 points="10,2 18,18 2,18"
                 fill={shape.color}
-                stroke="#1a1a1a"
-                strokeWidth="1.5"
+                stroke="#000"
+                strokeWidth="2"
                 opacity="0.5"
               />
             </svg>
@@ -114,26 +115,6 @@ const BackgroundArt = () => {
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {/* Dot grid pattern */}
       <div className="absolute inset-0 dot-grid" />
-
-      {/* Gradient mesh blobs */}
-      <motion.div
-        className="mesh-blob mesh-blob-cyan"
-        style={{ width: 300, height: 300, left: "10%", top: "20%" }}
-        animate={{ x: [0, 30, -20, 0], y: [0, -20, 15, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="mesh-blob mesh-blob-pink"
-        style={{ width: 250, height: 250, right: "15%", top: "40%" }}
-        animate={{ x: [0, -25, 15, 0], y: [0, 25, -10, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="mesh-blob mesh-blob-yellow"
-        style={{ width: 200, height: 200, left: "50%", bottom: "10%" }}
-        animate={{ x: [0, 20, -15, 0], y: [0, -15, 20, 0] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-      />
 
       {/* Floating geometric shapes */}
       {shapes.map((shape, index) => renderShape(shape, index))}

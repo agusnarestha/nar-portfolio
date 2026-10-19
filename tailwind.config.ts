@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["Outfit", "system-ui", "sans-serif"],
-        body: ["DM Sans", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        display: ["Space Grotesk", "system-ui", "sans-serif"],
+        body: ["Inter", "system-ui", "sans-serif"],
+        mono: ["Fira Code", "monospace"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -19,34 +19,47 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       boxShadow: {
-        custom: "5px 7px 0px 1px rgb(20, 20, 20)",
-        customhover: "2px 3px 0px 1px rgb(20, 20, 20)",
-        neo: "5px 5px 0 #1a1a1a",
-        "neo-sm": "3px 3px 0 #1a1a1a",
-        "neo-hover": "2px 2px 0 #1a1a1a",
-        "neo-active": "1px 1px 0 #1a1a1a",
+        neo: "6px 6px 0 #000000",
+        "neo-sm": "4px 4px 0 #000000",
+        "neo-lg": "8px 8px 0 #000000",
+        "neo-hover": "2px 2px 0 #000000",
+        "neo-active": "0px 0px 0 #000000",
+      },
+      borderWidth: {
+        neo: "3px",
       },
       animation: {
-        "float": "float 3s ease-in-out infinite",
-        "float-slow": "float-slow 6s ease-in-out infinite",
-        "drift": "drift 12s ease-in-out infinite",
+        "float": "float 4s ease-in-out infinite",
+        "float-slow": "float-slow 7s ease-in-out infinite",
+        "drift": "drift 15s ease-in-out infinite",
       },
       colors: {
-        "neo-cyan": "#3cc4ce",
-        "neo-yellow": "#e6b448",
-        "neo-pink": "#df548e",
-        "neo-green": "#a8e6a3",
-        "neo-blue": "#6c9bef",
-        "ink": {
-          DEFAULT: "#1a1a1a",
-          secondary: "#525252",
-          muted: "#737373",
-          faint: "#a3a3a3",
-        },
+        // Neo-brutalism accent palette - bold & vibrant
+        "neo-red": "#ef4444",
+        "neo-orange": "#f97316",
+        "neo-yellow": "#fbbf24",
+        "neo-lime": "#84cc16",
+        "neo-green": "#22c55e",
+        "neo-teal": "#14b8a6",
+        "neo-cyan": "#06b6d4",
+        "neo-blue": "#3b82f6",
+        "neo-indigo": "#6366f1",
+        "neo-violet": "#8b5cf6",
+        "neo-purple": "#a855f7",
+        "neo-pink": "#ec4899",
+        "neo-rose": "#f43f5e",
+        // Surfaces
         "surface": {
-          DEFAULT: "#faf9f6",
+          DEFAULT: "#dcebfe",
           card: "#ffffff",
-          warm: "#fffbe6",
+          warm: "#fef3c7",
+          accent: "#e0f2fe",
+        },
+        // Text
+        "ink": {
+          DEFAULT: "#000000",
+          secondary: "#1f2937",
+          muted: "#4b5563",
         },
       },
     },

@@ -39,7 +39,7 @@ const SpotifyNowPlaying = () => {
         };
 
         fetchNowPlaying();
-        const interval = setInterval(fetchNowPlaying, 30000); // Refresh every 30 seconds
+        const interval = setInterval(fetchNowPlaying, 30000);
 
         return () => clearInterval(interval);
     }, []);
@@ -49,36 +49,34 @@ const SpotifyNowPlaying = () => {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-lg max-w-md mx-auto"
+                className="flex items-center gap-3 px-4 py-3 bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] max-w-md mx-auto"
             >
                 <div className="animate-pulse flex items-center gap-3 w-full">
-                    <div className="w-12 h-12 bg-gray-300 dark:bg-gray-700 rounded" />
+                    <div className="w-12 h-12 bg-gray-200 border-2 border-black" />
                     <div className="flex-1">
-                        <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2" />
-                        <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/2" />
+                        <div className="h-4 bg-gray-200 border-2 border-black w-3/4 mb-2" />
+                        <div className="h-3 bg-gray-200 border-2 border-black w-1/2" />
                     </div>
                 </div>
             </motion.div>
         );
     }
 
-    // If no data at all (API error or no recent tracks), show a simple offline message
     if (!data || (!data.isPlaying && !data.isRecentlyPlayed)) {
         return (
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-lg max-w-md mx-auto"
+                className="flex items-center gap-3 px-4 py-3 bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] max-w-md mx-auto"
             >
-                <Music2 className="w-5 h-5 text-gray-400 dark:text-gray-500 flex-shrink-0" />
-                <span className="text-sm text-gray-500 dark:text-gray-400">
+                <Music2 className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                <span className="text-sm font-bold text-gray-600">
                     Spotify is offline
                 </span>
             </motion.div>
         );
     }
 
-    // Determine display state
     const isPlaying = data.isPlaying;
     const label = isPlaying
         ? "Now Playing"
@@ -86,20 +84,11 @@ const SpotifyNowPlaying = () => {
             ? `Last Played ${formatTimeAgo(data.playedAt)}`
             : "Last Played";
     const labelColor = isPlaying
-        ? "text-green-700 dark:text-green-400"
-        : "text-gray-600 dark:text-gray-400";
+        ? "text-green-700"
+        : "text-gray-600";
     const barColor = isPlaying
-        ? "bg-green-600 dark:bg-green-400"
-        : "bg-gray-400 dark:bg-gray-500";
-    const bgGradient = isPlaying
-        ? "from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20"
-        : "from-gray-50 to-slate-50 dark:from-gray-800/40 dark:to-slate-800/40";
-    const borderColor = isPlaying
-        ? "border-green-200 dark:border-green-800 hover:border-green-300 dark:hover:border-green-700"
-        : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600";
-    const iconColor = isPlaying
-        ? "text-green-600 dark:text-green-400"
-        : "text-gray-500 dark:text-gray-400";
+        ? "bg-green-600"
+        : "bg-gray-400";
 
     return (
         <AnimatePresence mode="wait">
@@ -112,12 +101,13 @@ const SpotifyNowPlaying = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 whileHover={{ scale: 1.02 }}
-                className={`flex items-center gap-3 px-4 py-3 bg-gradient-to-r ${bgGradient} rounded-lg max-w-md mx-auto border ${borderColor} transition-all cursor-pointer group`}
+                className={`flex items-center gap-3 px-4 py-3 bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] max-w-md mx-auto transition-all cursor-pointer group
+                    ${isPlaying ? 'hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px]' : ''}`}
             >
                 {/* Album Art */}
                 {data.albumImageUrl && (
                     <motion.div
-                        className="relative w-12 h-12 rounded overflow-hidden flex-shrink-0"
+                        className="relative w-12 h-12 overflow-hidden flex-shrink-0 border-2 border-black"
                         whileHover={{ rotate: 5 }}
                     >
                         <img
@@ -132,7 +122,6 @@ const SpotifyNowPlaying = () => {
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                         {isPlaying ? (
-                            // Animated bars for currently playing
                             <motion.div
                                 className="flex gap-0.5"
                                 initial={{ opacity: 0 }}
@@ -154,24 +143,23 @@ const SpotifyNowPlaying = () => {
                                 ))}
                             </motion.div>
                         ) : (
-                            // Clock icon for last played
-                            <Clock className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
+                            <Clock className="w-3.5 h-3.5 text-gray-500" />
                         )}
-                        <span className={`text-xs font-medium ${labelColor}`}>
+                        <span className={`text-xs font-bold ${labelColor}`}>
                             {label}
                         </span>
                     </div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">
+                    <p className="text-sm font-bold text-black truncate group-hover:text-green-700 transition-colors">
                         {data.title}
                     </p>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                    <p className="text-xs text-gray-600 truncate">
                         {data.artist}
                     </p>
                 </div>
 
                 {/* Spotify Icon */}
                 <svg
-                    className={`w-5 h-5 ${iconColor} flex-shrink-0`}
+                    className="w-5 h-5 text-gray-600 flex-shrink-0"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                 >

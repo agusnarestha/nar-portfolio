@@ -42,23 +42,23 @@ const Header = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4
-        border-b-2 border-black transition-all duration-300
+        border-b-[3px] border-black transition-all duration-300
         ${scrolled
-          ? "bg-white/80 backdrop-blur-md shadow-[0_2px_0px_0px_#1a1a1a]"
-          : "bg-white shadow-[0_2px_0px_0px_#1a1a1a]"
+          ? "bg-white/90 backdrop-blur-md shadow-[0_3px_0px_0px_#000000]"
+          : "bg-white shadow-[0_3px_0px_0px_#000000]"
         }`}
     >
       {/* Logo */}
       <div className="text-2xl">
         <a href="/">
           <motion.span
-            className="text-2xl font-display font-black uppercase tracking-tight
-              border-2 border-black px-3 py-1
-              bg-[#3cc4ce]
-              shadow-[3px_3px_0_#1a1a1a]
+            className="text-2xl font-display font-bold uppercase tracking-tight
+              border-[3px] border-black px-3 py-1.5
+              bg-[#fbbf24]
+              shadow-[6px_6px_0_#000000]
               inline-block cursor-pointer"
-            whileHover={{ rotate: -3, scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ rotate: -5, scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
             Nar.
@@ -70,10 +70,10 @@ const Header = () => {
       <div className="lg:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-center w-10 h-10 border-2 border-black bg-white shadow-[3px_3px_0_#1a1a1a] hover:shadow-[1px_1px_0_#1a1a1a] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-100"
+          className="flex items-center justify-center w-12 h-12 border-[3px] border-black bg-white shadow-[6px_6px_0_#000000] hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-150"
           aria-label="Open menu"
         >
-          <svg className="h-5 w-5 fill-current" viewBox="0 0 20 20">
+          <svg className="h-6 w-6 fill-current" viewBox="0 0 20 20">
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
           </svg>
         </button>
@@ -81,11 +81,11 @@ const Header = () => {
 
       {/* Desktop nav links */}
       <div className="hidden lg:block">
-        <ul className="flex flex-row items-center space-x-3">
-          <HeaderButton label="Home" color="#3cc4ce" href="/" />
+        <ul className="flex flex-row items-center space-x-4">
+          <HeaderButton label="Home" color="#fbbf24" href="/" />
           <HeaderButton
             label="About"
-            color="#e6b448"
+            color="#3b82f6"
             href="/?scroll=about"
             onClick={(e) => {
               const pathname = window.location.pathname;
@@ -96,8 +96,8 @@ const Header = () => {
               }
             }}
           />
-          <HeaderButton label="Project" color="#df548e" href="/project" />
-          <HeaderButton label="Blog" color="#a8e6a3" href="/blog" />
+          <HeaderButton label="Project" color="#ec4899" href="/project" />
+          <HeaderButton label="Blog" color="#22c55e" href="/blog" />
         </ul>
       </div>
 
@@ -109,7 +109,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen bg-[#fffbe6] border-2 border-black lg:hidden z-50"
+            className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen bg-[#fef9c3] border-[3px] border-black lg:hidden z-50"
           >
             {/* Close button */}
             <motion.button
@@ -117,10 +117,10 @@ const Header = () => {
               animate={{ opacity: 1, rotate: 0 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
               onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-5 w-10 h-10 border-2 border-black bg-white shadow-[3px_3px_0_#1a1a1a] hover:shadow-[1px_1px_0_#1a1a1a] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-100 flex items-center justify-center"
+              className="absolute top-5 right-5 w-12 h-12 border-[3px] border-black bg-white shadow-[6px_6px_0_#000000] hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-150 flex items-center justify-center"
               aria-label="Close menu"
             >
-              <svg className="h-5 w-5 fill-current" viewBox="0 0 20 20">
+              <svg className="h-6 w-6 fill-current" viewBox="0 0 20 20">
                 <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
               </svg>
             </motion.button>
@@ -133,21 +133,21 @@ const Header = () => {
               className="flex flex-col items-center justify-center space-y-6 h-full"
             >
               {[
-                { label: "Home", color: "#3cc4ce", href: "/" },
-                { label: "About", color: "#e6b448", href: "/?scroll=about" },
-                { label: "Project", color: "#df548e", href: "/project" },
-                { label: "Blog", color: "#a8e6a3", href: "/blog" },
+                { label: "Home", color: "#fbbf24", href: "/" },
+                { label: "About", color: "#3b82f6", href: "/?scroll=about" },
+                { label: "Project", color: "#ec4899", href: "/project" },
+                { label: "Blog", color: "#22c55e", href: "/blog" },
               ].map((item) => (
                 <motion.li key={item.label} variants={menuItemVariants}>
                   <a
                     href={item.href}
                     onClick={() => setIsOpen(false)}
                     style={{ backgroundColor: item.color }}
-                    className="inline-block px-8 py-3 border-2 border-black font-display font-black text-black text-lg uppercase tracking-wide
-                      shadow-[4px_4px_0px_0px_#1a1a1a]
-                      hover:shadow-[2px_2px_0px_0px_#1a1a1a]
-                      hover:translate-x-[2px] hover:translate-y-[2px]
-                      transition-all duration-100
+                    className="inline-block px-8 py-4 border-[3px] border-black font-display font-bold text-black text-lg uppercase tracking-wide
+                      shadow-[6px_6px_0px_0px_#000000]
+                      hover:shadow-[2px_2px_0px_0px_#000000]
+                      hover:translate-x-[4px] hover:translate-y-[4px]
+                      transition-all duration-150
                       w-[200px] text-center"
                   >
                     {item.label}

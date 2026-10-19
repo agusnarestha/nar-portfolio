@@ -37,21 +37,21 @@ export default function BlogPage() {
           {/* Page heading */}
           <div className="mb-6">
             <h1
-              className="neo-badge text-3xl bg-[#3cc4ce]
+              className="neo-badge text-3xl bg-[#06b6d4]
                 max-[375px]:text-xl max-[425px]:text-2xl"
             >
               Blog
             </h1>
           </div>
-          <p className="mb-8 text-[15px] text-[#525252] font-medium max-[375px]:text-[14px]">
+          <p className="mb-8 text-[15px] text-gray-600 font-medium max-[375px]:text-[14px]">
             Explore my thoughts and insights on web development, programming, and technology.
           </p>
 
           {/* Filter by Tags panel */}
           <div
-            className="mb-12 p-5 bg-[#fffbe6] border-2 border-black shadow-[5px_5px_0_#1a1a1a]"
+            className="mb-12 p-5 bg-[#fef3c7] border-[3px] border-black shadow-[8px_8px_0_#000000]"
           >
-            <h2 className="font-display font-black text-sm uppercase tracking-widest mb-4">
+            <h2 className="font-display font-bold text-sm uppercase tracking-widest mb-4">
               Filter by Tags
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -59,10 +59,10 @@ export default function BlogPage() {
               <Link
                 key="all"
                 href="/blog"
-                className="inline-block bg-black text-white font-mono font-bold text-xs uppercase px-3 py-1.5 border border-black
-                  shadow-[3px_3px_0_#888]
-                  hover:shadow-[1px_1px_0_#888] hover:translate-x-[2px] hover:translate-y-[2px]
-                  transition-all duration-100"
+                className="inline-block bg-black text-white font-mono font-bold text-xs uppercase px-3 py-1.5 border-[3px] border-black
+                  shadow-[6px_6px_0_#000000]
+                  hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px]
+                  transition-all duration-150"
               >
                 All
               </Link>
@@ -70,11 +70,11 @@ export default function BlogPage() {
                 <Link
                   key={tag}
                   href={`/blog/tag/${tag}`}
-                  className="inline-block bg-white text-black font-mono font-bold text-xs uppercase px-3 py-1.5 border-2 border-black
-                    shadow-[3px_3px_0_#1a1a1a]
-                    hover:shadow-[1px_1px_0_#1a1a1a] hover:translate-x-[2px] hover:translate-y-[2px]
-                    hover:bg-[#e6b448]
-                    transition-all duration-100"
+                  className="inline-block bg-white text-black font-mono font-bold text-xs uppercase px-3 py-1.5 border-[3px] border-black
+                    shadow-[6px_6px_0_#000000]
+                    hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px]
+                    hover:bg-[#fbbf24]
+                    transition-all duration-150"
                 >
                   #{tag}
                 </Link>
