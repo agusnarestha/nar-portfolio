@@ -8,37 +8,33 @@ import RecentPostSection from "@/components/sections/RecentPostSection";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
-// Animated neo-brutalist section divider with label badge
-const SectionDivider = ({ color = "#3b82f6", label }: { color?: string; label: string }) => (
-  <div className="relative flex flex-col sm:flex-row items-center my-12 sm:my-16 overflow-hidden">
-    {/* Top/left line */}
+// Animated neo-brutalist section divider with bold line and icon
+const SectionDivider = ({ color = "#3b82f6" }: { color?: string }) => (
+  <div className="relative flex items-center my-12 sm:my-16 overflow-hidden px-2">
+    {/* Left thick line */}
     <motion.div
-      className="flex-1 h-2 sm:h-2 bg-black w-full sm:w-auto"
+      className="flex-1 h-2 bg-black"
       initial={{ scaleX: 0, originX: 0 }}
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     />
-    {/* Center label badge */}
+    {/* Center colored diamond */}
     <motion.div
-      className="my-3 sm:my-0 sm:mx-6 flex-shrink-0 self-center"
-      initial={{ scale: 0, rotate: -10 }}
-      whileInView={{ scale: 1, rotate: 0 }}
+      className="mx-3 sm:mx-5 flex-shrink-0"
+      initial={{ scale: 0 }}
+      whileInView={{ scale: 1 }}
       viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.5, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+      transition={{ duration: 0.4, delay: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
     >
       <div
-        className="inline-flex items-center gap-2 border-[3px] border-black px-3 py-1.5 sm:px-4 sm:py-2 shadow-[3px_3px_0_#000000] sm:shadow-[4px_4px_0_#000000]"
-        style={{ backgroundColor: color }}
-      >
-        <span className="font-display font-bold text-xs uppercase tracking-wider text-black whitespace-nowrap">
-          {label}
-        </span>
-      </div>
+        className="w-4 h-4 sm:w-5 sm:h-5 border-[3px] border-black"
+        style={{ backgroundColor: color, transform: "rotate(45deg)" }}
+      />
     </motion.div>
-    {/* Bottom/right line */}
+    {/* Right thick line */}
     <motion.div
-      className="flex-1 h-2 sm:h-2 bg-black w-full sm:w-auto"
+      className="flex-1 h-2 bg-black"
       initial={{ scaleX: 0, originX: 1 }}
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true, amount: 0.5 }}
@@ -81,7 +77,7 @@ export default function Home() {
           <AboutSection />
         </motion.div>
 
-        <SectionDivider color="#84cc16" label="Experience" />
+        <SectionDivider color="#84cc16" />
 
         {/* Experience — slide from right */}
         <motion.div
@@ -94,7 +90,7 @@ export default function Home() {
         </motion.div>
       </div>
 
-      <SectionDivider color="#ec4899" label="Projects" />
+      <SectionDivider color="#ec4899" />
 
       {/* Recent Projects — scale up */}
       <motion.div
@@ -106,7 +102,7 @@ export default function Home() {
         <RecentProjectSection />
       </motion.div>
 
-      <SectionDivider color="#06b6d4" label="Posts" />
+      <SectionDivider color="#06b6d4" />
 
       {/* Recent Posts — fade up with rotate */}
       <motion.div
