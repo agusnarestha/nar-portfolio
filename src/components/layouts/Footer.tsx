@@ -49,7 +49,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="-mx-4 sm:-mx-8 mt-20 sm:mt-24 relative">
+    <div className="mt-20 sm:mt-24 relative">
       {/* Zigzag decorative top border */}
       <div className="zigzag-top border-t-[3px] border-black">
         <div className="bg-[#fef3c7]">
@@ -59,13 +59,13 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
               {/* CTA Card */}
               <motion.div
-                className="neo-card bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] p-5 flex-1 max-w-lg"
+                className="neo-card bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] p-4 sm:p-5 flex-1 max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="flex items-start gap-3">
+                <div className="flex flex-col sm:flex-row items-start gap-3">
                   <div className="w-10 h-10 flex-shrink-0 bg-[#22c55e] border-[3px] border-black flex items-center justify-center shadow-[3px_3px_0_#000000]">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 7h-9" />
@@ -74,16 +74,16 @@ const Footer = () => {
                       <circle cx="7" cy="7" r="3" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-display font-bold text-base uppercase tracking-tight mb-1">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-display font-bold text-sm sm:text-base uppercase tracking-tight mb-1">
                       Let&apos;s Work Together
                     </h3>
-                    <p className="text-sm text-gray-600 mb-3">
+                    <p className="text-xs sm:text-sm text-gray-600 mb-3">
                       Got a project in mind? I&apos;m open to new opportunities and collaborations.
                     </p>
                     <a
                       href="mailto:agusnaresthaa@gmail.com"
-                      className="inline-flex items-center gap-2 bg-[#fbbf24] border-[3px] border-black px-4 py-2 font-display font-bold text-sm uppercase shadow-[4px_4px_0_#000000] hover:shadow-[1px_1px_0_#000000] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-150"
+                      className="inline-flex items-center gap-2 bg-[#fbbf24] border-[3px] border-black px-3 py-2 sm:px-4 sm:py-2 font-display font-bold text-xs sm:text-sm uppercase shadow-[4px_4px_0_#000000] hover:shadow-[1px_1px_0_#000000] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-150"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -113,7 +113,7 @@ const Footer = () => {
             </div>
 
             {/* Middle row: Nav + Social */}
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
               {/* Navigation */}
               <div>
                 <h4 className="font-display font-bold text-xs uppercase tracking-widest text-gray-500 mb-3">
@@ -202,7 +202,7 @@ const Footer = () => {
         </div>
 
         {/* Mobile back to top */}
-        <div className="md:hidden px-4 pb-6">
+        <div className="md:hidden px-4 pb-6 max-w-6xl mx-auto">
           <button
             onClick={scrollToTop}
             className="w-full flex items-center justify-center gap-2 bg-white border-[3px] border-black px-4 py-3 font-display font-bold text-xs uppercase tracking-wide shadow-[4px_4px_0_#000000] hover:shadow-[1px_1px_0_#000000] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-150 cursor-pointer"
