@@ -1,0 +1,206 @@
+---
+title: "9Router vs OpenRouter vs LiteLLM: Which AI API Router Should You Use?"
+date: "2026-10-26"
+description: "An honest comparison of 9Router, OpenRouter, and LiteLLM — three AI API routers for cutting LLM costs. Pick the right tool for your workflow."
+tags:
+  [
+    "AI",
+    "Developer Tools",
+    "Open Source",
+    "Tools",
+    "9Router",
+    "OpenRouter",
+    "LiteLLM",
+  ]
+---
+
+You know you need an AI API router. You've hit a quota wall or a surprise bill, and you're done paying full price for every request. But here's the question most comparison posts skip: **what if one of these could actively shrink your bill, while the other two just move requests around?**
+
+9Router, OpenRouter, and LiteLLM all route AI requests across multiple providers. They all expose an OpenAI-compatible API. They all let you switch models without rewriting your code. But they optimize for completely different things — and picking the wrong one means you're still paying more than you need to.
+
+If you're new to 9Router and want the basics first, check our [9Router intro](/blog/9router) and [step-by-step setup guide](/blog/9router-setup). This post is for when you're ready to compare.
+
+## What These Tools Have in Common
+
+All three tools solve the same core problem: you're locked into one AI provider, and that's expensive and fragile. They each let you:
+
+- Use an OpenAI-compatible API endpoint
+- Route requests to 40+ backend providers (Claude, GPT, Gemini, DeepSeek, and more)
+- Switch models without changing your application code
+- Handle fallback when one provider is down
+
+That's the baseline. The differences are in what they **add** on top — and that's where the cost story changes.
+
+## 9Router: The Cost Optimizer 💰
+
+[9Router](https://github.com/decolua/9router) is an open-source, self-hosted smart proxy that sits between your AI coding tools (Claude Code, Cursor, Codex, Cline, Copilot) and the LLM providers. It doesn't just route requests — it actively compresses them, injects cost-saving prompts, and falls back to free tiers when your quota runs out.
+
+### Where 9Router Wins on Cost
+
+**RTK Token Saver:** 9Router includes built-in lossless compression for common tool outputs like `git diff`, `grep`, `ls`, and `tree`. This alone cuts input tokens by **20–40%** per request. OpenRouter and LiteLLM don't do this. You send the same `git diff` to all three routers, but only 9Router shrinks it before it hits the model.
+
+**Caveman and Ponytail Modes:** Two optional prompt injection styles that further reduce output tokens. Caveman Mode forces terse, noun-verb answers and cuts output tokens by up to **65%**. Ponytail Mode injects a "lazy senior developer" persona that favors stdlib and YAGNI-first answers. These are unique to 9Router.
+
+**Built-in Free Tiers:** 9Router's 3-tier fallback includes free providers out of the box:
+- **Tier 1 (Subscriptions):** Claude Code Pro/Max, Codex Plus/Pro, GitHub Copilot
+- **Tier 2 (Cheap):** GLM-5.1 ($0.6/1M tokens), MiniMax M2.7 ($0.2/1M tokens), Kimi K2.5 ($9/month flat)
+- **Tier 3 (Free):** Kiro AI (no signup required), OpenCode Free, Vertex AI ($300 GCP credits)
+
+When Tier 1 hits quota, 9Router automatically cascades to Tier 2, then Tier 3. You keep coding, and you're not paying for every request.
+
+**Multi-Account Round-Robin:** Add multiple accounts for the same provider (e.g., three Kiro AI accounts) and 9Router rotates requests across them, effectively tripling your free quota. This is a cost multiplier the other two routers don't support.
+
+**Live Quota Dashboard:** 9Router shows you exactly how much quota you have left across all providers, with reset countdowns. No more surprise 429 errors.
+
+### Where 9Router Falls Short
+
+- **You run it yourself.** It's self-hosted (npm, Docker, or from source). If you don't want to manage a local proxy, this is friction.
+- **Smaller model catalog.** 9Router supports 40+ providers, which is plenty for most coding workflows, but OpenRouter has 300+.
+- **Docs lag behind features.** It's community-driven and moving fast. The GitHub repo has 18.8k stars, but the docs don't always keep up.
+
+### Who Should Use 9Router
+
+Developers who spend $100–$300/month on AI coding tools and want to cut that to $15–$50. If you use Claude Code, Cursor, or Codex daily, and you're hitting quota walls or tired of surprise bills, 9Router is built for you. The combination of RTK compression, Caveman mode, and free-tier fallback can turn a $200/month bill into $15–30.
+
+Start with our [9Router setup guide](/blog/9router-setup) to get it running in under ten minutes.
+
+## OpenRouter: The Convenience Gateway ⚡
+
+[OpenRouter](https://openrouter.ai) is a hosted API gateway that gives you one API key to access 300+ models from every major provider. You sign up, get a key, and point your app at it. No setup, no self-hosting, no dashboard to configure.
+
+### Where OpenRouter Wins
+
+**Zero setup.** You don't run anything. Sign up, copy your API key, and you're routing requests to Claude, GPT-4, Gemini, Llama, and hundreds of other models. This is the fastest path from "I need a router" to "I'm using a router."
+
+**Massive model catalog.** 300+ models, including cutting-edge releases the day they drop. If you want access to every model without managing 20 API keys, OpenRouter is the answer.
+
+**Unified billing.** One invoice, one dashboard, one place to track spend. This is huge for teams managing AI costs across multiple projects.
+
+**Great for app developers.** If you're building an AI-powered app and need to switch models on the fly (e.g., use GPT-4 for one task, Claude for another), OpenRouter's SDK and API are designed for this workflow.
+
+**Free credits for some models.** OpenRouter offers free credits for certain models, which is nice for testing. But these are limited and don't compare to 9Router's always-free tiers.
+
+### Where OpenRouter Falls Short
+
+**No token compression.** You send the same `git diff` to OpenRouter that you'd send to Claude directly. No RTK savings, no Caveman mode. You're paying full price for every token.
+
+**Per-token markup.** OpenRouter charges a small markup on top of the provider's base price. It's not huge, but it adds up. With 9Router, you pay the provider directly (or nothing, if you're using free tiers).
+
+**No free-tier fallback.** When your OpenRouter quota runs out, you're done. There's no automatic cascade to a free provider. You have to manually switch or top up.
+
+**Hosted = less control.** Your requests go through OpenRouter's servers. For most use cases this is fine, but if you're working with sensitive code or need full audit control, self-hosted is the way to go.
+
+**You bring your own paid keys.** OpenRouter is convenient, but you're still paying for every model you use. There's no built-in cost optimization beyond routing.
+
+### Who Should Use OpenRouter
+
+App developers who want one API key for every model and don't want to self-host. If you're building a product and need to route requests to different models based on the task, OpenRouter is the fastest path. But if you're trying to cut your personal AI coding bill, OpenRouter won't save you much.
+
+## LiteLLM: The Developer Library 🛠️
+
+[LiteLLM](https://github.com/BerriAI/litellm) is an open-source Python and JavaScript SDK that lets you call 100+ LLMs using the OpenAI API format. It's not a proxy or a gateway — it's a library you embed in your code.
+
+### Where LiteLLM Wins
+
+**Embeddable SDK.** LiteLLM is designed to live inside your application. You `pip install litellm` or `npm install litellm` and call it like you'd call OpenAI. This is perfect for engineers building AI-powered products who need routing logic as code.
+
+**Fine-grained control.** Retry logic, fallback chains, load balancing — you write it as Python or JavaScript. LiteLLM gives you the primitives, and you build the routing strategy that fits your use case.
+
+**Popular in production ML stacks.** LiteLLM is widely used in production environments where teams need programmatic control over model routing. It's the choice for engineers who want to build, not just configure.
+
+**Self-hosted or library.** You can run LiteLLM as a proxy (like 9Router) or use it as a library in your app. This flexibility is powerful if you need both.
+
+### Where LiteLLM Falls Short
+
+**Not a turnkey product for coding tools.** If you just want to route Claude Code or Cursor, LiteLLM is overkill. You have to write code to configure it. 9Router gives you a dashboard and a one-line install.
+
+**No built-in cost optimization.** LiteLLM doesn't compress tokens or inject cost-saving prompts. It routes requests, and that's it. You're responsible for optimizing spend.
+
+**No dashboard out of the box.** LiteLLM has an optional UI (LiteLLM UI), but it's not as polished or turnkey as 9Router's dashboard. You're expected to build your own monitoring and quota tracking.
+
+**You bring your own keys and providers.** LiteLLM doesn't include free tiers or cheap providers. You configure the providers you want to use, and you pay for them directly.
+
+### Who Should Use LiteLLM
+
+Engineers building an AI-powered product who need a programmable routing layer. If you're writing Python or JavaScript and want to embed routing logic in your app, LiteLLM is the right tool. But if you just want to cut your personal AI coding bill, LiteLLM is not the answer — you'll spend more time configuring it than you'll save.
+
+## Head-to-Head Comparison
+
+Let's put them side by side:
+
+| Dimension              | 9Router                          | OpenRouter                       | LiteLLM                          |
+| ---------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
+| **Type**               | Self-hosted proxy                | Hosted gateway                   | Library / proxy                  |
+| **Setup**              | `npm i -g 9router` + dashboard   | Sign up, get API key             | `pip install` + code             |
+| **Token compression**  | ✅ Yes (RTK, 20–40% savings)     | ❌ No                            | ❌ No                            |
+| **Prompt modes**       | ✅ Caveman, Ponytail (65% saved) | ❌ None                          | ❌ Manual                        |
+| **Free tiers**         | ✅ Kiro, OpenCode, Vertex        | ⚠️ Some free models, limited     | ❌ N/A (bring your own keys)     |
+| **Provider count**     | 40+                              | 300+                             | 100+                             |
+| **Dashboard**          | ✅ Yes (live quota tracking)     | ✅ Yes (unified billing)         | ⚠️ Optional (LiteLLM UI)         |
+| **Coding tool support**| ✅ First-class (Claude Code, Cursor, Codex) | ✅ Good (any OpenAI-compatible) | ⚠️ Manual (requires code)        |
+| **Multi-account**      | ✅ Round-robin across accounts   | ❌ No                            | ⚠️ Manual                        |
+| **Pricing**            | Free (MIT) + your provider costs | Pay-as-you-go + markup           | Free (Apache-2.0) + provider costs |
+| **Self-hosted**        | ✅ Required                      | ❌ No                            | ✅ Optional                      |
+| **OpenAI-compatible**  | ✅ Yes                           | ✅ Yes                           | ✅ Yes                           |
+
+The story in this table: **9Router is the only one built to cut costs.** OpenRouter is built for convenience. LiteLLM is built for control.
+
+## Which One Should You Use?
+
+Here's the decision tree:
+
+**Use 9Router if:**
+- You mostly use Claude Code, Cursor, or Codex and want to cut your bill
+- You're hitting quota walls and want automatic fallback to free tiers
+- You're comfortable running a local proxy (npm or Docker)
+- You want token compression and prompt modes to shrink every request
+
+Start with our [9Router setup guide](/blog/9router-setup) to get it running in under ten minutes.
+
+**Use OpenRouter if:**
+- You're building an app and want one API key for every model
+- You don't want to self-host or manage a proxy
+- You need access to 300+ models with zero setup
+- You're okay paying per-token with a small markup
+
+**Use LiteLLM if:**
+- You're writing Python or JavaScript and need routing logic as code
+- You're building an AI-powered product and want fine-grained control
+- You want to embed routing in your app, not just configure it
+- You're okay writing code to set up fallback chains and load balancing
+
+**You can combine them.** Use 9Router as your local coding proxy (for Claude Code, Cursor, etc.), and use LiteLLM inside your product backend. They solve different problems.
+
+## FAQ
+
+### Can I use 9Router and OpenRouter together?
+
+Yes. Point 9Router at OpenRouter as one of your providers. 9Router will compress tokens and inject cost-saving prompts before sending the request to OpenRouter. This way you get 9Router's cost optimization and OpenRouter's model catalog.
+
+### Is 9Router safer than OpenRouter?
+
+9Router is self-hosted, so your requests go directly from your machine to the provider. With OpenRouter, your requests go through their servers. For most use cases, both are safe, but if you're working with sensitive code, self-hosted gives you full audit control.
+
+### Does LiteLLM support Claude Code or Cursor?
+
+LiteLLM is a library, not a turnkey proxy for coding tools. You can use it to build a proxy, but you'll need to write code to configure it. 9Router is designed specifically for Claude Code, Cursor, and Codex — it's a one-line install and a dashboard.
+
+### Which is cheapest?
+
+9Router is the cheapest for most developers, because it includes free tiers (Kiro AI, OpenCode, Vertex) and cost optimization (RTK compression, Caveman mode). OpenRouter charges a per-token markup, and LiteLLM requires you to bring your own paid keys. If you want to minimize spend, 9Router is the answer.
+
+### Can I self-host OpenRouter or LiteLLM?
+
+OpenRouter is hosted only — you can't self-host it. LiteLLM can be self-hosted as a proxy, or used as a library in your app. 9Router is self-hosted by design (npm, Docker, or from source).
+
+## Conclusion
+
+9Router, OpenRouter, and LiteLLM all route AI requests across providers. But only 9Router actively reduces your spend — with token compression, prompt modes, and built-in free tiers.
+
+- **9Router** is for developers who want to cut their AI coding bill.
+- **OpenRouter** is for app builders who want convenience.
+- **LiteLLM** is for engineers who need control.
+
+If you're spending $100–$300/month on AI coding tools and want to cut that to $15–$50, [set up 9Router](/blog/9router-setup) and start routing smarter.
+
+Star the [9Router GitHub repository](https://github.com/decolua/9router) to follow updates, and happy routing.
