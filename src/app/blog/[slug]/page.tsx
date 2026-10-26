@@ -8,6 +8,7 @@ import { MDXComponents } from "@/components/blog/MDXComponents";
 import { Metadata } from "next";
 import JsonLd from "@/components/blog/JsonLd";
 import ShareButtons from "@/components/blog/ShareButtons";
+import remarkGfm from "remark-gfm";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -136,7 +137,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               bg-white border-2 border-black
               shadow-[4px_4px_0_#000]
               p-5 sm:p-7 md:p-9">
-              <MDXRemote source={post.content} components={MDXComponents} />
+              <MDXRemote source={post.content} components={MDXComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
             </article>
 
             {/* Desktop Table of Contents */}
