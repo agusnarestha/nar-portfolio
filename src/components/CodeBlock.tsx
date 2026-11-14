@@ -26,20 +26,20 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, value }) => {
   const trimmedValue = value.trim();
 
   return (
-    <div className="relative rounded-lg overflow-hidden my-4 shadow-md max-w-full">
-      {/* macOS-style window controls */}
-      <div className="flex items-center px-2 sm:px-4 py-2 bg-gray-100 border-b border-gray-200">
+    <div className="relative my-4 max-w-full overflow-hidden border-2 border-ink bg-sheet-2 shadow-paper-sm">
+      {/* Window controls */}
+      <div className="flex items-center border-b border-ink/20 bg-sheet px-3 py-2">
         <div className="flex space-x-1 sm:space-x-2">
-          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500" />
-          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
-          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500" />
+          <div className="w-2 h-2 rounded-full bg-tomato sm:w-3 sm:h-3" />
+          <div className="w-2 h-2 rounded-full bg-highlight sm:w-3 sm:h-3" />
+          <div className="w-2 h-2 rounded-full bg-mint sm:w-3 sm:h-3" />
         </div>
-        <div className="flex-1 text-center text-gray-600 text-xs sm:text-sm">
+        <div className="flex-1 text-center font-mono text-xs uppercase tracking-wide text-ink-2">
           {language}
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1 px-2 py-1 text-xs sm:text-sm text-gray-600 hover:text-gray-900 bg-gray-200 hover:bg-gray-300 rounded transition-colors duration-200"
+          className="flex items-center gap-1 border border-ink bg-butter px-2 py-1 font-mono text-xs text-ink transition-colors duration-200 hover:bg-highlight"
           title="Copy to clipboard"
         >
           {copied ? (
@@ -87,14 +87,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, value }) => {
               margin: 0,
               padding: "0.75rem 1rem",
               background: "transparent",
-              borderRadius: "0 0 0.5rem 0.5rem",
+              borderRadius: 0,
               fontSize: "0.75rem", // 12px on mobile
               lineHeight: "1.4",
               minWidth: "100%",
               width: "auto",
             }}
             lineNumberStyle={{
-              color: "#999",
+              color: "#69707F",
               marginRight: "0.75rem",
               minWidth: "2rem",
               fontSize: "0.75rem",

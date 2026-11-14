@@ -82,7 +82,7 @@ export default function TableOfContents({
   return (
     <nav aria-label="Table of contents">
       {showTitle && (
-        <h2 className="font-black text-sm uppercase tracking-widest mb-4 pb-3 border-b-2 border-black">
+        <h2 className="mb-4 border-b border-dashed border-ink/30 pb-3 font-display text-sm font-bold uppercase tracking-widest text-ink">
           Table of Contents
         </h2>
       )}
@@ -96,10 +96,10 @@ export default function TableOfContents({
               <a
                 href={`#${heading.id}`}
                 onClick={(e) => handleClick(e, heading.id)}
-                className={`block py-1.5 border-l-[3px] transition-all duration-150
+                className={`block border-l-2 py-1.5 transition-all duration-150
                   ${isActive
-                    ? "border-[#e6b448] bg-[#fffbe6] text-black font-bold pl-3"
-                    : "border-transparent text-[#525252] hover:text-black hover:border-[#ccc] pl-3"
+                    ? "border-cobalt bg-highlight pl-3 font-medium text-ink"
+                    : "border-transparent pl-3 text-ink-2 hover:border-ink/30 hover:text-ink"
                   }`}
                 style={{ paddingLeft: `${indent * 0.75 + 0.75}rem` }}
               >

@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import JsonLd from "@/components/blog/JsonLd";
 import ShareButtons from "@/components/blog/ShareButtons";
 import remarkGfm from "remark-gfm";
+import Tape from "@/components/collage/Tape";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -68,33 +69,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="container mx-auto my-32">
+    <div className="container mx-auto my-24 max-[768px]:mt-32">
       <JsonLd post={post} />
-      <div className="relative max-w-6xl mx-auto mt-24 max-[768px]:mt-28">
+      <div className="relative mx-auto mt-24 max-w-6xl max-[768px]:mt-28">
         <div className="relative">
-
-          {/* Back button */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 mb-8 font-black text-xs uppercase tracking-widest
-              border-2 border-black bg-white px-3 py-2
-              shadow-[3px_3px_0_#000] hover:shadow-[1px_1px_0_#000]
-              hover:translate-x-[2px] hover:translate-y-[2px]
-              transition-all duration-100"
+            className="mb-8 inline-flex items-center gap-2 border-2 border-ink bg-sheet px-3 py-2 font-mono text-xs font-medium uppercase tracking-widest text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5 hover:bg-butter"
           >
             ← Back to Blog
           </Link>
 
-          {/* Post header */}
-          <header className="mb-10 p-6 bg-[#fffbe6] border-2 border-black shadow-[6px_6px_0_#000]">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#121212] uppercase tracking-tight mb-5 max-[375px]:text-xl">
+          <header className="relative mb-10 border-2 border-ink bg-butter p-5 shadow-paper sm:p-6">
+            <Tape
+              tone="pink"
+              rotate={-4}
+              className="absolute -top-3 left-6 h-4 w-16"
+            />
+            <h1 className="mb-5 font-display text-2xl font-extrabold leading-tight tracking-tight text-ink max-[375px]:text-xl sm:text-3xl md:text-4xl">
               {post.title}
             </h1>
 
-            {/* Meta */}
-            <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-[#525252] uppercase tracking-wide mb-5">
+            <div className="mb-5 flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-wide text-ink-2">
               <span>By Agus Narestha</span>
-              <span className="text-gray-300">|</span>
+              <span className="text-ink-3">/</span>
               <time>
                 {new Date(post.date).toLocaleDateString("en-US", {
                   month: "long",
@@ -102,20 +100,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   year: "numeric",
                 })}
               </time>
-              <span className="text-gray-300">|</span>
+              <span className="text-ink-3">/</span>
               <span>{post.readingTime} min read</span>
             </div>
 
-            {/* Tags + Share */}
             <div className="flex flex-wrap items-center gap-2">
               {post.tags.map((tag) => (
                 <Link
                   key={tag}
                   href={`/blog/tag/${tag}`}
-                  className="inline-block bg-[#e6b448] border-2 border-black text-black font-bold text-xs uppercase px-3 py-1
-                    shadow-[2px_2px_0_#000]
-                    hover:shadow-[1px_1px_0_#000] hover:translate-x-[1px] hover:translate-y-[1px]
-                    transition-all duration-100"
+                  className="inline-block border border-ink bg-sheet px-3 py-1 font-mono text-[10px] uppercase tracking-wide text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5 hover:bg-pink-light"
                 >
                   #{tag}
                 </Link>
@@ -126,28 +120,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <MobileTableOfContents content={post.content} />
 
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Article body */}
-            <article className="w-full lg:flex-1 prose prose-sm sm:prose-base md:prose-lg max-w-none
-              prose-headings:font-black prose-headings:uppercase
-              prose-a:text-[#3cc4ce]
-              prose-strong:text-gray-900
-              prose-pre:bg-gray-50 prose-pre:border-2 prose-pre:border-black prose-pre:rounded-none
-              prose-code:text-[#df548e]
-              bg-white border-2 border-black
-              shadow-[4px_4px_0_#000]
-              p-5 sm:p-7 md:p-9">
-              <MDXRemote source={post.content} components={MDXComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+          <div className="flex flex-col gap-8 lg:flex-row">
+            <article
+              className="prose prose-sm w-full max-w-none border-2 border-ink bg-sheet p-5 shadow-paper sm:prose-base sm:p-7 md:prose-lg md:p-9
+                prose-headings:font-display prose-headings:font-extrabold prose-headings:tracking-tight
+                prose-a:font-medium prose-a:text-cobalt prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-ink prose-code:text-tomato-dark
+                prose-pre:rounded-none prose-pre:border-2 prose-pre:border-ink
+                [--tw-prose-body:#444A57] [--tw-prose-headings:#15161A]
+                [--tw-prose-links:#2446F2] [--tw-prose-bold:#15161A]
+                [--tw-prose-code:#C2341A] [--tw-prose-pre-bg:#F6F8FB]
+                [&_pre]:overflow-x-auto [&_table]:block [&_table]:max-w-full [&_table]:overflow-x-auto"
+            >
+              <MDXRemote
+                source={post.content}
+                components={MDXComponents}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              />
             </article>
 
-            {/* Desktop Table of Contents */}
-            <aside className="hidden lg:block w-64 shrink-0 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto">
-              <div className="bg-white border-2 border-black shadow-[4px_4px_0_#000] p-5">
+            <aside className="hidden w-64 shrink-0 self-start lg:sticky lg:top-28 lg:block lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
+              <div className="relative border-2 border-ink bg-butter p-5 shadow-paper-sm">
+                <Tape
+                  tone="yellow"
+                  rotate={-4}
+                  className="absolute -top-3 left-6 h-4 w-14"
+                />
                 <TableOfContents content={post.content} />
               </div>
             </aside>
           </div>
-
         </div>
       </div>
     </div>
