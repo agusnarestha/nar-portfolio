@@ -24,19 +24,6 @@ const config: Config = {
         "paper-sm": "2px 2px 0 #15161A",
         "paper-lg": "5px 5px 0 #15161A",
         "paper-hover": "1px 1px 0 #15161A",
-        neo: "6px 6px 0 #000000",
-        "neo-sm": "4px 4px 0 #000000",
-        "neo-lg": "8px 8px 0 #000000",
-        "neo-hover": "2px 2px 0 #000000",
-        "neo-active": "0px 0px 0 #000000",
-      },
-      borderWidth: {
-        neo: "3px",
-      },
-      animation: {
-        "float": "float 4s ease-in-out infinite",
-        "float-slow": "float-slow 7s ease-in-out infinite",
-        "drift": "drift 15s ease-in-out infinite",
       },
       colors: {
         // Collage palette
@@ -69,20 +56,6 @@ const config: Config = {
           light: "#FFE1DA",
         },
         amber: "#D9B800",
-        // Neo-brutalism accent palette - kept until the Task 10 cleanup
-        "neo-red": "#ef4444",
-        "neo-orange": "#f97316",
-        "neo-yellow": "#fbbf24",
-        "neo-lime": "#84cc16",
-        "neo-green": "#22c55e",
-        "neo-teal": "#14b8a6",
-        "neo-cyan": "#06b6d4",
-        "neo-blue": "#3b82f6",
-        "neo-indigo": "#6366f1",
-        "neo-violet": "#8b5cf6",
-        "neo-purple": "#a855f7",
-        "neo-pink": "#ec4899",
-        "neo-rose": "#f43f5e",
         // Surfaces
         "surface": {
           DEFAULT: "#EDF0F4",

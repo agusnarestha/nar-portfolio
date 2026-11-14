@@ -35,8 +35,8 @@ export default function Home() {
 
       <div id="about" className="my-24 mb-10 sm:my-32">
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -46,8 +46,8 @@ export default function Home() {
         <TornDivider className="my-12 sm:my-16" />
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
