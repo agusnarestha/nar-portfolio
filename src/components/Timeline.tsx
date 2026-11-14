@@ -67,8 +67,8 @@ const PositionCard: React.FC<Position & { isLast: boolean }> = ({
 
       <div className="relative flex-1 pb-6">
         <Pushpin
-          rotate={-10}
-          className="absolute -left-4 -top-4 z-20 h-8 w-8 drop-shadow-[0_2px_1px_rgba(21,22,26,0.25)]"
+          rotate={-14}
+          className="absolute -left-5 -top-5 z-20 h-10 w-10 drop-shadow-[0_2px_1px_rgba(21,22,26,0.25)]"
         />
         <PaperSheet className="p-4 pl-6 sm:p-5 sm:pl-7">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">

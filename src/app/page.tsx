@@ -5,7 +5,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import RecentProjectSection from "@/components/sections/RecentProjectSection";
 import RecentPostSection from "@/components/sections/RecentPostSection";
-import TapeDivider from "@/components/collage/TapeDivider";
+import TornBand from "@/components/collage/TornBand";
 import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
@@ -33,48 +33,53 @@ export default function Home() {
         <HomeSection />
       </motion.div>
 
-      <div id="about" className="my-24 mb-10 sm:my-32">
+      <div id="about" className="my-16 sm:my-24">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
         >
-          <AboutSection />
+          <TornBand tone="cobalt">
+            <AboutSection />
+          </TornBand>
         </motion.div>
 
-        <TapeDivider tone="pink" className="my-12 sm:my-16" />
-
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
+          className="mt-10 sm:mt-14"
         >
-          <ExperienceSection />
+          <TornBand tone="butter">
+            <ExperienceSection />
+          </TornBand>
         </motion.div>
       </div>
 
-      <TapeDivider tone="sky" className="my-12 sm:my-16" />
-
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
+        className="mt-10 sm:mt-14"
       >
-        <RecentProjectSection />
+        <TornBand tone="cobalt">
+          <RecentProjectSection />
+        </TornBand>
       </motion.div>
 
-      <TapeDivider tone="sky" className="my-12 sm:my-16" />
-
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
+        className="mt-10 sm:mt-14"
       >
-        <RecentPostSection />
+        <TornBand tone="sky">
+          <RecentPostSection />
+        </TornBand>
       </motion.div>
     </div>
   );

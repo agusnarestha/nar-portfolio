@@ -44,12 +44,12 @@ const RecentProjectSection = () => {
             <span
               key={index}
               className={`h-3 w-3 border border-ink ${
-                index < latestProjects.length ? "bg-cobalt" : "bg-sheet"
+                index < latestProjects.length ? "bg-highlight" : "bg-sheet"
               }`}
             />
           ))}
         </div>
-        <HandNote rotate={-2} className="text-base">
+        <HandNote rotate={-2} tone="light" className="text-base">
           {latestProjects.length} of {projectData.length} pinned
         </HandNote>
       </div>

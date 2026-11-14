@@ -25,7 +25,7 @@ const RecentPostSection = () => {
   return (
     <div>
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative inline-block border-2 border-ink bg-sky px-5 py-2 shadow-paper-sm">
+        <div className="relative inline-block border-2 border-ink bg-butter px-5 py-2 shadow-paper-sm">
           <Tape
             tone="pink"
             rotate={-4}
