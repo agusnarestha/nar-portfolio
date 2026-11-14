@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ProjectCard from "../ProjectCard";
 import projectData from "@/data/projectData.json";
-import Stamp from "../collage/Stamp";
+import HandNote from "../collage/HandNote";
 import Tape from "../collage/Tape";
 
 const RecentProjectSection = () => {
@@ -35,13 +35,23 @@ const RecentProjectSection = () => {
         </Link>
       </div>
 
-      <div className="flex items-center gap-3">
-        <Stamp tone="cobalt">
-          {latestProjects.length} of {projectData.length}
-        </Stamp>
-        <span className="font-mono text-xs uppercase tracking-wide text-ink-2">
-          projects on display
-        </span>
+      <div className="flex flex-wrap items-center gap-3">
+        <div
+          className="flex items-center gap-1.5"
+          aria-label={`${latestProjects.length} of ${projectData.length} projects shown`}
+        >
+          {projectData.map((_, index) => (
+            <span
+              key={index}
+              className={`h-3 w-3 border border-ink ${
+                index < latestProjects.length ? "bg-cobalt" : "bg-sheet"
+              }`}
+            />
+          ))}
+        </div>
+        <HandNote rotate={-2} className="text-base">
+          {latestProjects.length} of {projectData.length} pinned
+        </HandNote>
       </div>
 
       <div className="my-8 -mx-4 flex gap-6 overflow-x-auto px-4 scrollbar-hide sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">

@@ -130,7 +130,6 @@ body {
 
 .tape {
   display: block;
-  height: 1.5rem;
   background: rgba(255, 238, 59, 0.78);
   box-shadow: 0 1px 0 rgba(21, 22, 26, 0.12);
 }
@@ -140,20 +139,6 @@ body {
 .tape-mint { background: rgba(47, 212, 154, 0.55); }
 .tape-sky { background: rgba(150, 185, 255, 0.68); }
 .tape-clear { background: rgba(255, 255, 255, 0.62); }
-
-.torn-divider {
-  height: 16px;
-  background-image:
-    linear-gradient(135deg, var(--ink) 25%, transparent 25%),
-    linear-gradient(225deg, var(--ink) 25%, transparent 25%);
-  background-size: 16px 16px;
-  background-repeat: repeat-x;
-  background-position: 0 0;
-}
-
-.torn-divider-flip {
-  transform: rotate(180deg);
-}
 
 .highlight {
   background: linear-gradient(transparent 55%, var(--highlight) 55%);

@@ -1,7 +1,5 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
-import TypeIt from "typeit-react";
 import ScrollDown from "../ScrollDown";
 import SpotifyNowPlaying from "../SpotifyNowPlaying";
 import BackgroundArt from "../BackgroundArt";
@@ -11,15 +9,8 @@ import HandNote from "../collage/HandNote";
 import Polaroid from "../collage/Polaroid";
 import { handCopy } from "@/lib/hand-copy";
 
-const emptySubscribe = () => () => {};
-
 const HomeSection = () => {
   const reduceMotion = useReducedMotion();
-  const mounted = useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
 
   return (
     <div className="relative flex min-h-screen flex-col">
@@ -60,21 +51,6 @@ const HomeSection = () => {
               className="mx-auto w-[220px] sm:w-[280px]"
             />
           </motion.div>
-
-          <div className="mt-6">
-            {mounted && !reduceMotion ? (
-              <TypeIt
-                className="font-display text-xl text-ink sm:text-2xl xl:text-3xl"
-                options={{ speed: 60 }}
-              >
-                Hello Everyone...👋
-              </TypeIt>
-            ) : (
-              <p className="font-display text-xl text-ink sm:text-2xl xl:text-3xl">
-                Hello Everyone...👋
-              </p>
-            )}
-          </div>
 
           <motion.div
             initial={reduceMotion ? false : { y: 20 }}

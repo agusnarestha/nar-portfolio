@@ -5,7 +5,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import RecentProjectSection from "@/components/sections/RecentProjectSection";
 import RecentPostSection from "@/components/sections/RecentPostSection";
-import TornDivider from "@/components/collage/TornDivider";
+import TapeDivider from "@/components/collage/TapeDivider";
 import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
@@ -43,7 +43,7 @@ export default function Home() {
           <AboutSection />
         </motion.div>
 
-        <TornDivider className="my-12 sm:my-16" />
+        <TapeDivider tone="pink" className="my-12 sm:my-16" />
 
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
@@ -55,7 +55,7 @@ export default function Home() {
         </motion.div>
       </div>
 
-      <TornDivider className="my-12 sm:my-16" />
+      <TapeDivider tone="sky" className="my-12 sm:my-16" />
 
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}
@@ -66,7 +66,7 @@ export default function Home() {
         <RecentProjectSection />
       </motion.div>
 
-      <TornDivider className="my-12 sm:my-16" />
+      <TapeDivider tone="sky" className="my-12 sm:my-16" />
 
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}

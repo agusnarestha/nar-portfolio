@@ -60,12 +60,25 @@ const AboutSection = ({ headingLevel = "h2" }: AboutSectionProps) => {
               <Highlight>
                 <span className="font-semibold text-ink">Agus Narestha</span>
               </Highlight>
-              , a software developer passionate about web and data development,
-              with a strong interest in learning and growing within the field. I
-              enjoy working on software development and deployment projects,
-              collaborating with teams, and applying my skills to solve
-              real-world problems. I also regularly use AI tools to support and
-              enhance my workflow.
+              , a{" "}
+              <Highlight>
+                <span className="font-medium text-ink">software developer</span>
+              </Highlight>{" "}
+              passionate about{" "}
+              <Highlight>
+                <span className="font-medium text-ink">
+                  web and data development
+                </span>
+              </Highlight>
+              , with a strong interest in learning and growing within the field.
+              I enjoy working on software development and deployment projects,{" "}
+              <Highlight>
+                <span className="font-medium text-ink">
+                  collaborating with teams
+                </span>
+              </Highlight>
+              , and applying my skills to solve real-world problems. I also
+              regularly use AI tools to support and enhance my workflow.
             </p>
 
             <p className="mb-4 font-body text-base leading-relaxed text-ink-2">

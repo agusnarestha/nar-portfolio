@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Stamp from "../collage/Stamp";
 import Tape from "../collage/Tape";
-import TornDivider from "../collage/TornDivider";
+import TapeDivider from "../collage/TapeDivider";
 import HandNote from "../collage/HandNote";
 import { handCopy } from "@/lib/hand-copy";
 
@@ -55,7 +55,7 @@ const Footer = () => {
 
   return (
     <div className="relative mt-20 sm:mt-24">
-      <TornDivider />
+      <TapeDivider tone="yellow" />
       <div className="border-t-2 border-ink bg-butter">
         <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-10">
           <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">

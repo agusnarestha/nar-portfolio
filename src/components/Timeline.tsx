@@ -1,5 +1,6 @@
 import React from "react";
 import PaperSheet from "./collage/PaperSheet";
+import Pushpin from "./collage/Pushpin";
 import Stamp from "./collage/Stamp";
 import Tag from "./collage/Tag";
 import Tape from "./collage/Tape";
@@ -19,9 +20,13 @@ export type TimelineCompanyProps = {
 
 type CompanyTone = "cobalt" | "mint" | "tomato";
 
-const PositionCard: React.FC<
-  Position & { companyTone: CompanyTone; isLast: boolean }
-> = ({ job, date, duration, description, companyTone, isLast }) => {
+const PositionCard: React.FC<Position & { isLast: boolean }> = ({
+  job,
+  date,
+  duration,
+  description,
+  isLast,
+}) => {
   const extractTechStack = (descriptions: string[]): string[] => {
     const techMap: { [key: string]: string } = {
       Laravel: "Laravel",
@@ -51,26 +56,21 @@ const PositionCard: React.FC<
 
   const techStack = extractTechStack(description);
   const isCurrent = date.toLowerCase().includes("present");
-  const dotClass =
-    companyTone === "cobalt"
-      ? "bg-cobalt"
-      : companyTone === "mint"
-        ? "bg-mint"
-        : "bg-tomato";
 
   return (
     <div className="relative flex gap-3 sm:gap-4">
       <div className="flex flex-shrink-0 flex-col items-center">
-        <div
-          className={`z-10 mt-5 h-3 w-3 rounded-full border-2 border-ink ${dotClass}`}
-        />
         {!isLast && (
-          <div className="mt-1 flex-1 border-l-2 border-dashed border-ink/30" />
+          <div className="mt-4 flex-1 border-l-2 border-dashed border-ink/25" />
         )}
       </div>
 
-      <div className="flex-1 pb-6">
-        <PaperSheet className="p-4 sm:p-5">
+      <div className="relative flex-1 pb-6">
+        <Pushpin
+          rotate={-10}
+          className="absolute -left-4 -top-4 z-20 h-8 w-8 drop-shadow-[0_2px_1px_rgba(21,22,26,0.25)]"
+        />
+        <PaperSheet className="p-4 pl-6 sm:p-5 sm:pl-7">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h3 className="font-display text-sm font-bold uppercase leading-tight tracking-tight text-ink sm:text-base lg:text-lg">
@@ -175,7 +175,6 @@ const Timeline: React.FC<TimelineCompanyProps> = ({ company, positions }) => {
           <PositionCard
             key={index}
             {...position}
-            companyTone={companyTone}
             isLast={index === positions.length - 1}
           />
         ))}
