@@ -5,4 +5,5 @@ export const handCopy = {
   current: "current",
   project: "open case",
   footer: "open to work",
+  notFound: "lost note",
 } as const;

@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import HandNote from "@/components/collage/HandNote";
+import Tape from "@/components/collage/Tape";
+import { handCopy } from "@/lib/hand-copy";
 
 export const metadata: Metadata = {
   title: "404 - Page Not Found",
@@ -13,41 +16,39 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="w-full h-[100vh] flex items-center justify-center px-8">
-      <div className="text-center">
-        {/* Big 404 with neobrutalist style */}
-        <div className="relative inline-block mb-6">
+    <div className="relative flex min-h-[100vh] items-center justify-center px-6 py-24">
+      <div className="relative w-full max-w-xl border-2 border-ink bg-sheet p-8 text-center shadow-paper-lg sm:p-12">
+        <Tape
+          tone="pink"
+          rotate={-4}
+          className="absolute -top-3 left-8 h-5 w-20"
+        />
+
+        <div className="relative mb-2 inline-block">
           <span
-            className="font-display font-black text-[120px] md:text-[180px] lg:text-[220px] leading-none tracking-tighter text-[#faf9f6]"
-            style={{
-              WebkitTextStroke: "3px #1a1a1a",
-            }}
+            className="font-display text-[100px] font-extrabold leading-none tracking-tighter text-cobalt md:text-[150px]"
+            style={{ WebkitTextStroke: "2px #15161A" }}
           >
             404
           </span>
-          {/* Decorative accent shapes */}
-          <div className="absolute top-4 -left-4 w-6 h-6 bg-[#3cc4ce] border-2 border-black rotate-45 animate-float" />
-          <div className="absolute bottom-8 -right-4 w-5 h-5 bg-[#df548e] border-2 border-black rounded-full animate-float-slow" />
-          <div className="absolute top-1/2 -right-8 w-4 h-4 bg-[#e6b448] border-2 border-black animate-drift" />
         </div>
 
-        {/* Message */}
-        <div className="mb-8">
-          <h1
-            className="neo-badge text-2xl md:text-3xl bg-[#df548e] text-white mb-4"
-          >
-            Page Not Found
-          </h1>
-          <p className="text-[#525252] mt-4 max-w-md mx-auto">
-            Oops! The page you&apos;re looking for seems to have wandered off.
-            Let&apos;s get you back on track.
-          </p>
-        </div>
+        <h1 className="mb-2 font-display text-2xl font-extrabold uppercase tracking-tight text-ink md:text-3xl">
+          Page Not Found
+        </h1>
 
-        {/* Return home button */}
+        <HandNote rotate={-2} className="mb-6 block text-xl">
+          {handCopy.notFound}
+        </HandNote>
+
+        <p className="mx-auto mb-8 max-w-md font-body text-sm leading-relaxed text-ink-2">
+          Oops! The page you&apos;re looking for seems to have wandered off.
+          Let&apos;s get you back on track.
+        </p>
+
         <Link
           href="/"
-          className="neo-btn bg-[#3cc4ce] text-black text-sm px-6 py-3 inline-flex items-center gap-2"
+          className="inline-flex items-center gap-2 border-2 border-ink bg-cobalt px-5 py-2.5 font-body text-sm font-medium uppercase tracking-wide text-white shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
