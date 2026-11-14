@@ -33,7 +33,7 @@ export default function Home() {
         <HomeSection />
       </motion.div>
 
-      <div id="about" className="my-16 sm:my-24">
+      <div id="about" className="mt-8 scroll-mt-24 sm:mt-12">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,9 +50,8 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
-          className="mt-10 sm:mt-14"
         >
-          <TornBand tone="butter">
+          <TornBand tone="butter" from="cobalt">
             <ExperienceSection />
           </TornBand>
         </motion.div>
@@ -63,9 +62,8 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
-        className="mt-10 sm:mt-14"
       >
-        <TornBand tone="cobalt">
+        <TornBand tone="cobalt" from="butter">
           <RecentProjectSection />
         </TornBand>
       </motion.div>
@@ -75,9 +73,8 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
-        className="mt-10 sm:mt-14"
       >
-        <TornBand tone="sky">
+        <TornBand tone="sky" from="cobalt">
           <RecentPostSection />
         </TornBand>
       </motion.div>
