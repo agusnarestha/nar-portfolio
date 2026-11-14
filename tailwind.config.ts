@@ -69,6 +69,8 @@ const config: Config = {
           secondary: "#444A57",
           muted: "#69707F",
         },
+        "ink-2": "#444A57",
+        "ink-3": "#69707F",
       },
     },
   },

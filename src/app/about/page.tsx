@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <div className="relative my-24 max-[768px]:mt-32">
-      <AboutSection />
+      <AboutSection headingLevel="h1" />
       <ExperienceSection />
     </div>
   );

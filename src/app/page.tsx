@@ -35,10 +35,10 @@ export default function Home() {
 
       <div id="about" className="my-24 mb-10 sm:my-32">
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
         >
           <AboutSection />
         </motion.div>
@@ -46,10 +46,10 @@ export default function Home() {
         <TornDivider className="my-12 sm:my-16" />
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
         >
           <ExperienceSection />
         </motion.div>
@@ -58,10 +58,10 @@ export default function Home() {
       <TornDivider className="my-12 sm:my-16" />
 
       <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ type: "spring", stiffness: 260, damping: 22 }}
       >
         <RecentProjectSection />
       </motion.div>
@@ -69,10 +69,10 @@ export default function Home() {
       <TornDivider className="my-12 sm:my-16" />
 
       <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ type: "spring", stiffness: 260, damping: 22 }}
       >
         <RecentPostSection />
       </motion.div>

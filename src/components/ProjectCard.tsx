@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 import Tape from "./collage/Tape";
 import Tag from "./collage/Tag";
 
@@ -19,11 +22,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   categories = [],
   technologies = [],
 }) => {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <a
+    <motion.a
       aria-label={title}
       href={linkProject}
-      className="group relative flex h-full min-h-[400px] flex-col border-2 border-ink bg-sheet p-3 shadow-paper transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-1deg]"
+      initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -1.5 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      whileHover={reduceMotion ? undefined : { y: -4, rotate: -1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      className="group relative flex h-full min-h-[400px] flex-col border-2 border-ink bg-sheet p-3 shadow-paper"
     >
       <Tape
         tone="yellow"
@@ -75,7 +85,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           ))}
         </div>
       </div>
-    </a>
+    </motion.a>
   );
 };
 

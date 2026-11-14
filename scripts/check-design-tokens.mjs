@@ -29,6 +29,28 @@ if (missing.length) {
   process.exit(1);
 }
 
+const tailwind = readFileSync("tailwind.config.ts", "utf8");
+const missingTailwindKeys = ["ink-2", "ink-3"].filter(
+  (key) => !new RegExp(`"${key}"\\s*:`).test(tailwind)
+);
+if (missingTailwindKeys.length) {
+  console.error(
+    `FAIL: missing Tailwind color keys: ${missingTailwindKeys.join(", ")}`
+  );
+  process.exit(1);
+}
+
+const missingTailwindHexes = Object.entries(EXPECTED).filter(
+  ([, hex]) => !tailwind.toUpperCase().includes(hex.toUpperCase())
+);
+if (missingTailwindHexes.length) {
+  console.error("FAIL: Tailwind config is missing palette hexes:");
+  for (const [key, hex] of missingTailwindHexes) {
+    console.error(`  ${key}: ${hex}`);
+  }
+  process.exit(1);
+}
+
 const luminance = (hex) => {
   const n = hex.replace("#", "");
   const [r, g, b] = [0, 2, 4]

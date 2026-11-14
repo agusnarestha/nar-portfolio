@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Tape from "./collage/Tape";
 import Tag from "./collage/Tag";
 
@@ -20,6 +21,7 @@ const PostCard: React.FC<PostCardProps> = ({
   tags = [],
 }) => {
   const [showAllTags, setShowAllTags] = useState(false);
+  const reduceMotion = useReducedMotion();
   const displayedTags = showAllTags ? tags : tags.slice(0, 3);
   const hasMoreTags = tags.length > 3;
 
@@ -30,10 +32,15 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   return (
-    <a
+    <motion.a
       href={`/blog/${slug}`}
       aria-label={title}
-      className="group relative flex h-[280px] w-full flex-col border-2 border-ink bg-sheet p-4 shadow-paper transition-transform duration-200 hover:-translate-y-1"
+      initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -1.5 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      whileHover={reduceMotion ? undefined : { y: -4, rotate: -1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      className="group relative flex h-[280px] w-full flex-col border-2 border-ink bg-sheet p-4 shadow-paper"
     >
       <Tape
         tone="mint"
@@ -70,7 +77,7 @@ const PostCard: React.FC<PostCardProps> = ({
       <p className="mt-auto border-t border-dashed border-ink/30 pt-3 font-mono text-xs uppercase tracking-wide text-ink-2">
         {pubDate}
       </p>
-    </a>
+    </motion.a>
   );
 };
 

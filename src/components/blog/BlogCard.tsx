@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { BlogPost } from "@/types/blog";
 import Tape from "@/components/collage/Tape";
 import Tag from "@/components/collage/Tag";
@@ -8,8 +11,17 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <article className="group relative flex h-full flex-col border-2 border-ink bg-sheet p-4 shadow-paper transition-transform duration-200 hover:-translate-y-1">
+    <motion.article
+      initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -1.5 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      whileHover={reduceMotion ? undefined : { y: -4, rotate: -1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      className="group relative flex h-full flex-col border-2 border-ink bg-sheet p-4 shadow-paper"
+    >
       <Tape
         tone="sky"
         rotate={-4}
@@ -45,6 +57,6 @@ export default function BlogCard({ post }: BlogCardProps) {
           <span>{post.readingTime} min read</span>
         </div>
       </Link>
-    </article>
+    </motion.article>
   );
 }

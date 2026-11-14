@@ -8,8 +8,13 @@ import Tape from "../collage/Tape";
 import Highlight from "../collage/Highlight";
 import { handCopy } from "@/lib/hand-copy";
 
-const AboutSection = () => {
+type AboutSectionProps = {
+  headingLevel?: "h1" | "h2";
+};
+
+const AboutSection = ({ headingLevel = "h2" }: AboutSectionProps) => {
   const reduceMotion = useReducedMotion();
+  const Heading = headingLevel;
 
   return (
     <div className="relative mt-16 max-[768px]:mt-20">
@@ -19,9 +24,9 @@ const AboutSection = () => {
           rotate={-4}
           className="absolute -top-3 left-6 h-4 w-16"
         />
-        <h2 className="font-display text-2xl font-extrabold uppercase tracking-tight text-ink sm:text-3xl">
+        <Heading className="font-display text-2xl font-extrabold uppercase tracking-tight text-ink sm:text-3xl">
           About Me
-        </h2>
+        </Heading>
       </div>
 
       <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[auto_1fr]">
