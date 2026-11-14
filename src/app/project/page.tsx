@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function Project() {
   return (
-    <div className="my-32">
+    <div className="relative my-24 max-[768px]:mt-32">
       <AllProjectSection />
     </div>
   );
