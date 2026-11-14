@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useId, useState } from "react";
 import PaperSheet from "./collage/PaperSheet";
 import Pushpin from "./collage/Pushpin";
 import Stamp from "./collage/Stamp";
@@ -56,6 +58,10 @@ const PositionCard: React.FC<Position & { isLast: boolean }> = ({
 
   const techStack = extractTechStack(description);
   const isCurrent = date.toLowerCase().includes("present");
+  const [expanded, setExpanded] = useState(false);
+  const listId = useId();
+  const hasMore = description.length > 2;
+  const visibleDescription = expanded ? description : description.slice(0, 2);
 
   return (
     <div className="relative flex gap-3 sm:gap-4">
@@ -89,19 +95,51 @@ const PositionCard: React.FC<Position & { isLast: boolean }> = ({
           </div>
 
           {description.length > 0 && (
-            <ul className="mt-3 space-y-1.5 border-t border-dashed border-ink/30 pt-3 sm:space-y-2">
-              {description.map((line, index) => (
-                <li
-                  key={index}
-                  className="flex gap-2 text-xs leading-relaxed text-ink-2 sm:text-sm"
+            <>
+              <ul
+                id={listId}
+                className="mt-3 space-y-1.5 border-t border-dashed border-ink/30 pt-3 sm:space-y-2"
+              >
+                {visibleDescription.map((line, index) => (
+                  <li
+                    key={index}
+                    className="flex gap-2 text-xs leading-relaxed text-ink-2 sm:text-sm"
+                  >
+                    <span className="mt-0.5 flex-shrink-0 font-bold text-ink">
+                      ▸
+                    </span>
+                    <span className="flex-1">{line}</span>
+                  </li>
+                ))}
+              </ul>
+              {hasMore && (
+                <button
+                  type="button"
+                  onClick={() => setExpanded((value) => !value)}
+                  aria-expanded={expanded}
+                  aria-controls={listId}
+                  className="mt-2 inline-flex items-center gap-1 font-hand text-sm text-ink-2 underline-offset-4 transition-colors hover:text-ink hover:underline"
                 >
-                  <span className="mt-0.5 flex-shrink-0 font-bold text-ink">
-                    ▸
-                  </span>
-                  <span className="flex-1">{line}</span>
-                </li>
-              ))}
-            </ul>
+                  {expanded
+                    ? "show less"
+                    : `read more (+${description.length - 2})`}
+                  <svg
+                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                      expanded ? "rotate-180" : ""
+                    }`}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+              )}
+            </>
           )}
 
           {techStack.length > 0 && (
