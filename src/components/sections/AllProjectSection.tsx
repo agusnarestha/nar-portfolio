@@ -4,8 +4,8 @@ import Tape from "../collage/Tape";
 
 const AllProjectSection = () => {
   return (
-    <div>
-      <div className="relative mx-auto mt-24 max-w-6xl max-[768px]:mt-28">
+    <div className="mx-auto w-full max-w-6xl px-4 sm:px-8">
+      <div className="relative mt-24 max-[768px]:mt-28">
         <div className="relative">
           <div className="relative mb-6 inline-block border-2 border-ink bg-pink-light px-5 py-2 shadow-paper-sm">
             <Tape

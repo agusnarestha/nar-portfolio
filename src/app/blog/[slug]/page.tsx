@@ -71,7 +71,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div className="container mx-auto my-24 max-[768px]:mt-32">
       <JsonLd post={post} />
-      <div className="relative mx-auto mt-24 max-w-6xl max-[768px]:mt-28">
+      <div className="relative mx-auto mt-24 max-w-6xl px-4 max-[768px]:mt-28 sm:px-8">
         <div className="relative">
           <Link
             href="/blog"

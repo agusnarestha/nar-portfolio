@@ -132,7 +132,7 @@ export default function RootLayout({
       <PortfolioJsonLd />
       <body className="font-body relative min-h-screen max-[768px]:mt-28 bg-surface">
         <div aria-hidden className="paper-grain" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-8 relative z-10">
+        <div className="relative z-10">
           <Header />
           {children}
         </div>

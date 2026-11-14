@@ -53,10 +53,10 @@ export default function TornBand({
   return (
     <div className={`relative ${className}`}>
       <TornEdge tone={tone} />
-      <div
-        className={`${toneConfig[tone].bg} px-4 pb-12 pt-4 sm:px-6 sm:pb-16 sm:pt-6 [&>div]:mt-0`}
-      >
-        {children}
+      <div className={toneConfig[tone].bg}>
+        <div className="mx-auto w-full max-w-6xl px-4 pb-12 pt-4 sm:px-8 sm:pb-16 sm:pt-6 [&>div]:mt-0">
+          {children}
+        </div>
       </div>
     </div>
   );
