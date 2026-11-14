@@ -3,6 +3,8 @@ import BlogCard from "@/components/blog/BlogCard";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import PaperSheet from "@/components/collage/PaperSheet";
+import Tape from "@/components/collage/Tape";
 
 interface TagPageProps {
   params: Promise<{
@@ -49,42 +51,36 @@ export default async function TagPage({ params }: TagPageProps) {
   const posts = getPostsByTag(canonicalTag);
 
   return (
-    <div className="container mx-auto my-32">
-      <div className="relative max-w-6xl mx-auto mt-24 max-[768px]:mt-28">
-
-        {/* Back link */}
+    <div className="container mx-auto my-24 max-[768px]:mt-32">
+      <div className="relative mx-auto mt-24 max-w-6xl max-[768px]:mt-28">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 mb-8 font-black text-xs uppercase tracking-widest
-            border-2 border-black bg-white px-3 py-2
-            shadow-[3px_3px_0_#000] hover:shadow-[1px_1px_0_#000]
-            hover:translate-x-[2px] hover:translate-y-[2px]
-            transition-all duration-100"
+          className="mb-8 inline-flex items-center gap-2 border-2 border-ink bg-sheet px-3 py-2 font-mono text-xs font-medium uppercase tracking-widest text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5 hover:bg-butter"
         >
           ← Back to Blog
         </Link>
 
-        {/* Page heading */}
         <div className="mb-6">
-          <h1
-            className="inline-block font-black text-2xl uppercase tracking-tight
-              bg-[#e6b448] border-2 border-black px-4 py-1
-              shadow-[5px_5px_0_#000]"
-          >
-            #{canonicalTag}
-          </h1>
+          <div className="relative inline-block border-2 border-ink bg-pink-light px-4 py-1.5 shadow-paper-sm">
+            <Tape
+              tone="yellow"
+              rotate={-4}
+              className="absolute -top-3 left-5 h-4 w-14"
+            />
+            <h1 className="font-display text-2xl font-extrabold uppercase tracking-tight text-ink">
+              #{canonicalTag}
+            </h1>
+          </div>
         </div>
 
-        {/* All Tags panel */}
-        <div className="mb-10 p-5 bg-[#fffbe6] border-2 border-black shadow-[5px_5px_0_#000]">
-          <h2 className="font-black text-sm uppercase tracking-widest mb-4">All Tags</h2>
+        <PaperSheet tone="butter" className="mb-10 p-5">
+          <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-widest text-ink">
+            All Tags
+          </h2>
           <div className="flex flex-wrap gap-2">
             <Link
               href="/blog"
-              className="inline-block bg-black text-white font-bold text-xs uppercase px-3 py-1.5 border border-black
-                shadow-[3px_3px_0_#888]
-                hover:shadow-[1px_1px_0_#888] hover:translate-x-[2px] hover:translate-y-[2px]
-                transition-all duration-100"
+              className="inline-block border-2 border-ink bg-sheet px-3 py-1.5 font-mono text-xs font-medium uppercase text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5 hover:bg-highlight"
             >
               All
             </Link>
@@ -92,23 +88,19 @@ export default async function TagPage({ params }: TagPageProps) {
               <Link
                 key={tag}
                 href={`/blog/tag/${tag}`}
-                className={`inline-block font-bold text-xs uppercase px-3 py-1.5 border-2 border-black
-                  shadow-[3px_3px_0_#000]
-                  hover:shadow-[1px_1px_0_#000] hover:translate-x-[2px] hover:translate-y-[2px]
-                  transition-all duration-100
-                  ${tag.toLowerCase() === canonicalTag.toLowerCase()
-                    ? "bg-[#e6b448] text-black"
-                    : "bg-white text-black hover:bg-[#e6b448]"
-                  }`}
+                className={`inline-block border-2 border-ink px-3 py-1.5 font-mono text-xs font-medium uppercase text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5 ${
+                  tag.toLowerCase() === canonicalTag.toLowerCase()
+                    ? "bg-highlight"
+                    : "bg-sheet hover:bg-butter"
+                }`}
               >
                 #{tag}
               </Link>
             ))}
           </div>
-        </div>
+        </PaperSheet>
 
-        {/* Posts grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <BlogCard key={post.slug} post={post} />
           ))}
