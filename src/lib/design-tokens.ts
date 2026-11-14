@@ -1,0 +1,26 @@
+export const palette = {
+  paper: "#EDF0F4",
+  sheet: "#FFFFFF",
+  sheet2: "#F6F8FB",
+  ink: "#15161A",
+  ink2: "#444A57",
+  ink3: "#69707F",
+  rule: "#C4CAD5",
+  cobalt: "#2446F2",
+  cobaltDark: "#1B34C4",
+  butter: "#FFF7B8",
+  highlight: "#FFEE3B",
+  mint: "#2FD49A",
+  mintLight: "#CDF6E6",
+  mintDark: "#077A52",
+  pink: "#FF8DC7",
+  pinkLight: "#FFD9EC",
+  sky: "#D3E2FF",
+  skyInk: "#1D2E62",
+  tomato: "#FF5130",
+  tomatoDark: "#C2341A",
+  tomatoLight: "#FFE1DA",
+  amber: "#D9B800",
+} as const;
+
+export type PaletteKey = keyof typeof palette;

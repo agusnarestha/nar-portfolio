@@ -9,9 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["Space Grotesk", "system-ui", "sans-serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
-        mono: ["Fira Code", "monospace"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        body: ["var(--font-body)", "system-ui", "sans-serif"],
+        hand: ["var(--font-hand)", "Comic Sans MS", "cursive"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -19,6 +20,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       boxShadow: {
+        paper: "3px 3px 0 #15161A",
+        "paper-sm": "2px 2px 0 #15161A",
+        "paper-lg": "5px 5px 0 #15161A",
+        "paper-hover": "1px 1px 0 #15161A",
         neo: "6px 6px 0 #000000",
         "neo-sm": "4px 4px 0 #000000",
         "neo-lg": "8px 8px 0 #000000",
@@ -34,7 +39,37 @@ const config: Config = {
         "drift": "drift 15s ease-in-out infinite",
       },
       colors: {
-        // Neo-brutalism accent palette - bold & vibrant
+        // Collage palette
+        paper: "#EDF0F4",
+        sheet: "#FFFFFF",
+        "sheet-2": "#F6F8FB",
+        rule: "#C4CAD5",
+        cobalt: {
+          DEFAULT: "#2446F2",
+          dark: "#1B34C4",
+        },
+        butter: "#FFF7B8",
+        highlight: "#FFEE3B",
+        mint: {
+          DEFAULT: "#2FD49A",
+          light: "#CDF6E6",
+          dark: "#077A52",
+        },
+        pink: {
+          DEFAULT: "#FF8DC7",
+          light: "#FFD9EC",
+        },
+        sky: {
+          DEFAULT: "#D3E2FF",
+          ink: "#1D2E62",
+        },
+        tomato: {
+          DEFAULT: "#FF5130",
+          dark: "#C2341A",
+          light: "#FFE1DA",
+        },
+        amber: "#D9B800",
+        // Neo-brutalism accent palette - kept until the Task 10 cleanup
         "neo-red": "#ef4444",
         "neo-orange": "#f97316",
         "neo-yellow": "#fbbf24",
@@ -50,16 +85,16 @@ const config: Config = {
         "neo-rose": "#f43f5e",
         // Surfaces
         "surface": {
-          DEFAULT: "#dcebfe",
-          card: "#ffffff",
-          warm: "#fef3c7",
-          accent: "#e0f2fe",
+          DEFAULT: "#EDF0F4",
+          card: "#FFFFFF",
+          warm: "#FFF7B8",
+          accent: "#D3E2FF",
         },
         // Text
         "ink": {
-          DEFAULT: "#000000",
-          secondary: "#1f2937",
-          muted: "#4b5563",
+          DEFAULT: "#15161A",
+          secondary: "#444A57",
+          muted: "#69707F",
         },
       },
     },
