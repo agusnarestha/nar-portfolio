@@ -1,160 +1,120 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import HeaderButton from "./HeaderButton";
-import { motion, AnimatePresence } from "framer-motion";
+import Tape from "@/components/collage/Tape";
+
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/?scroll=about" },
+  { label: "Project", href: "/project" },
+  { label: "Blog", href: "/blog" },
+];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Stagger children for mobile menu
-  const menuVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.15,
-      },
-    },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
-  };
-
-  const menuItemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { type: "spring" as const, stiffness: 300, damping: 20 },
-    },
+  const isActive = (label: string) => {
+    if (label === "Project") return pathname.startsWith("/project");
+    if (label === "Blog") return pathname.startsWith("/blog");
+    if (label === "Home") return pathname === "/";
+    return false;
   };
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4
-        border-b-[3px] border-black transition-all duration-300
-        ${scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-[0_3px_0px_0px_#000000]"
-          : "bg-white shadow-[0_3px_0px_0px_#000000]"
-        }`}
+      className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between border-b-2 border-ink px-4 py-3 transition-all duration-300 sm:px-6 ${
+        scrolled ? "bg-paper/90 backdrop-blur-md" : "bg-paper"
+      }`}
     >
-      {/* Logo */}
-      <div className="text-2xl">
-        <a href="/">
-          <motion.span
-            className="text-2xl font-display font-bold uppercase tracking-tight
-              border-[3px] border-black px-3 py-1.5
-              bg-[#fbbf24]
-              shadow-[6px_6px_0_#000000]
-              inline-block cursor-pointer"
-            whileHover={{ rotate: -5, scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-          >
-            Nar.
-          </motion.span>
-        </a>
-      </div>
+      <Link href="/" aria-label="Agus Narestha home">
+        <span className="relative inline-block border-2 border-ink bg-butter px-3 py-1.5 font-display text-2xl font-extrabold uppercase tracking-tight shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5">
+          <Tape
+            tone="pink"
+            rotate={-5}
+            className="absolute -top-2 left-1/2 h-4 w-12 -translate-x-1/2"
+          />
+          Nar.
+        </span>
+      </Link>
 
-      {/* Hamburger (mobile) */}
       <div className="lg:hidden">
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-center w-12 h-12 border-[3px] border-black bg-white shadow-[6px_6px_0_#000000] hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-150"
+          onClick={() => setIsOpen(true)}
+          className="flex h-11 w-11 items-center justify-center border-2 border-ink bg-sheet shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5"
           aria-label="Open menu"
         >
-          <svg className="h-6 w-6 fill-current" viewBox="0 0 20 20">
+          <svg className="h-5 w-5 fill-current" viewBox="0 0 20 20">
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
           </svg>
         </button>
       </div>
 
-      {/* Desktop nav links */}
       <div className="hidden lg:block">
-        <ul className="flex flex-row items-center space-x-4">
-          <HeaderButton label="Home" color="#fbbf24" href="/" />
-          <HeaderButton
-            label="About"
-            color="#3b82f6"
-            href="/?scroll=about"
-            onClick={(e) => {
-              const pathname = window.location.pathname;
-              if (pathname === "/") {
-                e.preventDefault();
-                const el = document.getElementById("about");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-          />
-          <HeaderButton label="Project" color="#ec4899" href="/project" />
-          <HeaderButton label="Blog" color="#22c55e" href="/blog" />
+        <ul className="flex flex-row items-center gap-2">
+          {navItems.map((item) => (
+            <HeaderButton
+              key={item.label}
+              label={item.label}
+              href={item.href}
+              active={isActive(item.label)}
+              onClick={(e) => {
+                if (item.label === "About" && pathname === "/") {
+                  e.preventDefault();
+                  document.getElementById("about")?.scrollIntoView({
+                    behavior: reduceMotion ? "auto" : "smooth",
+                  });
+                }
+              }}
+            />
+          ))}
         </ul>
       </div>
 
-      {/* Mobile menu overlay with staggered animations */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen bg-[#fef9c3] border-[3px] border-black lg:hidden z-50"
+            className="fixed inset-0 z-50 h-screen w-full border-b-2 border-ink bg-paper lg:hidden"
           >
-            {/* Close button */}
-            <motion.button
-              initial={{ opacity: 0, rotate: -90 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
+            <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-5 w-12 h-12 border-[3px] border-black bg-white shadow-[6px_6px_0_#000000] hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-150 flex items-center justify-center"
+              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center border-2 border-ink bg-sheet shadow-paper-sm"
               aria-label="Close menu"
             >
-              <svg className="h-6 w-6 fill-current" viewBox="0 0 20 20">
+              <svg className="h-5 w-5 fill-current" viewBox="0 0 20 20">
                 <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
               </svg>
-            </motion.button>
+            </button>
 
-            <motion.ul
-              variants={menuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="flex flex-col items-center justify-center space-y-6 h-full"
-            >
-              {[
-                { label: "Home", color: "#fbbf24", href: "/" },
-                { label: "About", color: "#3b82f6", href: "/?scroll=about" },
-                { label: "Project", color: "#ec4899", href: "/project" },
-                { label: "Blog", color: "#22c55e", href: "/blog" },
-              ].map((item) => (
-                <motion.li key={item.label} variants={menuItemVariants}>
-                  <a
+            <ul className="flex h-full flex-col items-center justify-center gap-4">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    style={{ backgroundColor: item.color }}
-                    className="inline-block px-8 py-4 border-[3px] border-black font-display font-bold text-black text-lg uppercase tracking-wide
-                      shadow-[6px_6px_0px_0px_#000000]
-                      hover:shadow-[2px_2px_0px_0px_#000000]
-                      hover:translate-x-[4px] hover:translate-y-[4px]
-                      transition-all duration-150
-                      w-[200px] text-center"
+                    className="inline-block w-[200px] border-2 border-ink bg-sheet px-8 py-3 text-center font-display text-lg font-bold uppercase tracking-wide shadow-paper transition-transform duration-150 hover:-translate-y-0.5 hover:bg-butter"
                   >
                     {item.label}
-                  </a>
-                </motion.li>
+                  </Link>
+                </li>
               ))}
-            </motion.ul>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>

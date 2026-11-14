@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Clock, Music2 } from "lucide-react";
 import { SpotifyNowPlayingData } from "@/types/spotify";
 
@@ -22,6 +22,7 @@ const formatTimeAgo = (timestamp: string): string => {
 const SpotifyNowPlaying = () => {
     const [data, setData] = useState<SpotifyNowPlayingData | null>(null);
     const [loading, setLoading] = useState(true);
+    const reduceMotion = useReducedMotion();
 
     useEffect(() => {
         const fetchNowPlaying = async () => {
@@ -47,15 +48,15 @@ const SpotifyNowPlaying = () => {
     if (loading) {
         return (
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 px-4 py-3 bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] max-w-md mx-auto"
+                className="flex items-center gap-3 px-4 py-3 bg-butter border-2 border-ink shadow-paper-sm max-w-md mx-auto"
             >
-                <div className="animate-pulse flex items-center gap-3 w-full">
-                    <div className="w-12 h-12 bg-gray-200 border-2 border-black" />
+                <div className="motion-safe:animate-pulse flex items-center gap-3 w-full">
+                    <div className="w-12 h-12 bg-paper border border-ink/20" />
                     <div className="flex-1">
-                        <div className="h-4 bg-gray-200 border-2 border-black w-3/4 mb-2" />
-                        <div className="h-3 bg-gray-200 border-2 border-black w-1/2" />
+                        <div className="h-4 bg-paper border border-ink/20 w-3/4 mb-2" />
+                        <div className="h-3 bg-paper border border-ink/20 w-1/2" />
                     </div>
                 </div>
             </motion.div>
@@ -65,12 +66,12 @@ const SpotifyNowPlaying = () => {
     if (!data || (!data.isPlaying && !data.isRecentlyPlayed)) {
         return (
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 px-4 py-3 bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] max-w-md mx-auto"
+                className="flex items-center gap-3 px-4 py-3 bg-butter border-2 border-ink shadow-paper-sm max-w-md mx-auto"
             >
-                <Music2 className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                <span className="text-sm font-bold text-gray-600">
+                <Music2 className="w-5 h-5 text-ink-2 flex-shrink-0" />
+                <span className="text-sm font-bold text-ink-2">
                     Spotify is offline
                 </span>
             </motion.div>
@@ -84,11 +85,11 @@ const SpotifyNowPlaying = () => {
             ? `Last Played ${formatTimeAgo(data.playedAt)}`
             : "Last Played";
     const labelColor = isPlaying
-        ? "text-green-700"
-        : "text-gray-600";
+        ? "text-mint-dark"
+        : "text-ink-2";
     const barColor = isPlaying
-        ? "bg-green-600"
-        : "bg-gray-400";
+        ? "bg-mint-dark"
+        : "bg-ink-3";
 
     return (
         <AnimatePresence mode="wait">
@@ -97,18 +98,18 @@ const SpotifyNowPlaying = () => {
                 href={data.songUrl || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                whileHover={{ scale: 1.02 }}
-                className={`flex items-center gap-3 px-4 py-3 bg-white border-[3px] border-black shadow-[6px_6px_0_#000000] max-w-md mx-auto transition-all cursor-pointer group
-                    ${isPlaying ? 'hover:shadow-[2px_2px_0_#000000] hover:translate-x-[4px] hover:translate-y-[4px]' : ''}`}
+                exit={reduceMotion ? undefined : { opacity: 0, y: -20 }}
+                whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+                className={`flex items-center gap-3 px-4 py-3 bg-butter border-2 border-ink shadow-paper-sm max-w-md mx-auto transition-all cursor-pointer group
+                    ${isPlaying ? 'hover:shadow-paper-hover hover:-translate-y-0.5' : ''}`}
             >
                 {/* Album Art */}
                 {data.albumImageUrl && (
                     <motion.div
-                        className="relative w-12 h-12 overflow-hidden flex-shrink-0 border-2 border-black"
-                        whileHover={{ rotate: 5 }}
+                        className="relative w-12 h-12 overflow-hidden flex-shrink-0 border border-ink"
+                        whileHover={reduceMotion ? undefined : { rotate: 5 }}
                     >
                         <img
                             src={data.albumImageUrl}
@@ -131,35 +132,37 @@ const SpotifyNowPlaying = () => {
                                     <motion.div
                                         key={i}
                                         className={`w-0.5 ${barColor} rounded-full`}
-                                        animate={{
-                                            height: ["4px", "12px", "4px"],
-                                        }}
-                                        transition={{
-                                            duration: 0.8,
-                                            repeat: Infinity,
-                                            delay: i * 0.2,
-                                        }}
+                                        animate={
+                                            reduceMotion
+                                                ? { height: "8px" }
+                                                : { height: ["4px", "12px", "4px"] }
+                                        }
+                                        transition={
+                                            reduceMotion
+                                                ? { duration: 0 }
+                                                : { duration: 0.8, repeat: Infinity, delay: i * 0.2 }
+                                        }
                                     />
                                 ))}
                             </motion.div>
                         ) : (
-                            <Clock className="w-3.5 h-3.5 text-gray-500" />
+                            <Clock className="w-3.5 h-3.5 text-ink-2" />
                         )}
                         <span className={`text-xs font-bold ${labelColor}`}>
                             {label}
                         </span>
                     </div>
-                    <p className="text-sm font-bold text-black truncate group-hover:text-green-700 transition-colors">
+                    <p className="text-sm font-bold text-ink truncate group-hover:text-mint-dark transition-colors">
                         {data.title}
                     </p>
-                    <p className="text-xs text-gray-600 truncate">
+                    <p className="text-xs text-ink-2 truncate">
                         {data.artist}
                     </p>
                 </div>
 
                 {/* Spotify Icon */}
                 <svg
-                    className="w-5 h-5 text-gray-600 flex-shrink-0"
+                    className="w-5 h-5 text-ink-2 flex-shrink-0"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                 >
