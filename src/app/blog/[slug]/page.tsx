@@ -69,9 +69,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="container mx-auto my-24 max-[768px]:mt-32">
+    <div className="grid-paper min-h-screen w-full">
       <JsonLd post={post} />
-      <div className="relative mx-auto mt-24 max-w-6xl px-4 max-[768px]:mt-28 sm:px-8">
+      <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-24 max-[768px]:pt-32 sm:px-8">
         <div className="relative">
           <Link
             href="/blog"
@@ -139,7 +139,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               />
             </article>
 
-            <aside className="hidden w-64 shrink-0 self-start lg:sticky lg:top-28 lg:block lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
+            <aside className="scrollbar-hide hidden w-64 shrink-0 self-start lg:sticky lg:top-28 lg:block lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
               <div className="relative border-2 border-ink bg-butter p-5 shadow-paper-sm">
                 <Tape
                   tone="yellow"

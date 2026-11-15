@@ -32,8 +32,8 @@ export default function BlogPage() {
   const tags = getAllTags();
 
   return (
-    <div className="container mx-auto my-24 max-[768px]:mt-32">
-      <div className="relative mx-auto mt-24 max-w-6xl px-4 max-[768px]:mt-28 sm:px-8">
+    <div className="grid-paper min-h-screen w-full">
+      <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-24 max-[768px]:pt-32 sm:px-8">
         <div className="relative">
           <div className="relative mb-6 inline-block border-2 border-ink bg-sky px-5 py-2 shadow-paper-sm">
             <Tape
