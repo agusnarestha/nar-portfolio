@@ -36,20 +36,20 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://agusnarestha.dev"),
   title: {
-    default: "Agus Narestha Portfolio - Web Developer & Data Enthusiast",
-    template: "%s | Agus Narestha Portfolio",
+    default: "Agus Narestha - Web Developer & Data Enthusiast",
+    template: "%s | Agus Narestha",
   },
   description:
     "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
   category: "technology",
-  applicationName: "Agus Narestha Portfolio",
+  applicationName: "Agus Narestha",
   generator: "Next.js",
   openGraph: {
-    title: "Agus Narestha Portfolio - Web Developer & Data Enthusiast",
+    title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
       "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
     url: "https://agusnarestha.dev",
-    siteName: "Agus Narestha Portfolio",
+    siteName: "Agus Narestha",
     type: "website",
     locale: "en_US",
   },
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agus Narestha Portfolio - Web Developer & Data Enthusiast",
+    title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
       "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
     creator: "@agusnarestha",
