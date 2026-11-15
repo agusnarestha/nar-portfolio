@@ -1,10 +1,37 @@
 import type { Metadata } from "next";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+import { Archivo, Figtree, Gochi_Hand, DM_Mono } from "next/font/google";
 
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import "./globals.css";
 import PortfolioJsonLd from "@/components/PortfolioJsonLd";
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const figtree = Figtree({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const gochi = Gochi_Hand({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-hand",
+  display: "swap",
+});
+
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://agusnarestha.dev"),
@@ -15,14 +42,14 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
   category: "technology",
-  applicationName: "Agus Narestha Portfolio",
+  applicationName: "Agus Narestha",
   generator: "Next.js",
   openGraph: {
     title: "Agus Narestha - Web Developer & Data Enthusiast",
     description:
       "Portfolio of Agus Narestha — web developer specializing in modern web technologies, data analysis, and full-stack development.",
     url: "https://agusnarestha.dev",
-    siteName: "Agus Narestha Portfolio",
+    siteName: "Agus Narestha",
     type: "website",
     locale: "en_US",
   },
@@ -87,7 +114,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${archivo.variable} ${figtree.variable} ${gochi.variable} ${dmMono.variable}`}
+    >
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="referrer" content="origin-when-cross-origin" />
@@ -100,8 +130,9 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-PHV2VZN6" />
       <GoogleAnalytics gaId="G-B2ZN13JQ9F" />
       <PortfolioJsonLd />
-      <body className="font-body relative min-h-screen max-[768px]:mt-28 bg-surface">
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+      <body className="font-body relative min-h-screen max-md:mt-28 bg-surface">
+        <div aria-hidden className="paper-grain" />
+        <div className="relative z-10">
           <Header />
           {children}
         </div>

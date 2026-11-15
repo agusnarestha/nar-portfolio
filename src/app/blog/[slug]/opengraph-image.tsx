@@ -23,14 +23,14 @@ export default async function Image({ params }: Props) {
 
     if (!post) {
         // Fallback OG image for invalid slugs
-        return generateOGImage({
+        return await generateOGImage({
             title: "Post Not Found",
             subtitle: "Agus Narestha",
             type: "blog",
         });
     }
 
-    return generateOGImage({
+    return await generateOGImage({
         title: post.title,
         subtitle: `By Agus Narestha • ${new Date(post.date).toLocaleDateString("en-US", {
             month: "short",

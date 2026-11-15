@@ -5,113 +5,78 @@ import AboutSection from "@/components/sections/AboutSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import RecentProjectSection from "@/components/sections/RecentProjectSection";
 import RecentPostSection from "@/components/sections/RecentPostSection";
+import TornBand from "@/components/collage/TornBand";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
-
-// Animated neo-brutalist section divider with bold line and icon
-const SectionDivider = ({ color = "#3b82f6" }: { color?: string }) => (
-  <div className="relative flex items-center my-12 sm:my-16 overflow-hidden px-2">
-    {/* Left thick line */}
-    <motion.div
-      className="flex-1 h-2 bg-black"
-      initial={{ scaleX: 0, originX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    />
-    {/* Center colored diamond */}
-    <motion.div
-      className="mx-3 sm:mx-5 flex-shrink-0"
-      initial={{ scale: 0 }}
-      whileInView={{ scale: 1 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.4, delay: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
-    >
-      <div
-        className="w-4 h-4 sm:w-5 sm:h-5 border-[3px] border-black"
-        style={{ backgroundColor: color, transform: "rotate(45deg)" }}
-      />
-    </motion.div>
-    {/* Right thick line */}
-    <motion.div
-      className="flex-1 h-2 bg-black"
-      initial={{ scaleX: 0, originX: 1 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    />
-  </div>
-);
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function Home() {
+  const reduceMotion = useReducedMotion();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       if (params.get("scroll") === "about") {
         const el = document.getElementById("about");
-        if (el) el.scrollIntoView({ behavior: "smooth" });
+        if (el) el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
       }
     }
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <div>
-      {/* Hero — fade up */}
+      {/* Hero — transform only, so the name is visible without JS */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7 }}
+        initial={reduceMotion ? false : { y: 24 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <HomeSection />
       </motion.div>
 
-      <div id="about" className="mb-10 my-32">
-        {/* About — slide from left */}
+      <div id="about" className="mt-8 scroll-mt-24 sm:mt-12">
         <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
         >
-          <AboutSection />
+          <TornBand tone="cobalt">
+            <AboutSection />
+          </TornBand>
         </motion.div>
 
-        <SectionDivider color="#84cc16" />
-
-        {/* Experience — slide from right */}
         <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
         >
-          <ExperienceSection />
+          <TornBand tone="butter" from="cobalt">
+            <ExperienceSection />
+          </TornBand>
         </motion.div>
       </div>
 
-      <SectionDivider color="#ec4899" />
-
-      {/* Recent Projects — scale up */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
-        <RecentProjectSection />
-      </motion.div>
-
-      <SectionDivider color="#06b6d4" />
-
-      {/* Recent Posts — fade up with rotate */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={{ type: "spring", stiffness: 260, damping: 22 }}
       >
-        <RecentPostSection />
+        <TornBand tone="cobalt" from="butter">
+          <RecentProjectSection />
+        </TornBand>
+      </motion.div>
+
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      >
+        <TornBand tone="sky" from="cobalt">
+          <RecentPostSection />
+        </TornBand>
       </motion.div>
     </div>
   );

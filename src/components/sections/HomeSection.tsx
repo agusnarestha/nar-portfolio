@@ -1,69 +1,106 @@
 "use client";
-import TypeIt from "typeit-react";
+
 import ScrollDown from "../ScrollDown";
-import Image from "next/image";
 import SpotifyNowPlaying from "../SpotifyNowPlaying";
 import BackgroundArt from "../BackgroundArt";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import Highlight from "../collage/Highlight";
+import HandNote from "../collage/HandNote";
+import Polaroid from "../collage/Polaroid";
+import Tape from "../collage/Tape";
+import { handCopy } from "@/lib/hand-copy";
 
 const HomeSection = () => {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <div className="flex flex-col h-screen relative">
+    <div className="relative flex min-h-[calc(100svh-7rem)] flex-col md:min-h-screen">
       <BackgroundArt />
-      <section className="flex-1 flex items-center justify-center relative z-10 pt-16">
-        <div className="relative w-full max-w-screen-md mx-auto px-4">
-          {/* Centered hero layout */}
-          <div className="flex flex-col items-center justify-center">
-            {/* Name text */}
-            <motion.h1
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="font-display font-bold text-black text-4xl sm:text-6xl xl:text-8xl text-center"
-              style={{ textShadow: "3px 3px 0px rgba(0, 0, 0, 0.15)" }}
-            >
-              Agus Narestha
-            </motion.h1>
+      <section className="relative z-10 flex flex-1 items-center justify-center px-4 pb-6 pt-8 sm:pb-10 sm:pt-24">
+        <div className="pointer-events-none absolute left-[7%] top-[24%] hidden xl:block">
+          <HandNote rotate={-6} className="text-xl">
+            open to work →
+          </HandNote>
+        </div>
 
-            {/* Emoji avatar with bounce-in */}
-            <motion.div
-              initial={{ opacity: 0, y: 60, rotate: -5 }}
-              animate={{ opacity: 1, y: 0, rotate: 0 }}
-              transition={{ duration: 0.7, delay: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-              className="relative z-10 mt-2"
+        <div className="pointer-events-none absolute right-[8%] top-[35%] hidden xl:block">
+          <HandNote rotate={3} className="text-lg">
+            web · data · ai
+          </HandNote>
+        </div>
+
+        <div className="w-full max-w-3xl text-center">
+          <motion.h1
+            initial={reduceMotion ? false : { y: 18 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="font-display text-5xl font-extrabold leading-[0.95] tracking-tight text-ink sm:text-7xl xl:text-8xl"
+          >
+            Agus <Highlight>Narestha</Highlight>
+          </motion.h1>
+
+          <motion.div
+            initial={reduceMotion ? false : { y: 24 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="mt-4"
+          >
+            <HandNote className="text-2xl sm:text-3xl">{handCopy.hero}</HandNote>
+            <svg
+              viewBox="0 0 80 36"
+              aria-hidden="true"
+              fill="none"
+              className="mx-auto mt-1 h-7 w-20 text-ink/45"
             >
-              <Image
-                className="relative mx-auto w-[200px] h-[200px] sm:w-[300px] sm:h-[300px]"
-                src="/emoji.webp"
-                alt="Agus Narestha Emoji"
-                width={300}
-                height={300}
-                priority
+              <path
+                d="M8 6c14 22 38 24 62 14"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
-            </motion.div>
+              <path
+                d="M58 14l12 6-10 7"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.div>
 
-            {/* Typing text */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-3"
-            >
-              <TypeIt className="font-display text-black text-xl sm:text-2xl xl:text-3xl">
-                Hello Everyone...👋
-              </TypeIt>
-            </motion.div>
+          <motion.div
+            initial={reduceMotion ? false : { y: 30 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+            className="mt-6"
+          >
+            <Polaroid
+              src="/emoji.webp"
+              alt="Agus Narestha Emoji"
+              width={300}
+              height={300}
+              priority
+              rotate={-2}
+              caption="that's me"
+              className="mx-auto w-[210px] sm:w-[300px] md:w-[320px]"
+            />
+          </motion.div>
 
-            {/* Spotify Now Playing */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="mt-6 w-full max-w-md mx-auto"
-            >
+          <motion.div
+            initial={reduceMotion ? false : { y: 20 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
+            className="mx-auto mt-6 w-full max-w-xs sm:mt-8"
+          >
+            <div className="relative rotate-1">
+              <Tape
+                tone="mint"
+                rotate={-4}
+                className="absolute -top-3 left-1/2 z-10 h-4 w-16 -translate-x-1/2"
+              />
               <SpotifyNowPlaying />
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
       <ScrollDown />

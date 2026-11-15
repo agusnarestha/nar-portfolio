@@ -95,7 +95,7 @@ export default function ShareButtons({ title, slug }: ShareButtonsProps) {
     <div className="relative" ref={popupRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 bg-[#525252] text-white rounded-lg border-2 border-black dark:border-white hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-200"
+        className="border-2 border-ink bg-sheet p-2 text-ink shadow-paper-sm dark:border-white hover:-translate-y-0.5 dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-200"
       >
         <svg
           className="w-5 h-5"
@@ -113,12 +113,12 @@ export default function ShareButtons({ title, slug }: ShareButtonsProps) {
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-48 rounded-lg bg-white dark:bg-gray-800 border-2 border-black dark:border-white shadow-lg z-50">
+        <div className="absolute left-0 z-50 mt-2 w-48 border-2 border-ink bg-sheet shadow-paper dark:border-white dark:bg-gray-800">
           {shareOptions.map((option) => (
             <button
               key={option.name}
               onClick={option.action}
-              className="w-full px-4 py-2 text-left text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 first:rounded-t-lg last:rounded-b-lg"
+              className="flex w-full items-center gap-2 px-4 py-2 text-left font-body text-sm text-ink hover:bg-butter dark:text-white dark:hover:bg-gray-700"
             >
               {option.icon}
               <span>{option.name}</span>
@@ -128,7 +128,7 @@ export default function ShareButtons({ title, slug }: ShareButtonsProps) {
       )}
 
       {copied && (
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-sm whitespace-nowrap">
+        <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-ink px-2 py-1 font-mono text-xs text-sheet">
           Link copied!
         </div>
       )}

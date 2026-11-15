@@ -26,9 +26,11 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <div className="mb-10 my-32">
-      <AboutSection />
-      <ExperienceSection />
+    <div className="relative my-24 max-[768px]:mt-32">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-8">
+        <AboutSection headingLevel="h1" />
+        <ExperienceSection />
+      </div>
     </div>
   );
 }

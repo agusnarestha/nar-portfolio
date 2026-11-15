@@ -1,87 +1,75 @@
+import Link from "next/link";
 import ProjectCard from "../ProjectCard";
 import projectData from "@/data/projectData.json";
-import { motion } from "framer-motion";
+import HandNote from "../collage/HandNote";
+import Tape from "../collage/Tape";
 
 const RecentProjectSection = () => {
   const latestProjects = projectData.slice(0, 3);
 
   return (
     <div className="relative">
-      {/* Decorative floating shapes */}
-      <div className="absolute -top-6 -left-4 pointer-events-none z-0 hidden sm:block">
-        <motion.svg
-          width="60" height="60" viewBox="0 0 60 60" fill="none"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        >
-          <polygon points="10,10 50,10 50,50 10,50" fill="none" stroke="#ec4899" strokeWidth="3" opacity="0.4" />
-          <line x1="20" y1="20" x2="40" y2="20" stroke="#ec4899" strokeWidth="2" opacity="0.4" />
-          <line x1="20" y1="30" x2="35" y2="30" stroke="#ec4899" strokeWidth="2" opacity="0.4" />
-          <line x1="20" y1="40" x2="40" y2="40" stroke="#ec4899" strokeWidth="2" opacity="0.4" />
-        </motion.svg>
-      </div>
-      <div className="absolute -bottom-4 -right-4 pointer-events-none z-0 hidden sm:block">
-        <motion.svg
-          width="50" height="50" viewBox="0 0 50 50" fill="none"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <circle cx="25" cy="25" r="20" fill="#fbbf24" stroke="#000" strokeWidth="3" opacity="0.4" />
-        </motion.svg>
-      </div>
-
-      {/* Heading row */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 relative z-10">
-        <h1
-          className="neo-badge text-3xl bg-[#ec4899] text-white
-            max-[325px]:text-base max-[365px]:text-[19px] max-[395px]:text-xl max-[430px]:text-2xl max-[540px]:text-[25px]"
-        >
-          Recent Project
-        </h1>
-        <a
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative inline-block border-2 border-ink bg-pink-light px-5 py-2 shadow-paper-sm">
+          <Tape
+            tone="yellow"
+            rotate={-4}
+            className="absolute -top-3 left-6 h-4 w-16"
+          />
+          <h2 className="font-display text-2xl font-extrabold uppercase tracking-tight text-ink sm:text-3xl">
+            Recent Project
+          </h2>
+        </div>
+        <Link
           href="/project"
-          className="neo-btn bg-[#fbbf24] self-start"
+          className="inline-flex items-center gap-2 self-start border-2 border-ink bg-butter px-4 py-2 font-body text-sm font-medium text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5"
         >
           View All
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 fill-current" viewBox="0 0 24 24">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4 fill-current"
+            viewBox="0 0 24 24"
+          >
             <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
           </svg>
-        </a>
+        </Link>
       </div>
 
-      {/* Project count indicator */}
-      <div className="flex items-center gap-2 mb-5 relative z-10">
-        <div className="flex -space-x-2">
-          {latestProjects.map((_, i) => (
-            <div
-              key={i}
-              className="w-6 h-6 rounded-full border-2 border-black bg-[#ec4899] flex items-center justify-center"
-              style={{ zIndex: 3 - i }}
-            >
-              <span className="text-white font-mono font-bold text-[8px]">{i + 1}</span>
-            </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <div
+          className="flex items-center gap-1.5"
+          aria-label={`${latestProjects.length} of ${projectData.length} projects shown`}
+        >
+          {projectData.map((_, index) => (
+            <span
+              key={index}
+              className={`h-3 w-3 border border-ink ${
+                index < latestProjects.length ? "bg-highlight" : "bg-sheet"
+              }`}
+            />
           ))}
         </div>
-        <span className="font-mono font-bold text-xs text-gray-600 uppercase">
-          {latestProjects.length} of {projectData.length} projects
-        </span>
+        <HandNote rotate={-2} tone="light" className="text-base">
+          {latestProjects.length} of {projectData.length} pinned
+        </HandNote>
       </div>
 
-      <div className="my-9 -mx-4 sm:-mx-8 px-4 sm:px-8 lg:mx-0 lg:px-0 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
-        <div className="flex lg:grid lg:grid-cols-3 gap-6 w-max lg:w-auto">
-          {latestProjects.map((item, index) => (
-            <div key={index} className="w-[280px] sm:w-[320px] lg:w-auto flex-shrink-0">
-              <ProjectCard
-                title={item.title}
-                description={item.description}
-                imageUrl={item.imageUrl}
-                linkProject={item.linkProject}
-                categories={item.categories}
-                technologies={item.technologies}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="my-8 -mx-4 flex gap-6 overflow-x-auto px-4 scrollbar-hide sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">
+        {latestProjects.map((item, index) => (
+          <div
+            key={index}
+            className="w-[280px] flex-shrink-0 sm:w-[320px] lg:w-auto"
+          >
+            <ProjectCard
+              title={item.title}
+              description={item.description}
+              imageUrl={item.imageUrl}
+              linkProject={item.linkProject}
+              categories={item.categories}
+              technologies={item.technologies}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

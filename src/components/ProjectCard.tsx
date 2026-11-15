@@ -1,4 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import Tape from "./collage/Tape";
+import Tag from "./collage/Tag";
 
 type ProjectCardProps = {
   title: string;
@@ -17,81 +22,70 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   categories = [],
   technologies = [],
 }) => {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <a
+    <motion.a
       aria-label={title}
       href={linkProject}
-      className="
-        neo-card relative h-[385px] flex flex-col
-        border-[3px] border-black bg-white
-        shadow-[8px_8px_0_#000000]
-        cursor-pointer overflow-hidden
-        group
-      "
+      initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -1.5 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      whileHover={reduceMotion ? undefined : { y: -4, rotate: -1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      className="group relative flex h-full min-h-[400px] flex-col border-2 border-ink bg-sheet p-3 shadow-paper"
     >
-      {/* Corner brackets */}
-      <div className="absolute top-2 left-2 w-4 h-4 border-t-[3px] border-l-[3px] border-black pointer-events-none z-10" />
-      <div className="absolute bottom-2 right-2 w-4 h-4 border-b-[3px] border-r-[3px] border-black pointer-events-none z-10" />
+      <Tape
+        tone="yellow"
+        rotate={-4}
+        className="absolute -top-3 left-1/2 z-10 h-5 w-20 -translate-x-1/2"
+      />
 
-      {/* Image area */}
-      <div className="relative h-44 w-full overflow-hidden border-b-[3px] border-black flex-shrink-0">
+      <div className="relative aspect-[16/10] w-full overflow-hidden border border-ink/20 bg-paper">
         <Image
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           src={imageUrl}
           alt={title}
-          width={385}
-          height={176}
-          loading="lazy"
         />
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300 flex items-center justify-center">
-          <span className="text-white font-display font-bold uppercase text-sm tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 border-[3px] border-white px-3 py-1">
-            View Project →
+        <div className="absolute inset-0 flex items-center justify-center bg-ink/0 opacity-0 transition-all duration-200 group-hover:bg-ink/50 group-hover:opacity-100">
+          <span className="border-2 border-ink bg-butter px-3 py-1 font-hand text-lg text-ink shadow-paper-sm">
+            view project →
           </span>
         </div>
       </div>
 
-      {/* Accent bar that grows on hover */}
-      <div className="h-1 w-full bg-[#ec4899] accent-bar" />
-
-      {/* Content area */}
-      <div className="bg-white flex-1 p-4 flex flex-col">
-        {/* Categories */}
-        <div className="flex gap-1.5 flex-wrap mb-2">
-          {categories.map((category, index) => (
-            <span
-              key={index}
-              className="bg-[#ec4899] border-[2px] border-black text-white font-mono font-bold text-[10px] uppercase px-2 py-0.5 whitespace-nowrap"
-            >
+      <div className="flex flex-1 flex-col pt-3">
+        <div className="mb-2 flex flex-wrap gap-1.5">
+          {categories.map((category) => (
+            <Tag key={category} tone="pink">
               #{category}
-            </span>
+            </Tag>
           ))}
         </div>
 
-        {/* Title */}
-        <h2 className="text-black text-base font-display font-bold uppercase tracking-tight leading-tight mb-1 group-hover:underline decoration-[#ec4899] decoration-[3px] underline-offset-2">
+        <h2 className="mb-1 font-display text-base font-bold leading-tight tracking-tight text-ink decoration-cobalt decoration-2 underline-offset-2 group-hover:underline">
           {title}
         </h2>
 
-        {/* Description */}
-        <p className="text-sm text-gray-600 line-clamp-2 flex-grow">
+        <p className="mb-3 line-clamp-2 flex-grow font-body text-sm text-ink-2">
           {description}
         </p>
 
-        {/* Tech icons */}
-        <div className="flex flex-row gap-2 mt-3 pt-3 border-t-2 border-black">
-          {technologies.map((technology, index) => (
+        <div className="flex flex-row gap-2 border-t border-dashed border-ink/30 pt-3">
+          {technologies.map((technology) => (
             <Image
-              key={index}
+              key={technology}
               alt={technology}
-              height="20"
-              width="20"
+              height={20}
+              width={20}
               src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/${technology}.svg`}
             />
           ))}
         </div>
       </div>
-    </a>
+    </motion.a>
   );
 };
 

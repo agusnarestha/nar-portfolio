@@ -2,7 +2,7 @@
 
 import Timeline from "../Timeline";
 import timelineData from "@/data/timelineData.json";
-import { motion } from "framer-motion";
+import Tape from "../collage/Tape";
 
 const ExperienceSection = () => {
   const calculateDuration = (dateString: string) => {
@@ -51,38 +51,19 @@ const ExperienceSection = () => {
   };
 
   return (
-    <div className="mt-24 max-[768px]:mt-28 relative">
-      {/* Decorative floating shapes */}
-      <div className="absolute -top-6 -right-4 pointer-events-none z-0 hidden sm:block">
-        <motion.svg
-          width="70" height="70" viewBox="0 0 70 70" fill="none"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        >
-          <rect x="10" y="10" width="50" height="50" rx="3" fill="none" stroke="#84cc16" strokeWidth="3" opacity="0.4" strokeDasharray="8 4" />
-        </motion.svg>
-      </div>
-      <div className="absolute -bottom-4 -left-6 pointer-events-none z-0 hidden sm:block">
-        <motion.svg
-          width="50" height="50" viewBox="0 0 50 50" fill="none"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <polygon points="25,5 45,45 5,45" fill="#3b82f6" stroke="#000" strokeWidth="3" opacity="0.4" />
-        </motion.svg>
-      </div>
-
-      {/* Neo-brutalism section heading */}
-      <div className="mb-6 relative z-10">
-        <h1
-          className="neo-badge text-3xl bg-[#84cc16]
-            max-[325px]:text-base max-[365px]:text-[19px] max-[395px]:text-xl max-[430px]:text-2xl max-[540px]:text-[25px]"
-        >
+    <div className="relative mt-20 max-[768px]:mt-24">
+      <div className="relative mb-8 inline-block border-2 border-ink bg-mint-light px-5 py-2 shadow-paper-sm">
+        <Tape
+          tone="sky"
+          rotate={-4}
+          className="absolute -top-3 left-6 h-4 w-16"
+        />
+        <h2 className="font-display text-2xl font-extrabold uppercase tracking-tight text-ink sm:text-3xl">
           Experience
-        </h1>
+        </h2>
       </div>
 
-      <div className="flex backdrop-blur-sm w-full p-4 rounded-sm relative z-10">
+      <div className="relative z-10 w-full p-0">
         <div className="w-full space-y-2">
           {timelineData.map((item, index) => (
             <Timeline

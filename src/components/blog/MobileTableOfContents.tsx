@@ -27,13 +27,7 @@ const MobileTableOfContents = ({ content }: MobileTableOfContentsProps) => {
       {/* Toggle button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between px-4 py-3
-          bg-white border-2 border-black font-black text-xs uppercase tracking-widest
-          shadow-[4px_4px_0_#000]
-          hover:shadow-[2px_2px_0_#000] hover:translate-x-[2px] hover:translate-y-[2px]
-          active:shadow-none active:translate-x-[4px] active:translate-y-[4px]
-          transition-all duration-100
-          `}
+        className="flex w-full items-center justify-between border-2 border-ink bg-sheet px-4 py-3 font-display text-xs font-bold uppercase tracking-widest text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5"
       >
         <span className="flex items-center gap-2">
           <svg
@@ -75,8 +69,7 @@ const MobileTableOfContents = ({ content }: MobileTableOfContentsProps) => {
       >
         <div
           ref={contentRef}
-          className="bg-white border-2 border-black p-4 mt-[-4px]
-            shadow-[4px_4px_0_#000]"
+          className="mt-[-2px] border-2 border-ink bg-butter p-4 shadow-paper-sm"
         >
           <TableOfContents
             content={content}
