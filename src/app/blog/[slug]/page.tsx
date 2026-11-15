@@ -8,6 +8,7 @@ import { MDXComponents } from "@/components/blog/MDXComponents";
 import { Metadata } from "next";
 import JsonLd from "@/components/blog/JsonLd";
 import ShareButtons from "@/components/blog/ShareButtons";
+import BlogCard from "@/components/blog/BlogCard";
 import remarkGfm from "remark-gfm";
 import Tape from "@/components/collage/Tape";
 
@@ -67,6 +68,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound();
   }
+
+  const relatedPosts = getAllPosts()
+    .filter((item) => item.slug !== post.slug)
+    .sort((a, b) => {
+      const aScore = a.tags.filter((tag) => post.tags.includes(tag)).length;
+      const bScore = b.tags.filter((tag) => post.tags.includes(tag)).length;
+      return bScore - aScore;
+    })
+    .slice(0, 3);
 
   return (
     <div className="grid-paper min-h-screen w-full">
@@ -150,6 +160,31 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             </aside>
           </div>
+
+          {relatedPosts.length > 0 && (
+            <section className="mt-16 border-t-2 border-dashed border-ink/20 pt-10">
+              <div className="mb-6 flex flex-wrap items-center gap-3">
+                <div className="relative inline-block border-2 border-ink bg-butter px-4 py-1.5 shadow-paper-sm">
+                  <Tape
+                    tone="pink"
+                    rotate={-4}
+                    className="absolute -top-3 left-5 h-4 w-14"
+                  />
+                  <h2 className="font-display text-xl font-extrabold uppercase tracking-tight text-ink sm:text-2xl">
+                    Read Next
+                  </h2>
+                </div>
+                <span className="font-hand text-lg text-ink-2">
+                  keep reading
+                </span>
+              </div>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {relatedPosts.map((item) => (
+                  <BlogCard key={item.slug} post={item} />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>
