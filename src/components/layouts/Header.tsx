@@ -39,7 +39,7 @@ const Header = () => {
         scrolled ? "bg-paper/90 backdrop-blur-md" : "bg-paper"
       }`}
     >
-      <Link href="/" aria-label="Agus Narestha home">
+      <Link href="/" aria-label="Agus Narestha Portfolio home">
         <span className="relative inline-block border-2 border-ink bg-butter px-3 py-1.5 font-display text-2xl font-extrabold uppercase tracking-tight shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5">
           <Tape
             tone="pink"

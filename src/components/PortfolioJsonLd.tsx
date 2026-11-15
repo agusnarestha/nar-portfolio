@@ -55,7 +55,6 @@ export default function PortfolioJsonLd() {
         "@id": `${baseUrl}/#website`,
         url: baseUrl,
         name: "Agus Narestha Portfolio",
-        alternateName: ["Agus Narestha", "agusnarestha.dev"],
         description:
           "Personal portfolio of Agus Narestha — Web Developer & Data Enthusiast",
         publisher: {

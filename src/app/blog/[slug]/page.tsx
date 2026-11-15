@@ -40,10 +40,10 @@ export async function generateMetadata({
   });
 
   return {
-    title: `${post.title} | Agus Narestha`,
+    title: post.title,
     description: post.description,
     openGraph: {
-      title: `${post.title} | Agus Narestha`,
+      title: `${post.title} | Agus Narestha Portfolio`,
       description: post.description,
       url,
       type: "article",
@@ -54,7 +54,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} | Agus Narestha`,
+      title: `${post.title} | Agus Narestha Portfolio`,
       description: post.description,
     },
     alternates: { canonical: url },

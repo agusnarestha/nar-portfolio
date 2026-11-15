@@ -222,7 +222,7 @@ const Footer = () => {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-center font-mono text-[11px] uppercase tracking-widest text-ink-2 sm:text-left sm:text-xs">
-              © {new Date().getFullYear()} Agus Narestha · Made With ❤️
+              © {new Date().getFullYear()} Agus Narestha Portfolio · Made With ❤️
             </p>
 
             <div className="flex items-center justify-center gap-2 sm:justify-end">
