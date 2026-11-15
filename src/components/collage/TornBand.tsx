@@ -42,7 +42,7 @@ export function TornEdge({
       viewBox="0 0 1200 48"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className={`block h-10 w-full drop-shadow-[0_1px_0_rgba(21,22,26,0.12)] sm:h-12 ${className}`}
+      className={`block h-10 w-full sm:h-12 ${className}`}
     >
       <rect width="1200" height="48" fill={baseFill[from]} />
       <path d={tornPath} fill="#FFFFFF" transform="translate(0 -3)" />
