@@ -3,7 +3,7 @@
 import React, { useId, useState } from "react";
 import PaperSheet from "./collage/PaperSheet";
 import Pushpin from "./collage/Pushpin";
-import Stamp from "./collage/Stamp";
+import StatusBadge from "./collage/StatusBadge";
 import Tag from "./collage/Tag";
 import Tape from "./collage/Tape";
 import { handCopy } from "@/lib/hand-copy";
@@ -87,9 +87,7 @@ const PositionCard: React.FC<Position & { isLast: boolean }> = ({
                   {date}
                 </span>
                 {duration ? <Tag tone="paper">{duration}</Tag> : null}
-                {isCurrent ? (
-                  <Stamp tone="mint">{handCopy.current}</Stamp>
-                ) : null}
+                {isCurrent ? <StatusBadge>{handCopy.current}</StatusBadge> : null}
               </div>
             </div>
           </div>

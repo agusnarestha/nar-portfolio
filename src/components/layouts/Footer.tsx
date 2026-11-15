@@ -4,10 +4,9 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Stamp from "../collage/Stamp";
+import StatusBadge from "../collage/StatusBadge";
 import Tape from "../collage/Tape";
 import { TornEdge } from "../collage/TornBand";
-import HandNote from "../collage/HandNote";
-import { handCopy } from "@/lib/hand-copy";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -186,10 +185,7 @@ const Footer = () => {
                 Status
               </h4>
               <div className="flex flex-wrap items-center gap-2">
-                <Stamp tone="mint">Open to Work</Stamp>
-                <HandNote rotate={-3} className="text-sm">
-                  {handCopy.footer}
-                </HandNote>
+                <StatusBadge>Open to Work</StatusBadge>
               </div>
             </div>
           </div>
