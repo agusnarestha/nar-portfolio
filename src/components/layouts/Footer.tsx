@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Stamp from "../collage/Stamp";
 import StatusBadge from "../collage/StatusBadge";
 import Tape from "../collage/Tape";
 import { TornEdge } from "../collage/TornBand";
@@ -74,8 +73,37 @@ const Footer = () => {
                 rotate={-4}
                 className="absolute -top-3 left-6 h-4 w-16"
               />
-              <div className="absolute right-4 top-4 rotate-3">
-                <Stamp tone="cobalt">postcard</Stamp>
+              <div className="pointer-events-none absolute right-4 top-4 hidden rotate-6 sm:block">
+                <svg
+                  viewBox="0 0 88 64"
+                  aria-hidden="true"
+                  fill="none"
+                  className="h-12 w-20"
+                >
+                  <path
+                    d="M8 30L72 8L50 58L38 40L8 30Z"
+                    fill="#FFF7B8"
+                    stroke="#15161A"
+                    strokeWidth="2"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M72 8L38 40"
+                    stroke="#15161A"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M4 54c9-6 17-5 25 1"
+                    stroke="#2446F2"
+                    strokeWidth="2"
+                    strokeDasharray="4 4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <span className="absolute -bottom-4 right-2 font-hand text-sm text-ink-2">
+                  sent!
+                </span>
               </div>
               <div className="flex flex-col items-start gap-3">
                 <div className="w-10 flex-shrink-0 border-2 border-ink bg-cobalt p-2 shadow-paper-sm">
