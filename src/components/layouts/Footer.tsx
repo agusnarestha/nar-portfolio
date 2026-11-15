@@ -52,14 +52,20 @@ const socialLinks = [
 const Footer = () => {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isBlog = pathname.startsWith("/blog");
+  const fromTone = isHome ? "sky" : isBlog ? "grid" : "paper";
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <div className={isHome ? "relative" : "relative mt-20 sm:mt-24"}>
-      <TornEdge tone="butter" from={isHome ? "sky" : "paper"} />
+    <div
+      className={
+        isHome || isBlog ? "relative" : "relative mt-20 sm:mt-24"
+      }
+    >
+      <TornEdge tone="butter" from={fromTone} />
       <div className="bg-butter">
         <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-10">
           <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">

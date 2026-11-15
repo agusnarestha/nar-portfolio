@@ -1,7 +1,7 @@
 import React from "react";
 
 export type TornTone = "cobalt" | "butter" | "sky" | "pink";
-type TornBase = TornTone | "paper";
+type TornBase = TornTone | "paper" | "grid";
 
 const toneConfig: Record<TornTone, { fill: string; bg: string }> = {
   cobalt: { fill: "#2446F2", bg: "bg-cobalt" },
@@ -12,6 +12,7 @@ const toneConfig: Record<TornTone, { fill: string; bg: string }> = {
 
 const baseFill: Record<TornBase, string> = {
   paper: "#EDF0F4",
+  grid: "#F8FBFF",
   cobalt: "#2446F2",
   butter: "#FFF7B8",
   sky: "#D3E2FF",
