@@ -83,6 +83,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <JsonLd post={post} />
       <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-24 max-[768px]:pt-32 sm:px-8">
         <div className="relative">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-4 flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-ink-2"
+          >
+            <Link
+              href="/"
+              className="transition-colors hover:text-ink hover:underline"
+            >
+              Home
+            </Link>
+            <span className="text-ink-3">/</span>
+            <Link
+              href="/blog"
+              className="transition-colors hover:text-ink hover:underline"
+            >
+              Blog
+            </Link>
+            <span className="text-ink-3">/</span>
+            <span className="line-clamp-1 text-ink">{post.title}</span>
+          </nav>
+
           <Link
             href="/blog"
             className="mb-8 inline-flex items-center gap-2 border-2 border-ink bg-sheet px-3 py-2 font-mono text-xs font-medium uppercase tracking-widest text-ink shadow-paper-sm transition-transform duration-150 hover:-translate-y-0.5 hover:bg-butter"
