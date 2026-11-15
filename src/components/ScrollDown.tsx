@@ -2,7 +2,7 @@ import { handCopy } from "@/lib/hand-copy";
 
 const ScrollDown = () => {
   return (
-    <div className="relative mt-8 flex items-center justify-center pb-28 max-[768px]:mt-10 max-[768px]:pb-20">
+    <div className="relative mt-4 flex items-center justify-center pb-16 max-[768px]:mt-3 max-[768px]:pb-8">
       <button
         className="group flex flex-col items-center gap-1"
         aria-label="Scroll to about"

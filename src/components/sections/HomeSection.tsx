@@ -14,9 +14,9 @@ const HomeSection = () => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="relative flex min-h-[calc(100svh-7rem)] flex-col md:min-h-screen">
       <BackgroundArt />
-      <section className="relative z-10 flex flex-1 items-center justify-center px-4 pb-10 pt-24">
+      <section className="relative z-10 flex flex-1 items-center justify-center px-4 pb-6 pt-8 sm:pb-10 sm:pt-24">
         <div className="pointer-events-none absolute left-[7%] top-[24%] hidden xl:block">
           <HandNote rotate={-6} className="text-xl">
             open to work →
@@ -82,7 +82,7 @@ const HomeSection = () => {
               priority
               rotate={-2}
               caption="that's me"
-              className="mx-auto w-[240px] sm:w-[300px] md:w-[320px]"
+              className="mx-auto w-[210px] sm:w-[300px] md:w-[320px]"
             />
           </motion.div>
 
@@ -90,7 +90,7 @@ const HomeSection = () => {
             initial={reduceMotion ? false : { y: 20 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
-            className="mx-auto mt-8 w-full max-w-xs"
+            className="mx-auto mt-6 w-full max-w-xs sm:mt-8"
           >
             <div className="relative rotate-1">
               <Tape

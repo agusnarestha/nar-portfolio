@@ -130,7 +130,7 @@ export default function RootLayout({
       <GoogleTagManager gtmId="GTM-PHV2VZN6" />
       <GoogleAnalytics gaId="G-B2ZN13JQ9F" />
       <PortfolioJsonLd />
-      <body className="font-body relative min-h-screen max-[768px]:mt-28 bg-surface">
+      <body className="font-body relative min-h-screen max-md:mt-28 bg-surface">
         <div aria-hidden className="paper-grain" />
         <div className="relative z-10">
           <Header />
