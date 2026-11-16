@@ -36,10 +36,7 @@ const RecentProjectSection = () => {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <div
-          className="flex items-center gap-1.5"
-          aria-label={`${latestProjects.length} of ${projectData.length} projects shown`}
-        >
+        <div className="flex items-center gap-1.5" aria-hidden="true">
           {projectData.map((_, index) => (
             <span
               key={index}
