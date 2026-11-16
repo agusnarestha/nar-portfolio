@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import PaperSheet from "../collage/PaperSheet";
 import Polaroid from "../collage/Polaroid";
 import Tape from "../collage/Tape";
@@ -30,7 +30,7 @@ const AboutSection = ({ headingLevel = "h2" }: AboutSectionProps) => {
       </div>
 
       <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[auto_1fr]">
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { opacity: 0, rotate: -4 }}
           whileInView={{ opacity: 1, rotate: 0 }}
           viewport={{ once: true }}
@@ -46,9 +46,9 @@ const AboutSection = ({ headingLevel = "h2" }: AboutSectionProps) => {
             rotate={-2}
             className="w-56 md:w-64"
           />
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -110,7 +110,7 @@ const AboutSection = ({ headingLevel = "h2" }: AboutSectionProps) => {
                   icon: "gmail",
                 },
               ].map((social, index) => (
-                <motion.a
+                <m.a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
@@ -127,11 +127,11 @@ const AboutSection = ({ headingLevel = "h2" }: AboutSectionProps) => {
                     src={`https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/${social.icon}.svg`}
                   />
                   {social.label}
-                </motion.a>
+                </m.a>
               ))}
             </div>
           </PaperSheet>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

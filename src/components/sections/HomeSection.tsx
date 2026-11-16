@@ -3,16 +3,12 @@
 import ScrollDown from "../ScrollDown";
 import SpotifyNowPlaying from "../SpotifyNowPlaying";
 import BackgroundArt from "../BackgroundArt";
-import { motion, useReducedMotion } from "framer-motion";
-import Highlight from "../collage/Highlight";
 import HandNote from "../collage/HandNote";
 import Polaroid from "../collage/Polaroid";
 import Tape from "../collage/Tape";
 import { handCopy } from "@/lib/hand-copy";
 
 const HomeSection = () => {
-  const reduceMotion = useReducedMotion();
-
   return (
     <div className="relative flex min-h-[calc(100svh-7rem)] flex-col md:min-h-screen">
       <BackgroundArt />
@@ -30,21 +26,14 @@ const HomeSection = () => {
         </div>
 
         <div className="w-full max-w-3xl text-center">
-          <motion.h1
-            initial={reduceMotion ? false : { y: 18 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="font-display text-5xl font-extrabold leading-[0.95] tracking-tight text-ink sm:text-7xl xl:text-8xl"
-          >
-            Agus <Highlight>Narestha</Highlight>
-          </motion.h1>
+          <h1 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tight text-ink sm:text-7xl xl:text-8xl">
+            Agus{" "}
+            <mark className="highlight highlight-yellow bg-transparent">
+              Narestha
+            </mark>
+          </h1>
 
-          <motion.div
-            initial={reduceMotion ? false : { y: 24 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="mt-4"
-          >
+          <div className="mt-4">
             <HandNote className="text-2xl sm:text-3xl">{handCopy.hero}</HandNote>
             <svg
               viewBox="0 0 80 36"
@@ -66,32 +55,25 @@ const HomeSection = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={reduceMotion ? false : { y: 30 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-            className="mt-6"
-          >
+          <div className="mt-6">
             <Polaroid
               src="/emoji.webp"
               alt="Agus Narestha Emoji"
               width={300}
               height={300}
               priority
+              unoptimized
+              fetchPriority="high"
+              sizes="(max-width: 640px) 210px, 300px"
               rotate={-2}
               caption="that's me"
               className="mx-auto w-[210px] sm:w-[300px] md:w-[320px]"
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={reduceMotion ? false : { y: 20 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
-            className="mx-auto mt-6 w-full max-w-xs sm:mt-8"
-          >
+          <div className="mx-auto mt-6 w-full max-w-xs sm:mt-8">
             <div className="relative rotate-1">
               <Tape
                 tone="mint"
@@ -100,7 +82,7 @@ const HomeSection = () => {
               />
               <SpotifyNowPlaying />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
       <ScrollDown />

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 const toneClasses = {
   tomato: "stamp-tomato",
@@ -25,7 +25,7 @@ export default function Stamp({
   const reduceMotion = useReducedMotion();
 
   return (
-    <motion.span
+    <m.span
       className={`stamp ${toneClasses[tone]} ${className}`}
       initial={
         reduceMotion
@@ -37,6 +37,6 @@ export default function Stamp({
       transition={{ duration: 0.18, ease: "easeOut" }}
     >
       {children}
-    </motion.span>
+    </m.span>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 const toneClasses = {
   yellow: "highlight-yellow",
@@ -24,7 +24,7 @@ export default function Highlight({
   const reduceMotion = useReducedMotion();
 
   return (
-    <motion.mark
+    <m.mark
       className={`highlight bg-transparent ${toneClasses[tone]} ${className}`}
       initial={reduceMotion ? false : { backgroundSize: "0% 100%" }}
       whileInView={{ backgroundSize: "100% 100%" }}
@@ -33,6 +33,6 @@ export default function Highlight({
       style={{ backgroundRepeat: "no-repeat" }}
     >
       {children}
-    </motion.mark>
+    </m.mark>
   );
 }

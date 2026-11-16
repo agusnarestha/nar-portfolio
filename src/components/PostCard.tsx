@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Tape from "./collage/Tape";
 import Tag from "./collage/Tag";
 
@@ -32,7 +32,7 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   return (
-    <motion.a
+    <m.a
       href={`/blog/${slug}`}
       aria-label={title}
       initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -1.5 }}
@@ -77,7 +77,7 @@ const PostCard: React.FC<PostCardProps> = ({
       <p className="mt-auto border-t border-dashed border-ink/30 pt-3 font-mono text-xs uppercase tracking-wide text-ink-2">
         {pubDate}
       </p>
-    </motion.a>
+    </m.a>
   );
 };
 
