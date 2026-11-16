@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Tape from "./collage/Tape";
 import Tag from "./collage/Tag";
 
@@ -25,7 +25,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const reduceMotion = useReducedMotion();
 
   return (
-    <motion.a
+    <m.a
       aria-label={title}
       href={linkProject}
       initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -1.5 }}
@@ -85,7 +85,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           ))}
         </div>
       </div>
-    </motion.a>
+    </m.a>
   );
 };
 

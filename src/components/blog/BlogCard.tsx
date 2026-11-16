@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { BlogPost } from "@/types/blog";
 import Tape from "@/components/collage/Tape";
 import Tag from "@/components/collage/Tag";
@@ -14,7 +14,7 @@ export default function BlogCard({ post }: BlogCardProps) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <motion.article
+    <m.article
       initial={reduceMotion ? false : { opacity: 0, y: 12, rotate: -1.5 }}
       whileInView={{ opacity: 1, y: 0, rotate: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -57,6 +57,6 @@ export default function BlogCard({ post }: BlogCardProps) {
           <span>{post.readingTime} min read</span>
         </div>
       </Link>
-    </motion.article>
+    </m.article>
   );
 }

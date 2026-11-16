@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { Archivo, Figtree, Gochi_Hand, DM_Mono } from "next/font/google";
 
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import "./globals.css";
 import PortfolioJsonLd from "@/components/PortfolioJsonLd";
+import MotionProvider from "@/components/MotionProvider";
+import AnalyticsConsent from "@/components/AnalyticsConsent";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -17,6 +18,7 @@ const figtree = Figtree({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
+  preload: false,
 });
 
 const gochi = Gochi_Hand({
@@ -24,6 +26,7 @@ const gochi = Gochi_Hand({
   weight: "400",
   variable: "--font-hand",
   display: "swap",
+  preload: false,
 });
 
 const dmMono = DM_Mono({
@@ -31,6 +34,7 @@ const dmMono = DM_Mono({
   weight: ["400", "500"],
   variable: "--font-mono",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -121,22 +125,18 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="referrer" content="origin-when-cross-origin" />
-        <script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="da6ad19e-934b-47ec-b254-4b3f41d490be"
-        ></script>
       </head>
-      <GoogleTagManager gtmId="GTM-PHV2VZN6" />
-      <GoogleAnalytics gaId="G-B2ZN13JQ9F" />
       <PortfolioJsonLd />
       <body className="font-body relative min-h-screen max-md:mt-28 bg-surface">
         <div aria-hidden className="paper-grain" />
-        <div className="relative z-10">
-          <Header />
-          {children}
-        </div>
-        <Footer />
+        <MotionProvider>
+          <div className="relative z-10">
+            <Header />
+            {children}
+          </div>
+          <Footer />
+        </MotionProvider>
+        <AnalyticsConsent />
       </body>
     </html>
   );

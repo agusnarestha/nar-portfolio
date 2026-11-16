@@ -8,6 +8,8 @@ type PolaroidProps = {
   height: number;
   caption?: string;
   priority?: boolean;
+  unoptimized?: boolean;
+  fetchPriority?: "high" | "low" | "auto";
   rotate?: number;
   className?: string;
   sizes?: string;
@@ -20,6 +22,8 @@ export default function Polaroid({
   height,
   caption,
   priority = false,
+  unoptimized = false,
+  fetchPriority,
   rotate = 0,
   className = "",
   sizes,
@@ -41,6 +45,9 @@ export default function Polaroid({
           width={width}
           height={height}
           priority={priority}
+          unoptimized={unoptimized}
+          fetchPriority={fetchPriority}
+          decoding={priority ? "sync" : "async"}
           sizes={sizes}
           className="h-auto w-full object-cover"
         />

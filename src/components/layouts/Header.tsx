@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import HeaderButton from "./HeaderButton";
 import Tape from "@/components/collage/Tape";
 
@@ -85,7 +85,7 @@ const Header = () => {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduceMotion ? undefined : { opacity: 0 }}
@@ -115,7 +115,7 @@ const Header = () => {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </nav>

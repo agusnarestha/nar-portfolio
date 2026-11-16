@@ -7,7 +7,7 @@ import RecentProjectSection from "@/components/sections/RecentProjectSection";
 import RecentPostSection from "@/components/sections/RecentPostSection";
 import TornBand from "@/components/collage/TornBand";
 import { useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
@@ -24,17 +24,10 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero — transform only, so the name is visible without JS */}
-      <motion.div
-        initial={reduceMotion ? false : { y: 24 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
-        <HomeSection />
-      </motion.div>
+      <HomeSection />
 
       <div id="about" className="mt-8 scroll-mt-24 sm:mt-12">
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -43,9 +36,9 @@ export default function Home() {
           <TornBand tone="cobalt">
             <AboutSection />
           </TornBand>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -54,10 +47,10 @@ export default function Home() {
           <TornBand tone="butter" from="cobalt">
             <ExperienceSection />
           </TornBand>
-        </motion.div>
+        </m.div>
       </div>
 
-      <motion.div
+      <m.div
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -66,9 +59,9 @@ export default function Home() {
         <TornBand tone="cobalt" from="butter">
           <RecentProjectSection />
         </TornBand>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -77,7 +70,7 @@ export default function Home() {
         <TornBand tone="sky" from="cobalt">
           <RecentPostSection />
         </TornBand>
-      </motion.div>
+      </m.div>
     </div>
   );
 }
